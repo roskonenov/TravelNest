@@ -1,4 +1,4 @@
-package bg.softuni.travelnest;
+package bg.softuni.travelNest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
