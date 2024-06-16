@@ -20,7 +20,7 @@
       <!-- Responsive-->
       <link rel="stylesheet" href="../css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <link rel="icon" href="../images/fevicon.png" type="image/gif" />
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
@@ -33,7 +33,7 @@
       <div th:replace="~{fragments/header_top_section::header_top_section}"></div>
       <!-- header top section start -->
       <!-- header section start -->
-      <div th:replace="~{fragments/header_section::header_section}"></div>
+      <div th:replace="~{fragments/header_section::header_section(activeLink='services')}"></div>
       <!-- header section end -->
       <!-- services section start -->
       <div class="services_section layout_padding">
@@ -41,40 +41,43 @@
             <div class="row">
                <div class="col-sm-12">
                   <h1 class="services_taital">Our Services</h1>
-                  <p class="services_text_1">ssages of Lorem Ipsum available, but the majority have suffered alteration</p>
+                  <p class="services_text_1">You just have fun, we'll take care of the rest!</p>
                </div>
             </div>
             <div class="services_section_2">
                <div class="row">
                   <div class="col-lg-3 col-sm-6">
-                     <div class="box_main active">
+                     <div class="box_main">
                         <div class="service_img"><img src="../images/icon-1.png"></div>
-                        <h4 class="development_text">Construction Services</h4>
-                        <p class="services_text">fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using L</p>
+                        <h4 class="development_text">Apartment rental</h4>
+                        <p class="services_text">Find a place to stay.
+                           Take a look at the rental offers according to the place you will be traveling to.</p>
                         <div class="readmore_bt"><a href="#">Read More</a></div>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                      <div class="box_main">
                         <div class="service_img"><img src="../images/icon-2.png"></div>
-                        <h4 class="development_text">Building Modeling</h4>
-                        <p class="services_text">fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using L</p>
+                        <h4 class="development_text">Rent a car</h4>
+                        <p class="services_text">Choose a suitable car for you, and we will deliver it to a place of your choice.</p>
                         <div class="readmore_bt"><a href="#">Read More</a></div>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                      <div class="box_main">
                         <div class="service_img"><img src="../images/icon-3.png"></div>
-                        <h4 class="development_text">Pre construction</h4>
-                        <p class="services_text">fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using L</p>
+                        <h4 class="development_text">Explore</h4>
+                        <p class="services_text">Explore local attractions, museums, art galleries and more.
+                           We will provide you with a ticket if needed.</p>
                         <div class="readmore_bt"><a href="#">Read More</a></div>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                      <div class="box_main">
                         <div class="service_img"><img src="../images/icon-4.png"></div>
-                        <h4 class="development_text">Management</h4>
-                        <p class="services_text">fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using L</p>
+                        <h4 class="development_text">Have fun</h4>
+                        <p class="services_text">If you want to visit a cinema, theater, concert or other local event,
+                           take a look at our suggestions.</p>
                         <div class="readmore_bt"><a href="#">Read More</a></div>
                      </div>
                   </div>
@@ -121,7 +124,7 @@
                   </div>
                   <div class="col-md-4">
                      <h2 class="useful_text">Work Portfolio</h2>
-                     <p class="lorem_text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem</p>
+                     <p class="lorem_text">It is a long-established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem</p>
                   </div>
                   <div class="col-md-4">
                      <h2 class="useful_text">SIGN UP TO OUR NEWSLETTER</h2>

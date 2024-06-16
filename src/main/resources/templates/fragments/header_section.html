@@ -7,17 +7,20 @@
 <body>
 <div
         th:fragment="header_section(activeLink)"
-        class="header_section">
+        class="header_section"
+        th:attrappend="class=${activeLink == 'index'? '_home': ''}">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"
+                           th:classappend="${activeLink == 'index'}? 'active'">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
+                        <a class="nav-link" href="/services"
+                           th:classappend="${activeLink == 'services'}? 'active'">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About</a>
@@ -48,8 +51,10 @@
         </nav>
     </div>
     <!-- banner section start -->
-        <th:block th:if="${activeLink == 'index'}" th:replace="~{fragments/banner::banner}">
-        </th:block>
+    <div th:if="${activeLink == 'index'}">
+        <div th:replace="~{fragments/banner::banner}">
+        </div>
+    </div>
     <!-- banner section end -->
 </div>
 </body>

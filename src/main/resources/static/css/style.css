@@ -302,10 +302,16 @@ button {
 .header_section {
     width: 100%;
     float: left;
-    background-image: url(../images/rilaMonastery.jpg);
+    background: white none;
     height: auto;
     background-size: 100% 100%;
-    background-repeat: no-repeat;
+}
+.header_section_home{
+    background-image: url(../images/rilaMonastery.jpg) !important;
+    width: 100%;
+    float: left;
+    height: auto;
+    background-size: 100% 100%;
 }
 
 .header_bg {
@@ -348,7 +354,7 @@ button {
 .navbar {
     background-color: #3b3a3a;
     /*opacity: 50;*/
-    padding: 10px 0px 30px 0px;
+    padding: 10px 0px 10px 0px;
 }
 
 .login_text {
@@ -394,6 +400,7 @@ button {
 .quote_btn a:hover {
     background-color: #ffffff;
     color: #252525;
+    border: 1px solid black;
 }
 
 
@@ -632,23 +639,26 @@ div.opacity {
 .services_taital {
     width: 100%;
     float: left;
-    font-size: 40px;
-    color: #1b1b1b;
+    font-size: 55px;
+    color: #305281;
     font-weight: bold;
     text-align: center;
 }
 
 .services_text_1 {
     width: 100%;
-    font-size: 16px;
+
+    font-size: 20px;
+    font-weight: 650;
     margin: 0 auto;
-    color: #1f1f1f;
+    color: #305281;
     padding-top: 20px;
     text-align: center;
 }
 
 .services_text {
     width: 100%;
+    height: 120px;
     font-size: 14px;
     margin: 0px;
     color: #1b1b1b;
@@ -657,14 +667,14 @@ div.opacity {
 
 .services_section_2 {
     width: 90%;
-    margin: 0 auto;
+    margin: 10px auto;
     padding-top: 30px;
 }
 
 .box_main {
     width: 100%;
     background-color: #ffffff;
-    height: auto;
+    height: 370px;
     padding: 40px 20px 40px 20px;
     border-radius: 20px;
     margin-top: 30px;
@@ -701,7 +711,7 @@ div.opacity {
 
 .readmore_bt {
     width: 140px;
-    padding-top: 30px;
+    padding-top: 5px;
 }
 
 .readmore_bt a {
@@ -1226,11 +1236,10 @@ textarea#comment.massage-bt::placeholder {
     font-size: 18px;
     padding: 10px 20px 0px 20px;
     background-color: #ffffff;
-    margin: 0 auto;
     justify-content: center;
     align-items: center;
     display: block;
-    margin-top: 20px;
+    margin: 20px auto 0;
     border-radius: 40px;
 }
 
