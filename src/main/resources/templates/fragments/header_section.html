@@ -19,14 +19,16 @@
                            th:classappend="${activeLink == 'index'}? 'active'">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/services"
+                        <a class="nav-link" href="services"
                            th:classappend="${activeLink == 'services'}? 'active'">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" href="about"
+                           th:classappend="${activeLink == 'about'}? 'active'">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="projects.html">Project</a>
+                        <a class="nav-link" href="projects"
+                        th:classappend="${activeLink == 'projects'}? 'active'">Project</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="blog.html">Blog</a>
