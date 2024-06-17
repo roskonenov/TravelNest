@@ -13,17 +13,10 @@
 @import url(font-awesome.min.css);
 @import url(meanmenu.css);
 @import url(owl.carousel.min.css);
-@import url(swiper.min.css);
 @import url(slick.css);
 @import url(jquery.fancybox.min.css);
 @import url(jquery-ui.css);
 @import url(nice-select.css);
-
-@font-face {
-    font-family: "Righteous";
-    src: url("../fonts/BalooChettan-Regular.ttf");
-    src: url("../fonts/BalooChettan-Regular.ttf");
-}
 
 
 /*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
@@ -1148,7 +1141,7 @@ textarea#comment.massage-bt::placeholder {
     float: left;
     font-size: 16px;
     color: #ffffff;
-    margin: 0px;
+    margin: 0;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -1159,8 +1152,8 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .location_text ul {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     display: inline-block;
     text-align: center;
 }
