@@ -318,6 +318,13 @@ button {
 
 .logo {
     width: 200px;
+    padding: 0  0 2px 2px;
+}
+.logo:hover{
+    background-color: #abdde5;
+    box-shadow: 0 0 5px 0 #aaaaaa;
+    border-radius: 8px;
+
 }
 
 .ml-auto,
@@ -1327,4 +1334,367 @@ textarea#comment.massage-bt::placeholder {
 
 .margin_top90 {
     margin-top: 90px;
+}
+/*--- login ---*/
+
+.login-form .card{
+    border: transparent;
+    border-radius: 10px;
+    box-shadow: 15px 15px #918f8f;
+    margin-top: 100px;
+    margin-bottom: 150px;
+}
+.login-form .card .card-header{
+    text-align: center;
+    background: #fda417;
+    border: none;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+.login-form .card .card-header h3{
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 30px;
+    text-shadow: #5a5959;
+}
+
+.card-body{
+    border: #adb5bd solid 1px;
+    border-top: none;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+
+}
+.form-check-label{
+    position: relative;
+}
+.login-form .card .card-footer{
+    text-align: center;
+    color: #ffffff;
+}
+.formLogin .form-check-label{
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding-left: 25px;
+    line-height: 18px;
+    margin-bottom: 0;
+    transition: color .3s linear;
+}
+
+.formLogin .form-check-label input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    box-sizing: border-box;
+    padding: 0;
+}
+.formLogin .form-check-label .form-check-sign::before, .formLogin .form-check-label .form-check-sign::after {
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    top: 0;
+    border: 1px solid #818181;
+    transition: opacity .3s linear;
+}
+
+.formLogin .form-check-label .form-check-sign::after {
+    font-family: "Material Design Icons";
+    content: "\F12C";
+    top: 0;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0;
+    color: #fff;
+    font-weight: 600;
+    border: 0;
+    background-color: inherit;
+}
+
+.formLogin .form-check-label input[type="checkbox"] + .form-check-sign::after{
+    opacity: 0;
+    font-size: 10px;
+    margin-top: 0;
+}
+.formLogin .form-check-label input[type="checkbox"]:checked + .form-check-sign::after {
+    opacity: 1;
+    font-size: 10px;
+    margin-top: 0;
+}
+.formLogin .form-group .form-control{
+    min-height: 55px;
+    border: 0;
+    border-radius: 0;
+    padding: 8px 15px;
+    box-shadow: 0 0 10px 0 #cfcfcf;
+    background-color: transparent;
+    margin-top: 40px;
+}
+.formLogin .form-group .form-control:focus{
+    border: 1px solid #fda417;;
+    box-shadow: none;
+}
+.addcolor i{
+    color: #fda417;;
+}
+.formLogin .form-group{
+    position: relative;
+}
+.formLogin .form-group i{
+    position: absolute;
+    right: 5px;
+    top: 0;
+    font-size: 34px;
+}
+.formLogin .text-right a{
+    color: #222222;
+    text-transform: capitalize;
+}
+.formLogin .text-right a:hover{
+    color: #fda417;;
+    text-decoration: none;
+}
+.formLogin .btn-wd{
+
+    color: #ffffff;
+    background-color: #fda417;
+    display: inline-block;
+    border-radius: 40px !important;
+    padding: 8px 16px;
+    min-width: 180px;
+    font-weight: bold;
+    border: none; !important;
+}
+
+.btn-wd:hover {
+    color: #ffffff;
+    background-color: #252525;
+    border: none; !important;
+}
+.copy-text{
+    font-size: 14px;
+}
+.copy-text a{
+    color: #fda417;;
+}
+.naw-text{
+    padding: 5px 0;
+    position: relative;
+    text-align: center;
+}
+.naw-text:before{
+    content: "";
+    background:#fda417;
+    height: 1px;
+    position: absolute;
+    width: 100%;
+    top: 18px;
+    left: 0;
+}
+.naw-text h5{
+    font-size: 12px;
+    text-align: center;
+    font-weight: normal;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    background: #ffffff;
+    padding: 0 5px;
+}
+.create-box{
+    color: #5a5959;
+    font-size: 15px;
+}
+.create-box a{
+    color: #212121;
+}
+.create-box .text-black:hover{
+    color: #fda417;
+}
+
+/*--- register ---*/
+
+.register-form .card{
+    border: transparent;
+    border-radius: 10px;
+    box-shadow: 15px 15px #918f8f;
+    margin-top: 100px;
+    margin-bottom: 150px;
+}
+.register-form .card .card-header{
+    text-align: center;
+    background: #fda417;
+    border: none;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+.register-form .card .card-header h3{
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 30px;
+    text-shadow: #5a5959;
+}
+
+.card-body{
+    border: #adb5bd solid 1px;
+    border-top: none;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+
+}
+.form-check-label{
+    position: relative;
+}
+.register-form .card .card-footer{
+    text-align: center;
+    color: #ffffff;
+}
+.formRegister .form-check-label{
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding-left: 25px;
+    line-height: 18px;
+    margin-bottom: 0;
+    transition: color .3s linear;
+}
+
+.formRegister .form-check-label input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    box-sizing: border-box;
+    padding: 0;
+}
+.formRegister .form-check-label .form-check-sign::before, .formRegister .form-check-label .form-check-sign::after {
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    top: 0;
+    border: 1px solid #818181;
+    transition: opacity .3s linear;
+}
+
+.formRegister .form-check-label .form-check-sign::after {
+    font-family: "Material Design Icons";
+    content: "\F12C";
+    top: 0;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0;
+    color: #fff;
+    font-weight: 600;
+    border: 0;
+    background-color: inherit;
+}
+
+.formRegister .form-check-label input[type="checkbox"] + .form-check-sign::after{
+    opacity: 0;
+    font-size: 10px;
+    margin-top: 0;
+}
+.formRegister .form-check-label input[type="checkbox"]:checked + .form-check-sign::after {
+    opacity: 1;
+    font-size: 10px;
+    margin-top: 0;
+}
+.formRegister .form-group .form-control{
+    min-height: 55px;
+    border: 0;
+    border-radius: 0;
+    padding: 8px 15px;
+    box-shadow: 0 0 10px 0 #cfcfcf;
+    background-color: transparent;
+    margin-top: 40px;
+}
+.formRegister .form-group .form-control:focus{
+    border: 1px solid #fda417;;
+    box-shadow: none;
+}
+.addcolor i{
+    color: #fda417;;
+}
+.formRegister .form-group{
+    position: relative;
+}
+.formRegister .form-group i{
+    position: absolute;
+    right: 5px;
+    top: 0;
+    font-size: 34px;
+}
+.formRegister .text-right a{
+    color: #222222;
+    text-transform: capitalize;
+}
+.formRegister .text-right a:hover{
+    color: #fda417;;
+    text-decoration: none;
+}
+.formRegister .btn-wd{
+
+    color: #ffffff;
+    background-color: #fda417;
+    display: inline-block;
+    border-radius: 40px !important;
+    padding: 8px 16px;
+    min-width: 180px;
+    font-weight: bold;
+    border: none; !important;
+}
+
+.btn-wd:hover {
+    color: #ffffff;
+    background-color: #252525;
+    border: none; !important;
+}
+.copy-text{
+    font-size: 14px;
+}
+.copy-text a{
+    color: #fda417;;
+}
+.naw-text{
+    padding: 5px 0;
+    position: relative;
+    text-align: center;
+}
+.naw-text:before{
+    content: "";
+    background:#fda417;
+    height: 1px;
+    position: absolute;
+    width: 100%;
+    top: 18px;
+    left: 0;
+}
+.naw-text h5{
+    font-size: 12px;
+    text-align: center;
+    font-weight: normal;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    background: #ffffff;
+    padding: 0 5px;
+}
+.create-box{
+    color: #5a5959;
+    font-size: 15px;
+}
+.create-box a{
+    color: #212121;
+}
+.create-box .text-black:hover{
+    color: #fda417;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -13,7 +14,7 @@
                     <ul>
                         <li>
                             <a href="#"><span class="padding_15"><i class="fa fa-mobile" aria-hidden="true"></i></span>
-                                <br>Call +01 1234567890</a>
+                                <br>Call +359 444 222</a>
                         </li>
                         <li>
                             <a href="#"><span class="padding_15"><i class="fa fa-envelope"
@@ -35,13 +36,13 @@
                     <h2 class="useful_text">QUICK LINKS</h2>
                     <div class="footer_menu">
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/services">Services</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="testimonial.html">Testimonial</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/about}">About</a></li>
+                            <li><a th:href="@{/services}">Services</a></li>
+                            <li><a th:href="@{/projects}">Projects</a></li>
+                            <li><a th:href="@{/testimonial}">Testimonial</a></li>
+                            <li><a th:href="@{/blog}">Blog</a></li>
+                            <li><a th:href="@{/contact}">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,22 +60,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="social_icon">
-            <ul>
-                <li>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>

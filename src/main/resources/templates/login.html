@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- basic -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- mobile metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<!-- site metas -->
+	<title>Travel Nest</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- bootstrap css -->
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<!-- style css -->
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<!-- Responsive-->
+	<link rel="stylesheet" href="../css/responsive.css">
+	<!-- fevicon -->
+	<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png"/>
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+	<!-- Tweaks for older IEs-->
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800&family=Sen:wght@400;700;800&display=swap"
+		  rel="stylesheet">
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+
+</head>
+<body>
+<!-- header top section start -->
+<div th:replace="~{fragments/header_top_section::header_top_section}"></div>
+<!-- header top section start -->
+<!-- header section start -->
+<div>
+	<div th:replace="~{fragments/header_section::header_section(activeLink='login')}"></div>
+</div>
+<!-- header section end -->
+<div class="container py-2 background">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 login-form mx-auto">
+                    <!-- form card login -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="mb-0">Login</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="formLogin" method="POST" class="formLogin">
+                                <div class="form-group">
+                                    <input for="username" class="form-control" id="name" name="name" placeholder="Username" type="text" required="">
+									<i class="mdi mdi-account"></i>
+                                </div>
+                                <div class="form-group">
+                                    <input for="password" type="password" class="form-control" placeholder="Password" id="pwd" required="">
+									<i class="mdi mdi-onepassword"></i>
+                                </div>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<div class="checkbox checkbox-primary">
+											<input id="checkbox1" class="styled" type="checkbox">
+											<label for="checkbox1">
+												Remember me 
+											</label>
+										</div>
+									</div>
+									<div class="col-md-6 text-right">
+										<a href="#">forgot password?</a>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-lg-12 text-center"><button type="submit" class="btn btn-success rippler btn-wd rippler-default" id="btnLogin">Login</button></div>
+								</div>
+                            </form>
+							<div class="naw-text mb-3">
+								<h5>New to TravelNest?</h5>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="create-box text-block text-center my-0">
+										<span class="text-small font-weight-semibold">Not a member ?</span>
+										<a th:href="@{/register}" class="text-black text-small">Create new account</a>
+									</div>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                    <!-- /form card login -->
+                </div>
+            </div>
+            <!--/row-->
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>
+<!--/container-->
+<!-- footer section start -->
+<div th:replace="~{fragments/footer_section::footer_section}"></div>
+<!-- footer section end -->
+<!-- copyright section start -->
+<div th:replace="~{fragments/copyright_section::copyright_section}"></div>
+<!-- copyright section end -->
+
+<!-- jquery latest version -->
+<script src="/js/jquery.min.js"></script>
+<!-- popper.min.js -->
+<script src="/js/popper.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.min.js"></script>
+<!-- Jquery Rippler js -->
+<script src="/js/jquery.rippler.min.js"></script>
+<!-- script js -->
+<script src="/js/script.js"></script>
+</body>
+</html>
