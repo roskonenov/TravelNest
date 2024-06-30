@@ -8,19 +8,19 @@
 (function ($) {
 	"use strict";
 
-	function formLogin() {
-		$('#formLogin').on('submit', function (e) {
-			$.ajax({
-				type: "POST",
-				url: 'form-process.php',
-				data: $(this).serialize(),
-				success: function () {
-					$('#msgSubmit').fadeIn(100).show();
-				}
-			});
-			e.preventDefault();
-		});
-	};
+	// function formLogin() {
+	// 	$('#formLogin').on('submit', function (e) {
+	// 		$.ajax({
+	// 			type: "POST",
+	// 			url: 'form-process.php',
+	// 			data: $(this).serialize(),
+	// 			success: function () {
+	// 				$('#msgSubmit').fadeIn(100).show();
+	// 			}
+	// 		});
+	// 		e.preventDefault();
+	// 	});
+	// }
 
 
 	$('.form-group input').focus(function () {
@@ -38,6 +38,5 @@
 			, duration: 400
 		});
 	});
-
 
 })(jQuery);
