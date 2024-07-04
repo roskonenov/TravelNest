@@ -54,13 +54,16 @@
                             <h3 class="mb-0">Login</h3>
                         </div>
                         <div class="card-body">
-                            <form id="formLogin" method="POST" class="formLogin">
+                            <form id="formLogin"
+								  th:method="post"
+								  th:action="@{/users/login}"
+								  class="formLogin">
                                 <div class="form-group">
-                                    <input for="username" class="form-control" id="name" name="name" placeholder="Username" type="text" required="">
+                                    <input th:for="username" class="form-control" id="username" name="username" placeholder="Username" type="text" required="">
 									<i class="mdi mdi-account"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input for="password" type="password" class="form-control" placeholder="Password" id="pwd" required="">
+                                    <input th:for="password" type="password" class="form-control"  placeholder="Password" id="password" name="password" required="">
 									<i class="mdi mdi-onepassword"></i>
                                 </div>
 								<div class="row mb-3">

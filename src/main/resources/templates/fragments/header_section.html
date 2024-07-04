@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -46,17 +47,33 @@
                 <form class="form-inline my-2 my-lg-0">
                     <div class="login_text">
                         <ul>
-                            <li><a th:href="@{/users/login}">Login</a></li>
-                            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                            <li sec:authorize="isAnonymous()">
+                                <a th:href="@{/users/login}">Login</a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a href="#">
+                                    <i class="fa fa-user" aria-hidden="true">
+                                    </i>
+                                </a>
+                            </li>
                             <li th:if="${activeLink == 'index'}">
                                 <a href="#" class="text-center">User:
-                                    <th:block th:text="${welcomeMessage}"></th:block>
+                                    <th:block th:text="${username}"></th:block>
                                     !
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    <div class="quote_btn"><a th:href="@{/users/register}">Register</a></div>
+                    <form name="logoutForm"
+                          th:method="post"
+                          th:action="@{/users/logout}"
+                          sec:authorize="isAuthenticated()">
+                            <input class="btn" type="submit" value="Logout"/>
+                    </form>
+                    <div class="quote_btn"
+                         sec:authorize="isAnonymous()">
+                        <a th:href="@{/users/register}">Register</a>
+                    </div>
                 </form>
             </div>
         </nav>

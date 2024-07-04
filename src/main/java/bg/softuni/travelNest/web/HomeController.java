@@ -23,9 +23,9 @@ public class HomeController {
     @GetMapping("/")
     public String showHome(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if (userDetails instanceof CurrentUser currentUser) {
-            model.addAttribute("welcomeMessage", currentUser.getUsername());
+            model.addAttribute("username", currentUser.getUsername());
         }else {
-            model.addAttribute("welcomeMessage", "guest");
+            model.addAttribute("username", "guest");
         }
         return "index";
     }

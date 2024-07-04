@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new CurrentUser(
                 user.getUsername(),
                 user.getPassword(),
-                List.of(),
+                new ArrayList<>(),
                 user.getEmail()
         );
     }
