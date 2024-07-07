@@ -1,7 +1,7 @@
 package bg.softuni.travelNest.service.impl;
 
 import bg.softuni.travelNest.repository.UserRepository;
-import bg.softuni.travelNest.data.entity.User;
+import bg.softuni.travelNest.model.entity.User;
 
 import bg.softuni.travelNest.service.CurrentUser;
 import org.springframework.security.core.userdetails.UserDetails;

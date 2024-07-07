@@ -1,7 +1,7 @@
-package bg.softuni.travelNest.data.dto;
+package bg.softuni.travelNest.model.dto;
 
-import bg.softuni.travelNest.data.annotation.Email;
-import bg.softuni.travelNest.data.annotation.Password;
+import bg.softuni.travelNest.model.annotation.Email;
+import bg.softuni.travelNest.model.annotation.Password;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

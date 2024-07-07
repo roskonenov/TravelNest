@@ -1,6 +1,6 @@
 package bg.softuni.travelNest.service;
 
-import bg.softuni.travelNest.data.dto.RegisterDto;
+import bg.softuni.travelNest.model.dto.RegisterDto;
 
 public interface UserService {
 

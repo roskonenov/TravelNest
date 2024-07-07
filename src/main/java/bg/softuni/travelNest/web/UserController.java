@@ -1,6 +1,6 @@
 package bg.softuni.travelNest.web;
 
-import bg.softuni.travelNest.data.dto.RegisterDto;
+import bg.softuni.travelNest.model.dto.RegisterDto;
 import bg.softuni.travelNest.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class UserController {
     public String register(@Valid RegisterDto registerDto, BindingResult bindingResult, RedirectAttributes rAttr){
 
         boolean passwordDiff = userService.passwordDiff(registerDto.getPassword(), registerDto.getConfirmPassword());
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors() || passwordDiff){
 
             rAttr.addFlashAttribute("registerData", registerDto);
             rAttr.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);

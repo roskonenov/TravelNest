@@ -7,7 +7,7 @@
 
 	var revapi486;
 	tpj(document).ready(function () {
-		if (tpj("#rev_slider_486_1").revolution == undefined) {
+		if (tpj("#rev_slider_486_1").revolution === undefined) {
 			revslider_showDoubleJqueryError("#rev_slider_486_1");
 		} else {
 			revapi486 = tpj("#rev_slider_486_1").show().revolution({
@@ -81,7 +81,6 @@
 					origo: "enterpoint",
 					speed: 400,
 					levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 46, 47, 48, 49, 50, 55],
-					type: "scroll",
 				},
 				shadow: 0,
 				spinner: "off",

@@ -1,4 +1,4 @@
-package bg.softuni.travelNest.data.annotation;
+package bg.softuni.travelNest.model.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;

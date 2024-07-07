@@ -1,6 +1,6 @@
-package bg.softuni.travelNest.data.entity;
+package bg.softuni.travelNest.model.entity;
 
-import bg.softuni.travelNest.data.entity.base.BaseEntity;
+import bg.softuni.travelNest.model.entity.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
