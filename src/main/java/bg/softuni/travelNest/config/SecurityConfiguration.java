@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
@@ -16,6 +17,7 @@ public class SecurityConfiguration {
     private static final String[] AUTH_WHITELIST = {
             "/",
             "/users/login",
+            "/users/login-error",
             "/users/register",
     };
 
@@ -31,12 +33,13 @@ public class SecurityConfiguration {
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/", true)
-                        .failureForwardUrl("/users/login-error"))
+                        .failureUrl("/users/login-error"))
                 .rememberMe(rememberMe -> rememberMe
                         .rememberMeParameter("rememberMe")
                         .key("remember Me Encryption Key")
                         .rememberMeCookieName("rememberMeCookie")
                         .tokenValiditySeconds(10000))
+                .logout(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout
                         .logoutUrl("/users/logout")
                         .logoutSuccessUrl("/")
@@ -51,7 +54,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
     }
 }

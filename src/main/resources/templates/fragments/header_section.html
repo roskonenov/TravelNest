@@ -44,7 +44,7 @@
                            th:classappend="${activeLink == 'contact'}? 'active'">Contact Us</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                <section class="form-inline my-2 my-lg-0">
                     <div class="login_text">
                         <ul>
                             <li sec:authorize="isAnonymous()">
@@ -64,7 +64,7 @@
                             </li>
                         </ul>
                     </div>
-                    <form name="logoutForm"
+                    <form class="logoutForm" name="logoutForm"
                           th:method="post"
                           th:action="@{/users/logout}"
                           sec:authorize="isAuthenticated()">
@@ -74,7 +74,7 @@
                          sec:authorize="isAnonymous()">
                         <a th:href="@{/users/register}">Register</a>
                     </div>
-                </form>
+                </section>
             </div>
         </nav>
     </div>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Travel Nest</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png"/>
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800&family=Sen:wght@400;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+
+</head>
+<body>
+<!-- header top section start -->
+<div th:replace="~{fragments/header_top_section::header_top_section}"></div>
+<!-- header top section start -->
+<!-- header section start -->
+<div>
+    <div th:replace="~{fragments/header_section::header_section(activeLink='register')}"></div>
+</div>
+<!-- header section end -->
+<div class="container py-2 background">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 register-form mx-auto">
+                    <!-- form card login -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="mb-0">Registration</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="formRegister"
+                                  th:method="post"
+                                  th:action="@{/users/register}"
+                                  th:object="${registerData}"
+                                  class="formRegister">
+                                <div th:if="${userOrEmailExist}" style="color: red; font-size: 15px">Username or
+                                    email already exist!
+                                </div>
+                                <div class="form-group">
+                                    <input th:for="username"
+                                           th:field="*{username}"
+                                           th:errorclass="is-invalid"
+                                           class="form-control"
+                                           id="name"
+                                           name="name"
+                                           placeholder="Username"
+                                           type="text"
+                                           required="">
+                                    <i class="mdi mdi-account"></i>
+                                    <small th:errors="*{username}" class="invalid-feedback danger">Username error
+                                        message!</small>
+                                </div>
+                                <div class="form-group">
+                                    <input th:for="email"
+                                           th:field="*{email}"
+                                           th:errorclass="is-invalid"
+                                           type="email"
+                                           class="form-control"
+                                           placeholder="Email"
+                                           id="email"
+                                           required="">
+                                    <i class="mdi mdi-email"></i>
+                                    <small th:errors="*{email}" class="invalid-feedback danger">Email error
+                                        message!</small>
+                                </div>
+                                <div class="form-group">
+                                    <input th:for="password"
+                                           th:field="*{password}"
+                                           th:errorclass="is-invalid"
+                                           type="password"
+                                           class="form-control"
+                                           placeholder="Password"
+                                           required="">
+                                    <i class="mdi mdi-onepassword"></i>
+                                    <small th:errors="*{password}" class="invalid-feedback dander">Password error
+                                        message!</small>
+                                    <div th:if="${passwordDiff}" style="color: red; font-size: 15px">Passwords did not
+                                        match!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input th:for="confirm-password"
+                                           th:field="*{confirmPassword}"
+                                           th:errorclass="is-invalid"
+                                           type="password"
+                                           class="form-control"
+                                           placeholder="Confirm Password"
+                                           required="">
+                                    <i class="mdi mdi-textbox-password"></i>
+                                    <small th:errors="*{confirmPassword}" class="invalid-feedback danger">ConfirmPassword
+                                        error message!</small>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="checkbox1"
+                                                   th:for="checkbox1"
+                                                   th:field="*{agree}"
+                                                   th:errorclass="is-invalid"
+                                                   class="styled"
+                                                   type="checkbox">
+                                            <label>
+                                                I agree with <a href="#" id="popup-link">Terms of service</a>
+                                                <div th:if="${#fields.hasErrors('agree')}" th:errors="*{agree}" id="error"></div>
+                                            </label>
+                                            <div class="popup-window" id="popup-window">
+                                                <h1>Terms of service</h1>
+                                                <div class="content">
+                                                    <ol th:type="1">
+                                                        <li> 1. Acceptance of Terms
+                                                            By accessing this website, you agree to be bound by these
+                                                            Terms of Service, all applicable laws and regulations, and
+                                                            agree that you are responsible for compliance with any
+                                                            applicable local laws. If you do not agree with any of these
+                                                            terms, you are prohibited from using or accessing this site.
+                                                        </li>
+                                                        <li>
+                                                            2. Use License
+                                                            Permission is granted to temporarily download one copy of
+                                                            the materials (information or software) on this website for
+                                                            personal, non-commercial transitory viewing only. This is
+                                                            the grant of a license, not a transfer of title, and under
+                                                            this license you may not:
+                                                        </li>
+                                                        <li>
+                                                            3. Modify or copy the materials;
+                                                            Use the materials for any commercial purpose, or for any
+                                                            public display (commercial or non-commercial);
+                                                            Attempt to decompile or reverse engineer any software
+                                                            contained on this website;
+                                                            Remove any copyright or other proprietary notations from the
+                                                            materials; or
+                                                            Transfer the materials to another person or "mirror" the
+                                                            materials on any other server.
+                                                            This license shall automatically terminate if you violate
+                                                            any of these restrictions and may be terminated by us at any
+                                                            time. Upon terminating your viewing of these materials or
+                                                            upon the termination of this license, you must destroy any
+                                                            downloaded materials in your possession whether in
+                                                            electronic or printed format.
+                                                        </li>
+                                                        <li>
+                                                            4. User Accounts
+                                                            When you create an account on our website, you agree to
+                                                            provide accurate, complete information. You are responsible
+                                                            for maintaining the confidentiality of your account and
+                                                            password and for restricting access to your computer. You
+                                                            agree to accept responsibility for all activities that occur
+                                                            under your account or password.
+                                                        </li>
+                                                        <li>
+                                                            5. Privacy Policy
+                                                            Your use of our website is also subject to our Privacy
+                                                            Policy. Please review our Privacy Policy to understand our
+                                                            practices.
+                                                        </li>
+                                                        <li>
+                                                            6. Limitation of Liability
+                                                            This website and all content on it are provided on an "as
+                                                            is" basis without any warranties, express or implied. We do
+                                                            not warrant that the website will operate uninterrupted or
+                                                            error-free, or that the website or its server are free of
+                                                            viruses or other harmful components. In no event shall we be
+                                                            liable for any damages (including, without limitation,
+                                                            damages for loss of data or profit, or due to business
+                                                            interruption) arising out of the use or inability to use the
+                                                            materials on this website, even if we have been notified
+                                                            orally or in writing of the possibility of such damage.
+                                                        </li>
+                                                        <li>
+                                                            7. Revisions and Errata
+                                                            The materials appearing on our website could include
+                                                            technical, typographical, or photographic errors. We do not
+                                                            warrant that any of the materials on our website are
+                                                            accurate, complete, or current. We may make changes to the
+                                                            materials contained on our website at any time without
+                                                            notice. However, we do not make any commitment to update the
+                                                            materials.
+                                                        </li>
+                                                        <li>
+                                                            8. Links
+                                                            We have not reviewed all the sites linked to our website and
+                                                            are not responsible for the contents of any such linked
+                                                            site. The inclusion of any link does not imply endorsement
+                                                            by us of the site. Use of any such linked website is at the
+                                                            user's own risk.
+                                                        </li>
+                                                        <li>
+                                                            9. Modifications
+                                                            We may revise these Terms of Service for our website at any
+                                                            time without notice. By using this website you are agreeing
+                                                            to be bound by the then-current version of these Terms of
+                                                            Service.
+                                                        </li>
+                                                        <li>
+                                                            10. Governing Law
+                                                            These terms and conditions are governed by and construed in
+                                                            accordance with the laws of [Your Country/State], and you
+                                                            irrevocably submit to the exclusive jurisdiction of the
+                                                            courts in that State or location.
+                                                        </li>
+                                                        <li>
+                                                            11. Termination
+                                                            We may terminate or suspend your access to our website
+                                                            immediately, without prior notice or liability, for any
+                                                            reason whatsoever, including without limitation if you
+                                                            breach the Terms.
+                                                        </li>
+                                                        <li>
+                                                            12. Contact Us
+                                                            If you have any questions about these Terms, please contact
+                                                            us at [Your Contact Email].
+                                                        </li>
+                                                    </ol>
+                                                    <button id="close-button">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-12 text-center">
+                                        <button type="submit" class="btn btn-success btn-wd"
+                                                id="btnRegister">Register
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="naw-text mb-3">
+                                <h5>Already in TravelNest?</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="create-box text-block text-center my-0">
+                                        <span class="text-small font-weight-semibold">I'm a member ?</span>
+                                        <a th:href="@{/login}" class="text-black text-small">Login</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /form card register -->
+                </div>
+            </div>
+            <!--/row-->
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>
+<!--/container-->
+<!-- footer section start -->
+<div th:replace="~{fragments/footer_section::footer_section}"></div>
+<!-- footer section end -->
+<!-- copyright section start -->
+<div th:replace="~{fragments/copyright_section::copyright_section}"></div>
+<!-- copyright section end -->
+
+<!-- jquery latest version -->
+<script src="/js/jquery.min.js"></script>
+<!-- popper.min.js -->
+<script src="/js/popper.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.min.js"></script>
+<!-- script js -->
+<script src="/js/script.js"></script>
+<script src="/js/popup-box.js"></script>
+</body>
+</html>

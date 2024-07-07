@@ -4,7 +4,13 @@ import bg.softuni.travelNest.model.entity.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -18,28 +24,14 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-
-
-    public String getUsername() {
-        return username;
-    }
-
     public User setUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public User setEmail(String email) {
         this.email = email;
         return this;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public User setPassword(String password) {

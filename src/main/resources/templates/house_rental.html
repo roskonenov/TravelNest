@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Travel Nest</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png"/>
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800&family=Sen:wght@400;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+</head>
+<body>
+<!-- header top section start -->
+<div th:replace="~{fragments/header_top_section::header_top_section}"></div>
+<!-- header top section start -->
+<!-- header section start -->
+<div>
+    <div th:replace="~{fragments/header_section::header_section(activeLink='login')}"></div>
+</div>
+<!-- header section end -->
+<div class="container">
+    <div class="filter_section">
+        <label for="cityFilter">Filter by city:</label>
+        <select id="cityFilter" class="nice-select">
+            <option value="all">All Cities</option>
+            <option th:each="city : ${cities}"
+            th:value="${city}"
+            th:text="${city}">
+            </option>
+        </select>
+        <div class="create-box">
+            <span class="place">You have a place to rent? </span>
+            <a th:href="@{/house/add}" class="create text-black text-small"> Create new ad</a>
+        </div>
+    </div>
+
+    <div class="houses_list">
+        <div class="house_item" data-city="Sofia">
+            <img src="images/sofia.jpg" alt="House in Sofia">
+            <p>Sofia, Vitoshka Street 1</p>
+            <div class="btn_main">
+                <div class="details_button"><a href="#">See details</a></div>
+            </div>
+        </div>
+        <div class="house_item" data-city="Plovdiv">
+            <img src="images/plovdiv.jpg" alt="House in Plovdiv">
+            <p>Plovdiv, Ivan Vazov Street 5</p>
+            <div class="btn_main">
+                <div class="details_button"><a href="#">See details</a></div>
+            </div>
+        </div>
+        <div class="house_item" data-city="Varna">
+            <img src="images/varna.jpg" alt="House in Varna">
+            <p>Varna, Black Sea Boulevard 10</p>
+            <div class="btn_main">
+                <div class="details_button"><a href="#">See details</a></div>
+            </div>
+        </div>
+        <div class="house_item" data-city="Burgas">
+            <img src="images/burgas.jpg" alt="House in Burgas">
+            <p>Burgas, Alexander the Great Street 20</p>
+            <div class="btn_main">
+                <div class="details_button"><a href="#">See details</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer section start -->
+<div th:replace="~{fragments/footer_section::footer_section}"></div>
+<!-- footer section end -->
+<!-- copyright section start -->
+<div th:replace="~{fragments/copyright_section::copyright_section}"></div>
+<!-- copyright section end -->
+
+<!-- jquery latest version -->
+<script src="/js/jquery.min.js"></script>
+<!-- popper.min.js -->
+<script src="/js/popper.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.min.js"></script>
+<!-- script js -->
+<script src="/js/script.js"></script>
+
+<script src="/js/filter-properties.js"></script>
+</body>
+</html>
