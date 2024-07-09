@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Travel Nest</title>
+    <title>Rental List</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -39,7 +39,7 @@
 <!-- header top section start -->
 <!-- header section start -->
 <div>
-    <div th:replace="~{fragments/header_section::header_section(activeLink='login')}"></div>
+    <div th:replace="~{fragments/header_section::header_section(activeLink='services')}"></div>
 </div>
 <!-- header section end -->
 <div class="container">
@@ -59,7 +59,7 @@
     </div>
 
     <div class="houses_list">
-        <div class="house_item" data-city="Sofia">
+        <div class="house_item" th:data-city="Sofia">
             <img src="images/sofia.jpg" alt="House in Sofia">
             <p>Sofia, Vitoshka Street 1</p>
             <div class="btn_main">

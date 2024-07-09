@@ -1777,7 +1777,7 @@ textarea#comment.massage-bt::placeholder {
     color: #fda417;
 }
 
-/*house-rental*/
+/*housing-rental*/
 
 
 .filter_section{
@@ -1821,7 +1821,7 @@ textarea#comment.massage-bt::placeholder {
     background-color: #fda417;
     border-radius: 30px;
     border: 3px solid #fd7e14;
-    width: 100%;
+    width: 90%;
     font-size: 14px;
     color: #171a1d;
     margin: 15px 0 15px 0;
@@ -1888,4 +1888,57 @@ textarea#comment.massage-bt::placeholder {
 }
 .filter_section div{
     text-align: right;
+}
+
+.house_item img{
+    height: 150px;
+    width: 200px;
+    margin: 30px 30px;
+    border-radius: 5px;
+    border: 2px solid #fd7e14;
+}
+.house_item{
+    display: inline-flex;
+}
+.house_item p{
+    align-self: center;
+    width: 600px;
+    font-size: 17px;
+}
+.house_item .btn_main{
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+
+/*housing-details*/
+
+.housing-details .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+.housing-details .main_image {
+    width: 100%;
+    height: auto;
+}
+.housing-details .thumbnail {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.housing-details .thumbnail:hover {
+    border: 2px solid #333;
+}
+.housing-details .thumbnail_container {
+    display: flex;
+    margin-top: 10px;
+}
+.housing-details .details_section, .comments_section, .add_comment_section {
+    margin-top: 20px;
+}
+.housing-details .comment {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }

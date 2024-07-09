@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Housing details</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png"/>
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800&family=Sen:wght@400;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+</head>
+<body>
+<!-- header top section start -->
+<div th:replace="~{fragments/header_top_section::header_top_section}"></div>
+<!-- header top section start -->
+<!-- header section start -->
+<div>
+    <div th:replace="~{fragments/header_section::header_section(activeLink='services')}"></div>
+</div>
+<!-- header section end -->
+<div class="housing-details container">
+    <div class="main_image_container">
+        <img th:src="@{${house.mainImageUrl}}" alt="Main House Image" id="mainImage" class="housing-details main_image">
+    </div>
+    <div class="housing-details thumbnail_container">
+        <img th:each="imageUrl : ${house.imageUrls}" th:src="@{${imageUrl}}" alt="Thumbnail" class="housing-details thumbnail" th:onclick="'changeImage(' + @{${imageUrl}} + ')'">
+    </div>
+
+    <div class="housing-details details_section">
+        <h2>House Details</h2>
+        <p><strong>Price:</strong> <span th:text="${house.price}"></span>/day</p>
+        <p><strong>City:</strong> <span th:text="${house.city}"></span></p>
+        <p><strong>Address:</strong> <span th:text="${house.address}"></span></p>
+        <p><strong>Floor:</strong> <span th:text="${house.floor}"></span></p>
+        <p><strong>Rooms:</strong> <span th:text="${house.rooms}"></span></p>
+        <button class="details_button">Rent</button>
+        <button class="details_button">Add to favorites</button>
+    </div>
+
+    <div class="housing-details comments_section">
+        <h3>User Comments</h3>
+        <div th:each="comment : ${house.comments}">
+            <div class="housing-details comment">
+                <p><strong th:text="${comment.user}"></strong>: <span th:text="${comment.text}"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="housing-details add_comment_section">
+        <h3>Add a Comment</h3>
+        <textarea id="commentText" rows="4" cols="50" placeholder="Write your comment here..."></textarea><br>
+        <button onclick="addComment()">Submit</button>
+    </div>
+</div>
+<!-- footer section start -->
+<div th:replace="~{fragments/footer_section::footer_section}"></div>
+<!-- footer section end -->
+<!-- copyright section start -->
+<div th:replace="~{fragments/copyright_section::copyright_section}"></div>
+<!-- copyright section end -->
+
+<!-- jquery latest version -->
+<script src="/js/jquery.min.js"></script>
+<!-- popper.min.js -->
+<script src="/js/popper.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.min.js"></script>
+<!-- script js -->
+<script src="/js/script.js"></script>
+
+<script src="/js/change-image.js"></script>
+</body>
+</html>

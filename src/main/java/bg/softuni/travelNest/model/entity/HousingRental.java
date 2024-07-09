@@ -1,12 +1,14 @@
 package bg.softuni.travelNest.model.entity;
 
 import bg.softuni.travelNest.model.entity.base.BaseEntity;
+import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class HousingRental extends BaseEntity {
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     private CityEntity city;
 
+    @Column(name = "picture_url", columnDefinition = "TEXT")
     private String pictureUrl;
 
     @Column(name = "is_available", columnDefinition = "BOOL default true")
@@ -33,4 +36,7 @@ public class HousingRental extends BaseEntity {
 
     @Column(name = "rented_to")
     private LocalDate rentedTo;
+
+    @OneToMany(mappedBy = "housingRental")
+    private List<HousingComment> comments;
 }

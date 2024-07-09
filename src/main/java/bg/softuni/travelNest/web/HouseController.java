@@ -20,6 +20,6 @@ public class HouseController {
 
     @GetMapping("/house/rental")
     public String showRentalHousing(){
-        return "house_rental";
+        return "housing_rental";
     }
 }
