@@ -4,7 +4,7 @@ document.getElementById('cityFilter').addEventListener('change', function() {
 
     houseItems.forEach(function(item) {
         if (selectedCity === 'all' || item.getAttribute('data-city') === selectedCity) {
-            item.style.display = 'block';
+            item.style.display = 'inline-flex';
         } else {
             item.style.display = 'none';
         }

@@ -31,7 +31,7 @@
           rel="stylesheet">
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/7.4.47/css/materialdesignicons.min.css">
 </head>
 <body>
 <!-- header top section start -->
@@ -58,33 +58,15 @@
         </div>
     </div>
 
-    <div class="houses_list">
-        <div class="house_item" th:data-city="Sofia">
-            <img src="images/sofia.jpg" alt="House in Sofia">
-            <p>Sofia, Vitoshka Street 1</p>
+    <div class="houses_list"
+         th:each="property : ${housingData}"
+         th:object="${property}">
+        <div class="house_item"
+             th:data-city="*{city}">
+            <img th:src="*{pictureUrl}" alt="House in Sofia">
+            <p th:text="*{address}"></p>
             <div class="btn_main">
-                <div class="details_button"><a href="#">See details</a></div>
-            </div>
-        </div>
-        <div class="house_item" data-city="Plovdiv">
-            <img src="images/plovdiv.jpg" alt="House in Plovdiv">
-            <p>Plovdiv, Ivan Vazov Street 5</p>
-            <div class="btn_main">
-                <div class="details_button"><a href="#">See details</a></div>
-            </div>
-        </div>
-        <div class="house_item" data-city="Varna">
-            <img src="images/varna.jpg" alt="House in Varna">
-            <p>Varna, Black Sea Boulevard 10</p>
-            <div class="btn_main">
-                <div class="details_button"><a href="#">See details</a></div>
-            </div>
-        </div>
-        <div class="house_item" data-city="Burgas">
-            <img src="images/burgas.jpg" alt="House in Burgas">
-            <p>Burgas, Alexander the Great Street 20</p>
-            <div class="btn_main">
-                <div class="details_button"><a href="#">See details</a></div>
+                <div class="details_button"><a th:href="@{/house/details/{uuid} (uuid=*{id})}">See details</a></div>
             </div>
         </div>
     </div>

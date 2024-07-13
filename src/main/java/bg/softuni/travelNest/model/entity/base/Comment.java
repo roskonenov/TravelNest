@@ -25,7 +25,12 @@ public abstract class Comment extends BaseEntity {
 
     protected Comment(){}
 
-    protected Comment(String type){
+    protected Comment(String type) {
         this.type = type;
+    }
+    protected Comment(String type, String text, User user){
+        this.type = type;
+        this.text = text;
+        this.user = user;
     }
 }

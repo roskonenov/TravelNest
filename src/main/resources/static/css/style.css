@@ -395,7 +395,8 @@ button {
 }
 
 .quote_btn a,
-.logoutForm .btn{
+.logoutForm .btn,
+.add_picture{
     width: max-content;
     float: left;
     font-size: 16px;
@@ -407,7 +408,8 @@ button {
 }
 
 .quote_btn a:hover,
-.logoutForm .btn:hover{
+.logoutForm .btn:hover,
+.add_picture:hover{
     background-color: #ffffff;
     color: #252525;
     border: 1px solid black;
@@ -654,7 +656,7 @@ div.opacity {
     float: left;
 }
 
-.services_taital {
+.services_taital{
     width: 100%;
     float: left;
     font-size: 55px;
@@ -1457,7 +1459,7 @@ textarea#comment.massage-bt::placeholder {
     margin-top: 40px;
 }
 .formLogin .form-group .form-control:focus{
-    border: 1px solid #fda417;;
+    border: 1px solid #fda417;!important;
     box-shadow: none;
 }
 .addcolor i{
@@ -1639,7 +1641,7 @@ textarea#comment.massage-bt::placeholder {
     margin-top: 40px;
 }
 .formRegister .form-group .form-control:focus{
-    border: 1px solid #fda417;;
+    border: 1px solid #fda417;!important;
     box-shadow: none;
 }
 .addcolor i{
@@ -1818,6 +1820,7 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .house_item{
+    display: inline-flex;!important;
     background-color: #fda417;
     border-radius: 30px;
     border: 3px solid #fd7e14;
@@ -1897,9 +1900,7 @@ textarea#comment.massage-bt::placeholder {
     border-radius: 5px;
     border: 2px solid #fd7e14;
 }
-.house_item{
-    display: inline-flex;
-}
+
 .house_item p{
     align-self: center;
     width: 600px;
@@ -1941,4 +1942,81 @@ textarea#comment.massage-bt::placeholder {
 .housing-details .comment {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
+}
+
+/*add-rental-property*/
+
+
+.add_property{
+    width: 100%;
+    float: left;
+    font-size: 55px;
+    color: #305281;
+    font-weight: bold;
+    text-align: center;
+}
+
+.add_property_field{
+    width: 100%;
+    font-size: 20px;
+    font-weight: 650;
+    margin: 0 auto;
+    color: #305281;
+    padding-top: 20px;
+}
+.add_property_box {
+    width: 100%;
+    border: 2px solid #fd7e14;
+    border-radius: 10px;
+    color: #5a5959;
+    box-shadow: 0 0 15px 0 #5a5959;
+}
+.add_property_box:active{
+    border-color: #5a5959; !important;
+}
+
+.add_picture{
+    border-color: #fd7e14;
+    margin: 10px 0 10px 0;
+}
+
+.add_property_background .row{
+    display: inline-flex;
+    align-items: stretch;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+/*housing details*/
+
+.main_image_container img{
+    width: 500px;
+    height:auto;
+    border: 3px solid #fd7e14;
+    border-radius: 15px;
+    object-fit: cover;
+}
+.housing-details h2{
+    width: 100%;
+    float: left;
+    font-size: 55px;
+    color: #305281;
+    font-weight: bold;
+    text-align: left;
+}
+
+.housing-details .details_section p{
+    width: 100%;
+    font-size: 20px;
+    font-weight: 650;
+    margin: 0 auto;
+    color: #305281;
+    padding-top: 20px;
+    text-align: left;
+}
+.housing-details .details_section{
+    padding-left: 20px;
+}
+.comments_section .container{
+    display: flex;
 }

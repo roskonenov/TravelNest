@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Add Rental Property</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"/>
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800&family=Sen:wght@400;700;800&display=swap"
+          rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/7.4.47/css/materialdesignicons.min.css">
+</head>
+<body>
+<!-- header top section start -->
+<div th:replace="~{fragments/header_top_section::header_top_section}"></div>
+<!-- header top section start -->
+<!-- header section start -->
+<div>
+    <div th:replace="~{fragments/header_section::header_section(activeLink='services')}"></div>
+</div>
+<!-- header section end -->
+<div class="add_property_background container mt-5">
+    <h1 class="add_property mb-4">Add Rental Property</h1>
+    <div class="row">
+        <form th:method="post"
+              th:action="@{/house/add}"
+              th:object="${addRentalData}"
+              enctype="multipart/form-data">
+            <div class="add_property_field form-group">
+                <label for="city">City</label>
+                <select class="add_property_box form-control" id="city" name="city">
+                    <option value="" disabled selected>-Select city-</option>
+                    <option
+                            th:each="city : ${cities}"
+                            th:value="${city}"
+                            th:text="${city}">City</option>
+
+                </select>
+            </div>
+            <div class="add_property_field form-group">
+                <label th:for="address">Address</label>
+                <input
+                        th:field="*{address}"
+                        th:errorclass="is-invalid"
+                        type="text"
+                        class="add_property_box form-control"
+                        id="address"
+                        name="address"
+                        required>
+                <i class="mdi mdi-account"></i>
+                <small th:errors="*{address}" class="invalid-feedback danger">Username error
+                    message!</small>
+            </div>
+            <div class="add_property_field form-group">
+                <label for="price">Price</label>
+                <input type="number" class="add_property_box form-control" id="price" name="price" required>
+            </div>
+            <div class="add_property_field form-group">
+                <label for="floor">Floor</label>
+                <input type="number" class="add_property_box form-control" id="floor" name="floor">
+            </div>
+            <div class="add_property_field form-group">
+                <label for="rooms">Number of Rooms</label>
+                <input type="number" class="add_property_box form-control" id="rooms" name="rooms">
+            </div>
+            <div class="add_property_field form-group">
+                <label for="image">Upload Image</label>
+                <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+            </div>
+            <button type="submit" class="add_picture btn btn-primary">Submit</button>
+        </form>
+        <div class="col-md-6 padding_left_15">
+            <div class="add_rent_property">
+                <img src="https://cdn.pixabay.com/photo/2024/02/29/10/47/house-8603946_1280.png" width="500" height="500" alt="add_rent_property image">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer section start -->
+<div th:replace="~{fragments/footer_section::footer_section}"></div>
+<!-- footer section end -->
+<!-- copyright section start -->
+<div th:replace="~{fragments/copyright_section::copyright_section}"></div>
+<!-- copyright section end -->
+
+<!-- jquery latest version -->
+<script src="/js/jquery.min.js"></script>
+<!-- popper.min.js -->
+<script src="/js/popper.min.js"></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.min.js"></script>
+<!-- script js -->
+<script src="/js/script.js"></script>
+</body>
+</html>
