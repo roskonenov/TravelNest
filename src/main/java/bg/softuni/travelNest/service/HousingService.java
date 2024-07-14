@@ -4,7 +4,6 @@ import bg.softuni.travelNest.model.dto.AddCommentDTO;
 import bg.softuni.travelNest.model.dto.AddRentalPropertyDTO;
 import bg.softuni.travelNest.model.dto.HousingDTO;
 import bg.softuni.travelNest.model.dto.HousingDetailsDTO;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -13,11 +12,13 @@ import java.util.UUID;
 
 public interface HousingService {
 
-    UUID add(AddRentalPropertyDTO addRentalPropertyDTO, MultipartFile image) throws IOException;
+    UUID add(AddRentalPropertyDTO addRentalPropertyDTO, MultipartFile image, CurrentUser currentUser) throws IOException;
 
     HousingDetailsDTO findById(UUID id);
 
-    List<HousingDTO> findAll();
+    List<HousingDTO> findAllNotRented();
 
     void addComment(AddCommentDTO addCommentDTO, UUID housingId, CurrentUser currentUser);
+
+    void addToFavorites(CurrentUser currentUser, UUID housingId);
 }

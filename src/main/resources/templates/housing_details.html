@@ -31,7 +31,8 @@
           rel="stylesheet">
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/7.4.47/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 <!-- header top section start -->
@@ -42,7 +43,8 @@
     <div th:replace="~{fragments/header_section::header_section(activeLink='services')}"></div>
 </div>
 <!-- header section end -->
-<div class="housing-details container" th:object="${housingDetails}">
+<div class="housing-details container"
+     th:object="${housingDetails}">
     <h2>Property Details</h2>
     <div class="row">
         <div class="main_image_container">
@@ -51,43 +53,67 @@
         </div>
         <div class="housing-details details_section">
 
-            <p><strong>Price:</strong> <span th:text="${housingDetails.getPrice()}"></span>/day</p>
             <p><strong>City:</strong> <span th:text="${housingDetails.getCity()}"></span></p>
             <p><strong>Address:</strong> <span th:text="${housingDetails.getAddress()}"></span></p>
             <p><strong>Floor:</strong> <span th:text="${housingDetails.getFloor()}"></span></p>
             <p><strong>Rooms:</strong> <span th:text="${housingDetails.getRooms()}"></span></p>
+            <p><strong>Price:</strong> <span th:text="${housingDetails.getPrice()}"></span>/day</p>
         </div>
     </div>
-    <button class="details_button">Rent</button>
-    <button class="details_button">Add to favorites</button>
-    <div class="comment-section">
+        <button class="details_button" id="rentButton">Rent</button>
+        <div id="rentModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Select Dates</h2>
+                <form th:action="@{/house/rent/{uuid}(uuid= ${uuid})}"
+                      th:method="post">
+                    <label for="startDate" id="startDateLabel">Start Date:</label>
+                    <input type="text" id="startDate" name="startDate" required value="-Choose date-">
+                    <br>
+                    <label for="endDate" id="endDateLabel">End Date:  </label>
+                    <input type="text" id="endDate" name="endDate" required value="-Choose date-">
+                    <br><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    <form th:method="post"
+          th:action="@{/house/add-to-favorites/{uuid}(uuid= ${uuid})}">
+        <button class="details_button"
+                th:object="${user}">Add to favorites
+        </button>
+        <th:block class="favorite-icon" th:if="${isFavorite}">
+            <i id="favorite" class="favorite mdi mdi-star" style="font-size: 47px; color: #fda417;"></i>
+        </th:block>
+    </form>
+    <article class="comment-section">
         <h2>Comments</h2>
 
         <!-- Existing Comments -->
-        <div class="container" id="comments">
+        <div class="comment_box container" id="comments">
             <div class="housing-details comment"
                  th:each="comment : ${housingDetails.getComments()}">
                 <div class="author" th:text="${comment.getUser().getUsername()}">Author Name</div>
-                <div class="text" th:text="${comment.getText()}">Comment text goes here...</div>
+                <div class="comment_text" th:text="${comment.getText()}">Comment text goes here...</div>
             </div>
         </div>
 
         <!-- Add New Comment -->
-        <div class="add-comment">
-            <h3>Add a Comment</h3>
-            <form
-                    th:action="@{/house/details/{uuid}(uuid=${uuid})}"
-                    th:method="post"
-                    th:object="${commentData}">
-                <label for="comment">Comment:</label>
+        <form class="add-comment"
+              th:action="@{/house/details/{uuid}(uuid=${uuid})}"
+              th:method="post"
+              th:object="${commentData}">
+            <h3 class="table-title title">Add a Comment</h3>
+            <th:block th:errors="*{text}" class="invalid-feedback danger" style="color: red; font-size: 15px">Error
+                message!
+            </th:block>
+            <div>
                 <textarea th:field="*{text}"
                           th:errorclass="is-invalid" id="comment" name="comment" rows="4" required></textarea>
-                <th:block th:errors="*{text}" class="invalid-feedback danger">Username error
-                    message!</th:block>
                 <button type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
+            </div>
+        </form>
+    </article>
 </div>
 <!-- footer section start -->
 <div th:replace="~{fragments/footer_section::footer_section}"></div>
@@ -106,5 +132,8 @@
 <script src="/js/script.js"></script>
 
 <script src="/js/add_comment.js"></script>
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/js/flatpickr.js"></script>
 </body>
 </html>

@@ -2,19 +2,14 @@ package bg.softuni.travelNest.model.entity;
 
 import bg.softuni.travelNest.model.entity.base.BaseEntity;
 import bg.softuni.travelNest.model.entity.base.Comment;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -30,6 +25,25 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
+
+    @ManyToMany
+    @JoinTable(name = "users_housing_rentals",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "housing_rental_id", referencedColumnName = "id"))
+    private Set<HousingRental> favorites;
+
+    @OneToMany(mappedBy = "tenant")
+    private Set<HousingRental> rentedHousing;
+
+    @OneToMany(mappedBy = "landlord")
+    private Set<HousingRental> myHousingAdds;
+
+    public User() {
+        setComments(new ArrayList<>());
+        setFavorites(new HashSet<>());
+        setMyHousingAdds(new HashSet<>());
+        setRentedHousing(new HashSet<>());
+    }
 
     public User setUsername(String username) {
         this.username = username;
