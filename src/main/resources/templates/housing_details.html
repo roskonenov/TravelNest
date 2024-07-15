@@ -46,6 +46,9 @@
 <div class="housing-details container"
      th:object="${housingDetails}">
     <h2>Property Details</h2>
+    <div th:if="${message}">
+        <p th:text="${message}" style="color: orange; font-size: 15px"></p>
+    </div>
     <div class="row">
         <div class="main_image_container">
             <img th:src="@{${housingDetails.getPictureUrl()}}" alt="Main House Image" id="mainImage"
@@ -67,6 +70,21 @@
                 <h2>Select Dates</h2>
                 <form th:action="@{/house/rent/{uuid}(uuid= ${uuid})}"
                       th:method="post">
+                    <h1>Rent Periods</h1>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="period : ${rentPeriods}">
+                            <td th:text="${period.startDate}"></td>
+                            <td th:text="${period.endDate}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <label for="startDate" id="startDateLabel">Start Date:</label>
                     <input type="text" id="startDate" name="startDate" required value="-Choose date-">
                     <br>
@@ -79,8 +97,7 @@
         </div>
     <form th:method="post"
           th:action="@{/house/add-to-favorites/{uuid}(uuid= ${uuid})}">
-        <button class="details_button"
-                th:object="${user}">Add to favorites
+        <button class="details_button">Add to favorites
         </button>
         <th:block class="favorite-icon" th:if="${isFavorite}">
             <i id="favorite" class="favorite mdi mdi-star" style="font-size: 47px; color: #fda417;"></i>
@@ -104,7 +121,7 @@
               th:method="post"
               th:object="${commentData}">
             <h3 class="table-title title">Add a Comment</h3>
-            <th:block th:errors="*{text}" class="invalid-feedback danger" style="color: red; font-size: 15px">Error
+            <th:block th:errors="*{text}" class="invalid-feedback danger">Error
                 message!
             </th:block>
             <div>

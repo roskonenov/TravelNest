@@ -2,7 +2,7 @@ package bg.softuni.travelNest.service.impl;
 
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.RegisterDto;
-import bg.softuni.travelNest.model.entity.HousingRental;
+import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.repository.HousingRepository;
 import bg.softuni.travelNest.repository.UserRepository;
@@ -11,7 +11,6 @@ import bg.softuni.travelNest.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -54,7 +53,7 @@ public class UserServiceImpl implements UserService {
     public boolean isFavorite(CurrentUser currentUser, UUID id) {
         return this.findUser(currentUser)
                 .getFavorites()
-                .contains(housingRepository.findById(id).orElse(new HousingRental()));
+                .contains(housingRepository.findById(id).orElse(new Housing()));
 
     }
 }

@@ -2108,6 +2108,11 @@ textarea#comment.massage-bt::placeholder {
     background-color: #fda417;
 }
 
+.add-comment .invalid-feedback .dander{
+    font-size: 15px;!important;
+    color: #bd081d;!important;
+}
+
 #error{
     font-size: 15px;
     color: #bd081d;

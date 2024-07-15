@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.model.dto;
 
+import bg.softuni.travelNest.model.entity.User;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -23,8 +24,8 @@ public class RentDTO {
     private LocalDate endDate;
 
     @NotNull
-    private UUID housingId;
+    private UUID id;
 
     @NotNull
-    private UUID tenantId;
+    private User renter;
 }

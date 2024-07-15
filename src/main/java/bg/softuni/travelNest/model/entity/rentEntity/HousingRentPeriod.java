@@ -1,8 +1,7 @@
-package bg.softuni.travelNest.model.entity.commentEntity;
+package bg.softuni.travelNest.model.entity.rentEntity;
 
 import bg.softuni.travelNest.model.entity.Housing;
-import bg.softuni.travelNest.model.entity.User;
-import bg.softuni.travelNest.model.entity.base.Comment;
+import bg.softuni.travelNest.model.entity.base.RentPeriod;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -10,11 +9,14 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 @Getter
 @Setter
 @Entity
 @DiscriminatorValue("housing")
-public class HousingComment extends Comment {
+public class HousingRentPeriod extends RentPeriod {
 
     private static final String type = "HOUSING";
 
@@ -22,12 +24,12 @@ public class HousingComment extends Comment {
     @JoinColumn(name = "housing_id", referencedColumnName = "id")
     private Housing housing;
 
-    public HousingComment(String text, Housing housing, User currentUser) {
-        super(type, text, currentUser );
-        this.housing = housing;
+    protected HousingRentPeriod() {
+        super(type);
     }
 
-    public HousingComment() {
-        super(type);
+    public HousingRentPeriod( UUID renter, LocalDate startDate, LocalDate endDate, Housing housing) {
+        super(type, renter, startDate, endDate);
+        this.housing = housing;
     }
 }

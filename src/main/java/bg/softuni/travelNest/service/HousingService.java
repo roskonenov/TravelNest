@@ -1,9 +1,7 @@
 package bg.softuni.travelNest.service;
 
-import bg.softuni.travelNest.model.dto.AddCommentDTO;
-import bg.softuni.travelNest.model.dto.AddRentalPropertyDTO;
-import bg.softuni.travelNest.model.dto.HousingDTO;
-import bg.softuni.travelNest.model.dto.HousingDetailsDTO;
+import bg.softuni.travelNest.model.dto.*;
+import bg.softuni.travelNest.model.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,11 +12,11 @@ public interface HousingService {
 
     UUID add(AddRentalPropertyDTO addRentalPropertyDTO, MultipartFile image, CurrentUser currentUser) throws IOException;
 
-    HousingDetailsDTO findById(UUID id);
+    HousingDetailsDTO findDetailsById(UUID id);
 
     List<HousingDTO> findAllNotRented();
 
-    void addComment(AddCommentDTO addCommentDTO, UUID housingId, CurrentUser currentUser);
+    void addComment(AddCommentDTO addCommentDTO, UUID housingId, User user);
 
-    void addToFavorites(CurrentUser currentUser, UUID housingId);
+    void addToFavorites(User user, UUID housingId);
 }

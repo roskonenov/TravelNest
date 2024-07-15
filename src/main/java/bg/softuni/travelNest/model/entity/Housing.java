@@ -2,15 +2,14 @@ package bg.softuni.travelNest.model.entity;
 
 import bg.softuni.travelNest.model.entity.base.BaseEntity;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
+import bg.softuni.travelNest.model.entity.rentEntity.HousingRentPeriod;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,8 +17,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "housing_rental")
-public class HousingRental extends BaseEntity {
+@Table(name = "housing")
+public class Housing extends BaseEntity {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String address;
@@ -42,43 +41,33 @@ public class HousingRental extends BaseEntity {
     @Column(name = "is_available")
     private boolean isAvailable;
 
-    @Column(name = "rented_from")
-    private LocalDate rentedFrom;
-
-    @Column(name = "rented_to")
-    private LocalDate rentedTo;
-
-    @OneToMany(mappedBy = "housingRental")
+    @OneToMany(mappedBy = "housing")
     private List<HousingComment> comments;
+
+    @OneToMany(mappedBy = "housing")
+    private List<HousingRentPeriod> rentPeriods;
 
     @ManyToOne
     private User landlord;
 
-    @ManyToOne
-    private User tenant;
-
-    public HousingRental() {
+    public Housing() {
         setAvailable(true);
         setComments(new ArrayList<>());
+        setRentPeriods(new ArrayList<>());
     }
 
-    public HousingRental setPictureUrl(String pictureUrl) {
+    public Housing setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
         return this;
     }
 
-    public HousingRental setCity(CityEntity city) {
+    public Housing setCity(CityEntity city) {
         this.city = city;
         return this;
     }
 
-    public HousingRental setLandlord(User landlord) {
+    public Housing setLandlord(User landlord) {
         this.landlord = landlord;
-        return this;
-    }
-
-    public HousingRental setTenant(User tenant) {
-        this.tenant = tenant;
         return this;
     }
 
@@ -86,7 +75,7 @@ public class HousingRental extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HousingRental that = (HousingRental) o;
+        Housing that = (Housing) o;
         return Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getCity(), that.getCity()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getFloor(), that.getFloor()) && Objects.equals(getRooms(), that.getRooms()) && Objects.equals(getPictureUrl(), that.getPictureUrl());
     }
 

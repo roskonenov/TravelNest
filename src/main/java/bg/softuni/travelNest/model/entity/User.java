@@ -27,22 +27,18 @@ public class User extends BaseEntity {
     private List<Comment> comments;
 
     @ManyToMany
-    @JoinTable(name = "users_housing_rentals",
+    @JoinTable(name = "users_housings",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "housing_rental_id", referencedColumnName = "id"))
-    private Set<HousingRental> favorites;
-
-    @OneToMany(mappedBy = "tenant")
-    private Set<HousingRental> rentedHousing;
+            inverseJoinColumns = @JoinColumn(name = "housing_id", referencedColumnName = "id"))
+    private Set<Housing> favorites;
 
     @OneToMany(mappedBy = "landlord")
-    private Set<HousingRental> myHousingAdds;
+    private Set<Housing> myHousingAdds;
 
     public User() {
         setComments(new ArrayList<>());
         setFavorites(new HashSet<>());
         setMyHousingAdds(new HashSet<>());
-        setRentedHousing(new HashSet<>());
     }
 
     public User setUsername(String username) {

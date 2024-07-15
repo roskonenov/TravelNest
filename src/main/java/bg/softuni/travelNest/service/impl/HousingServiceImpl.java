@@ -1,11 +1,8 @@
 package bg.softuni.travelNest.service.impl;
 
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
-import bg.softuni.travelNest.model.dto.AddCommentDTO;
-import bg.softuni.travelNest.model.dto.AddRentalPropertyDTO;
-import bg.softuni.travelNest.model.dto.HousingDTO;
-import bg.softuni.travelNest.model.dto.HousingDetailsDTO;
-import bg.softuni.travelNest.model.entity.HousingRental;
+import bg.softuni.travelNest.model.dto.*;
+import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
@@ -25,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -46,16 +42,16 @@ public class HousingServiceImpl implements HousingService {
     public UUID add(AddRentalPropertyDTO addRentalPropertyDTO, MultipartFile image, CurrentUser currentUser) throws IOException {
 
         return housingRepository.save(
-            modelMapper.map(addRentalPropertyDTO, HousingRental.class)
-                    .setLandlord(userRepository.findByUsername(currentUser.getUsername())
-                            .orElseThrow(() -> new ObjectNotFoundException("Current user not found!")))
-                    .setCity(cityRepository.findByName(addRentalPropertyDTO.getCity()))
-                    .setPictureUrl(pictureService.uploadImage(image))
+                modelMapper.map(addRentalPropertyDTO, Housing.class)
+                        .setLandlord(userRepository.findByUsername(currentUser.getUsername())
+                                .orElseThrow(() -> new ObjectNotFoundException("Current user not found!")))
+                        .setCity(cityRepository.findByName(addRentalPropertyDTO.getCity()))
+                        .setPictureUrl(pictureService.uploadImage(image))
         ).getId();
     }
 
     @Override
-    public HousingDetailsDTO findById(UUID id) {
+    public HousingDetailsDTO findDetailsById(UUID id) {
         return housingRepository.findById(id)
                 .map(housingRental -> {
                     HousingDetailsDTO map = modelMapper.map(housingRental, HousingDetailsDTO.class);
@@ -63,8 +59,8 @@ public class HousingServiceImpl implements HousingService {
                     map.setComments(commentRepository.findByType(COMMENT_TYPE)
                             .stream()
                             .map(comment -> (HousingComment) comment)
-                            .filter(comment -> comment.getHousingRental().getId().equals(id))
-                                    .sorted(Comparator.comparingLong(Comment::getId))
+                            .filter(comment -> comment.getHousing().getId().equals(id))
+                            .sorted(Comparator.comparingLong(Comment::getId))
                             .toList());
                     return map;
                 })
@@ -75,7 +71,7 @@ public class HousingServiceImpl implements HousingService {
     public List<HousingDTO> findAllNotRented() {
         return housingRepository.findAll()
                 .stream()
-                .filter(HousingRental::isAvailable)
+                .filter(Housing::isAvailable)
                 .map(housingRental -> {
                     HousingDTO map = modelMapper.map(housingRental, HousingDTO.class);
                     map.setCity(housingRental.getCity().getName());
@@ -84,24 +80,19 @@ public class HousingServiceImpl implements HousingService {
     }
 
     @Override
-    public void addComment(AddCommentDTO addCommentDTO, UUID housingId, CurrentUser currentUser) {
+    public void addComment(AddCommentDTO addCommentDTO, UUID housingId, User user) {
 
-        HousingRental housingRental = housingRepository.findById(housingId)
+        Housing housing = housingRepository.findById(housingId)
                 .orElseThrow(() -> new ObjectNotFoundException("This property does not exist"));
 
-        User user = userRepository.findByUsername(currentUser.getUsername())
-                .orElseThrow(() -> new ObjectNotFoundException("This user does not exist"));
-
-        commentRepository.saveAndFlush(new HousingComment(addCommentDTO.getText(), housingRental, user));
+        commentRepository.saveAndFlush(new HousingComment(addCommentDTO.getText(), housing, user));
     }
 
     @Override
     @Transactional
-    public void addToFavorites(CurrentUser currentUser, UUID housingId) {
+    public void addToFavorites(User user, UUID housingId) {
 
-        userRepository.findByUsername(currentUser.getUsername())
-                .map(User::getFavorites)
-                .ifPresent(favorites -> favorites.add(housingRepository.findById(housingId)
-                        .orElseThrow(() -> new ObjectNotFoundException("No such property!"))));
+        user.getFavorites().add(housingRepository.findById(housingId)
+                .orElseThrow(() -> new ObjectNotFoundException("No such property!")));
     }
 }

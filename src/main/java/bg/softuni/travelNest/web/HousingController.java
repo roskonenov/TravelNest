@@ -2,14 +2,13 @@ package bg.softuni.travelNest.web;
 
 import bg.softuni.travelNest.model.dto.AddCommentDTO;
 import bg.softuni.travelNest.model.dto.AddRentalPropertyDTO;
-import bg.softuni.travelNest.model.dto.RentDTO;
 import bg.softuni.travelNest.model.enums.City;
 import bg.softuni.travelNest.service.CurrentUser;
 import bg.softuni.travelNest.service.HousingService;
+import bg.softuni.travelNest.service.RentService;
 import bg.softuni.travelNest.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +29,7 @@ public class HousingController {
 
     private final HousingService housingService;
     private final UserService userService;
+    private final RentService rentService;
 
     @ModelAttribute("cities")
     public List<String> cities() {
@@ -49,11 +48,6 @@ public class HousingController {
         return new AddCommentDTO();
     }
 
-    @ModelAttribute("rentData")
-    public RentDTO rentDTO(){
-        return new RentDTO();
-    }
-
     @GetMapping("/rental")
     public String showRentalHousing(Model model) {
         model.addAttribute("housingData", housingService.findAllNotRented());
@@ -61,13 +55,15 @@ public class HousingController {
     }
 
     @GetMapping("/details/{uuid}")
-    public String showDetails(@PathVariable("uuid") UUID housingId, @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+    public String showDetails(@PathVariable("uuid") UUID housingId,
+                              @AuthenticationPrincipal CurrentUser currentUser,
+                              Model model) {
 
         if (userService.isFavorite(currentUser, housingId)) {
             model.addAttribute("isFavorite", true);
         }
-
-        model.addAttribute("housingDetails", housingService.findById(housingId));
+        model.addAttribute("rentPeriods", rentService.getHousingRentPeriods(housingId));
+        model.addAttribute("housingDetails", housingService.findDetailsById(housingId));
         return "housing_details";
     }
 
@@ -76,8 +72,7 @@ public class HousingController {
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @Valid AddCommentDTO addCommentDTO,
                              BindingResult bindingResult,
-                             RedirectAttributes rAttr,
-                             Model model) {
+                             RedirectAttributes rAttr) {
 
         if (bindingResult.hasErrors()) {
             rAttr.addFlashAttribute("commentData", addCommentDTO);
@@ -85,10 +80,9 @@ public class HousingController {
             return "redirect:/house/details/" + housingId;
         }
 
-        housingService.addComment(addCommentDTO, housingId, currentUser);
+        housingService.addComment(addCommentDTO, housingId, userService.findUser(currentUser));
         return "redirect:/house/details/" + housingId;
     }
-
 
     @GetMapping("/add")
     public String showAddHousing() {
@@ -107,34 +101,14 @@ public class HousingController {
             rAttr.addFlashAttribute("org.springframework.validation.BindingResult.addRentalData", bindingResult);
             return "redirect:/house/add";
         }
-
         return "redirect:/house/details/" + housingService.add(addRentalPropertyDTO, image, currentUser);
     }
 
     @PostMapping("/add-to-favorites/{uuid}")
     public String addToFavorites(@PathVariable("uuid") UUID housingId,
                                  @AuthenticationPrincipal CurrentUser currentUser) {
-        housingService.addToFavorites(currentUser, housingId);
+
+        housingService.addToFavorites(userService.findUser(currentUser), housingId);
         return "redirect:/house/details/" + housingId;
-    }
-
-    @PostMapping("/rent/{uuid}")
-    public String rent(@PathVariable("uuid") UUID housingId,
-                       @AuthenticationPrincipal CurrentUser currentUser,
-                       @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                       @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-                       @Valid RentDTO rentDTO,
-                       BindingResult bindingResult,
-                       RedirectAttributes rAttr) {
-
-        rentDTO.setTenantId(userService.findUser(currentUser).getId());
-        rentDTO.setHousingId(housingId);
-
-        if (bindingResult.hasErrors()) {
-            rAttr.addFlashAttribute("rentData", rentDTO);
-            rAttr.addFlashAttribute("org.springframework.validation.BindingResul.rentData", bindingResult);
-            return "redirect:/house/details/" + housingId;
-        }
-        return "index";
     }
 }

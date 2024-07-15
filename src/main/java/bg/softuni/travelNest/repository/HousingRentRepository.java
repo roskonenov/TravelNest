@@ -1,10 +1,9 @@
 package bg.softuni.travelNest.repository;
 
-import bg.softuni.travelNest.model.entity.Housing;
+import bg.softuni.travelNest.model.entity.rentEntity.HousingRentPeriod;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
 @Repository
-public interface HousingRepository extends JpaRepository<Housing, UUID> {
+public interface HousingRentRepository extends JpaRepository<HousingRentPeriod, Long> {
 }
