@@ -1,9 +1,13 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.model.entity.Role;
+import bg.softuni.travelNest.model.enums.RoleEnum;
 import bg.softuni.travelNest.repository.UserRepository;
 import bg.softuni.travelNest.model.entity.User;
 
 import bg.softuni.travelNest.service.CurrentUser;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,8 +33,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new CurrentUser(
                 user.getUsername(),
                 user.getPassword(),
-                new ArrayList<>(),
+                user.getRoles().stream().map(Role::getRole).map(UserDetailsServiceImpl::map).toList(),
                 user.getEmail()
         );
+    }
+
+    private static GrantedAuthority map(RoleEnum role){
+        return new SimpleGrantedAuthority("ROLE_" + role);
     }
 }

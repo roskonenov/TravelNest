@@ -1,6 +1,6 @@
 package bg.softuni.travelNest.model.entity;
 
-import bg.softuni.travelNest.model.entity.base.BaseEntity;
+import bg.softuni.travelNest.model.entity.base.BaseEntityUuid;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "city")
-public class CityEntity extends BaseEntity {
+public class CityEntity extends BaseEntityUuid {
 
     @Column(nullable = false)
     private String name;

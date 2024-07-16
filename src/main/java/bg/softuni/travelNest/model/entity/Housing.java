@@ -1,6 +1,6 @@
 package bg.softuni.travelNest.model.entity;
 
-import bg.softuni.travelNest.model.entity.base.BaseEntity;
+import bg.softuni.travelNest.model.entity.base.BaseEntityUuid;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
 import bg.softuni.travelNest.model.entity.rentEntity.HousingRentPeriod;
 import jakarta.persistence.*;
@@ -18,7 +18,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "housing")
-public class Housing extends BaseEntity {
+public class Housing extends BaseEntityUuid {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String address;

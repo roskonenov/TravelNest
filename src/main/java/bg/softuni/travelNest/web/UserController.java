@@ -29,7 +29,6 @@ public class UserController {
 
     @GetMapping("/login-error")
     public String loginError(Model model){
-//        model.addAttribute("loginData", new LoginDTO());
         model.addAttribute("showError", true);
         return "login";
     }

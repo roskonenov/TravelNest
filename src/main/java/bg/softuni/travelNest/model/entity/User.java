@@ -1,6 +1,6 @@
 package bg.softuni.travelNest.model.entity;
 
-import bg.softuni.travelNest.model.entity.base.BaseEntity;
+import bg.softuni.travelNest.model.entity.base.BaseEntityUuid;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.*;
 @Setter
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class User extends BaseEntityUuid {
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -22,6 +22,11 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;

@@ -13,11 +13,7 @@ import java.util.UUID;
 @Table(name = "rent_periods")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
-public abstract class RentPeriod {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public abstract class RentPeriod extends BaseEntityId {
 
     @Column(insertable = false, updatable = false)
     private String type;

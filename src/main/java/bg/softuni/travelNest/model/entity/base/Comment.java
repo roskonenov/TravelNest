@@ -11,11 +11,7 @@ import lombok.Setter;
 @Table(name = "comments")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
-public abstract class Comment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public abstract class Comment extends BaseEntityId {
 
     @Column(insertable = false, updatable = false)
     private String type;
