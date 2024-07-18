@@ -68,10 +68,9 @@ public class HousingServiceImpl implements HousingService {
     }
 
     @Override
-    public List<HousingDTO> findAllNotRented() {
+    public List<HousingDTO> findAllAdds() {
         return housingRepository.findAll()
                 .stream()
-                .filter(Housing::isAvailable)
                 .map(housingRental -> {
                     HousingDTO map = modelMapper.map(housingRental, HousingDTO.class);
                     map.setCity(housingRental.getCity().getName());

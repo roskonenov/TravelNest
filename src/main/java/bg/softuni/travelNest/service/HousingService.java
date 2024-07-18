@@ -14,7 +14,7 @@ public interface HousingService {
 
     HousingDetailsDTO findDetailsById(UUID id);
 
-    List<HousingDTO> findAllNotRented();
+    List<HousingDTO> findAllAdds();
 
     void addComment(AddCommentDTO addCommentDTO, UUID housingId, User user);
 

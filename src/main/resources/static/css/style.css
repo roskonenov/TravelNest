@@ -1789,10 +1789,6 @@ textarea#comment.massage-bt::placeholder {
     display: contents;
 }
 
-.houses_list{
-    padding-top: 20px;
-}
-
 .filter_section label{
     padding-right: 10px;
     padding-left: 10px;
@@ -1908,6 +1904,16 @@ textarea#comment.massage-bt::placeholder {
     align-self: center;
     width: 600px;
     font-size: 17px;
+}
+
+.house_item h2{
+    align-self: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #171a1d;
+    text-transform: capitalize;
+    text-align: left;
+    padding-bottom: 0;
 }
 .house_item .btn_main{
     align-items: flex-end;

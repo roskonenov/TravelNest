@@ -50,7 +50,7 @@ public class HousingController {
 
     @GetMapping("/rental")
     public String showRentalHousing(Model model) {
-        model.addAttribute("housingData", housingService.findAllNotRented());
+        model.addAttribute("housingData", housingService.findAllAdds());
         return "housing_rental";
     }
 

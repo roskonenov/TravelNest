@@ -55,7 +55,6 @@ public class RentServiceImpl implements RentService {
     }
 
     private String applyRent(RentDTO rentDTO, Housing housing) {
-        housing.setAvailable(false);
         housingRentRepository.saveAndFlush(new HousingRentPeriod(rentDTO.getRenter().getId(), rentDTO.getStartDate(), rentDTO.getEndDate(), housing ));
         housingRepository.saveAndFlush(housing);
         return "The housing was rented successfully!";

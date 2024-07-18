@@ -20,12 +20,12 @@ import java.util.Objects;
 @Table(name = "housing")
 public class Housing extends BaseEntityUuid {
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String address;
-
     @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     private CityEntity city;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String address;
 
     @NotNull
     @PositiveOrZero
@@ -38,9 +38,6 @@ public class Housing extends BaseEntityUuid {
     @Column(name = "picture_url", columnDefinition = "TEXT")
     private String pictureUrl;
 
-    @Column(name = "is_available")
-    private boolean isAvailable;
-
     @OneToMany(mappedBy = "housing")
     private List<HousingComment> comments;
 
@@ -51,9 +48,19 @@ public class Housing extends BaseEntityUuid {
     private User landlord;
 
     public Housing() {
-        setAvailable(true);
         setComments(new ArrayList<>());
         setRentPeriods(new ArrayList<>());
+    }
+
+    public Housing(CityEntity city, String address, BigDecimal price, Integer floor, Integer rooms, String pictureUrl, User landlord) {
+        this();
+        this.city = city;
+        this.address = address;
+        this.price = price;
+        this.floor = floor;
+        this.rooms = rooms;
+        this.pictureUrl = pictureUrl;
+        this.landlord = landlord;
     }
 
     public Housing setPictureUrl(String pictureUrl) {

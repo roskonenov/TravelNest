@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("rentModal");
     const btn = document.getElementById("rentButton");
     const span = document.getElementsByClassName("close")[0];
+    const submitBtn = document.getElementById("submitRentForm");
 
     // Show modal when the button is clicked
     btn.onclick = function() {
@@ -34,6 +35,10 @@ document.addEventListener("DOMContentLoaded", function() {
         onChange: validateDates
     });
 
+    // Add input event listeners for validation
+    document.getElementById("startDate").addEventListener("input", validateDates);
+    document.getElementById("endDate").addEventListener("input", validateDates);
+
     // Form validation
     document.getElementById("rentForm").addEventListener("submit", function(event) {
         const startDate = document.getElementById("startDate").value;
@@ -45,29 +50,32 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    function validateDates(selectedDates, dateStr, instance) {
-        let start;
+    function validateDates() {
         const startDate = document.getElementById("startDate").value;
         const endDate = document.getElementById("endDate").value;
         const currentDate = new Date();
 
-        if (startDate) {
-            start = new Date(startDate);
-            if (start < currentDate) {
-                alert("Start date cannot be before the current date.");
-                return false;
-            }
+        if (!startDate || !endDate) {
+            submitBtn.disabled = true;
+            return false;
         }
 
-        if (startDate && endDate) {
-            start = new Date(startDate);
-            const end = new Date(endDate);
+        let start = new Date(startDate);
+        let end = new Date(endDate);
 
-            if (end < start) {
-                alert("End date must be after the start date.");
-                return false;
-            }
+        if (start < currentDate) {
+            alert("Start date cannot be before the current date.");
+            submitBtn.disabled = true;
+            return false;
         }
+
+        if (end <= start) {
+            alert("End date must be after the start date.");
+            submitBtn.disabled = true;
+            return false;
+        }
+
+        submitBtn.disabled = false;
         return true;
     }
 });

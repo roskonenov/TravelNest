@@ -80,8 +80,8 @@
                         </thead>
                         <tbody>
                         <tr th:each="period : ${rentPeriods}">
-                            <td th:text="${period.startDate}"></td>
-                            <td th:text="${period.endDate}"></td>
+                           <td th:text="${period.startDate}"></td>
+                           <td th:text="${period.endDate}"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -91,7 +91,7 @@
                     <label for="endDate" id="endDateLabel">End Date:  </label>
                     <input type="text" id="endDate" name="endDate" required value="-Choose date-">
                     <br><br>
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="submitRentForm" disabled>Submit</button>
                 </form>
             </div>
         </div>

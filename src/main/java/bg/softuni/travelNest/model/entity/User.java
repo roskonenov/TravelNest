@@ -32,7 +32,7 @@ public class User extends BaseEntityUuid {
     private List<Comment> comments;
 
     @ManyToMany
-    @JoinTable(name = "users_housings",
+    @JoinTable(name = "users_favorite_housings",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "housing_id", referencedColumnName = "id"))
     private Set<Housing> favorites;
@@ -41,9 +41,17 @@ public class User extends BaseEntityUuid {
     private Set<Housing> myHousingAdds;
 
     public User() {
+        setRoles(new ArrayList<>());
         setComments(new ArrayList<>());
         setFavorites(new HashSet<>());
         setMyHousingAdds(new HashSet<>());
+    }
+
+    public User(String username, String email, String password) {
+        this();
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public User setUsername(String username) {
@@ -58,6 +66,11 @@ public class User extends BaseEntityUuid {
 
     public User setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public User setRoles(List<Role> roles) {
+        this.roles = roles;
         return this;
     }
 

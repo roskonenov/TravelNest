@@ -64,6 +64,7 @@
         <div class="house_item"
              th:data-city="*{city}">
             <img th:src="*{pictureUrl}" alt="House in Sofia">
+            <h2 th:text="*{city}"></h2>
             <p th:text="*{address}"></p>
             <div class="btn_main">
                 <div class="details_button"><a th:href="@{/house/details/{uuid} (uuid=*{id})}">See details</a></div>
