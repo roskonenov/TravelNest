@@ -38,7 +38,7 @@ public class SecurityConfig {
                         .rememberMeParameter("rememberMe")
                         .key("remember Me Encryption Key")
                         .rememberMeCookieName("rememberMeCookie")
-                        .tokenValiditySeconds(10080))
+                        .tokenValiditySeconds(604800))
                 .logout(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout
                         .logoutUrl("/users/logout")

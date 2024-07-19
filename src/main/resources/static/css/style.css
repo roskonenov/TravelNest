@@ -2083,6 +2083,7 @@ textarea#comment.massage-bt::placeholder {
     border: 1px solid #fda417;
     border-radius: 40px;
     padding: 8px;
+    margin: 25px;
 }
 
 .housing-details .details_button:hover{

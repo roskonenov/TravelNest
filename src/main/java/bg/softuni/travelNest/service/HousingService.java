@@ -19,4 +19,6 @@ public interface HousingService {
     void addComment(AddCommentDTO addCommentDTO, UUID housingId, User user);
 
     void addToFavorites(User user, UUID housingId);
+
+    void deleteHousing(CurrentUser currentUser, UUID housingId);
 }

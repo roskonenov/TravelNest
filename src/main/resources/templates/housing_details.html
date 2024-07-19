@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -63,6 +64,7 @@
             <p><strong>Price:</strong> <span th:text="${housingDetails.getPrice()}"></span>/day</p>
         </div>
     </div>
+    <div class="row">
         <button class="details_button" id="rentButton">Rent</button>
         <div id="rentModal" class="modal">
             <div class="modal-content">
@@ -80,29 +82,35 @@
                         </thead>
                         <tbody>
                         <tr th:each="period : ${rentPeriods}">
-                           <td th:text="${period.startDate}"></td>
-                           <td th:text="${period.endDate}"></td>
+                            <td th:text="${period.startDate}"></td>
+                            <td th:text="${period.endDate}"></td>
                         </tr>
                         </tbody>
                     </table>
                     <label for="startDate" id="startDateLabel">Start Date:</label>
                     <input type="text" id="startDate" name="startDate" required value="-Choose date-">
                     <br>
-                    <label for="endDate" id="endDateLabel">End Date:  </label>
+                    <label for="endDate" id="endDateLabel">End Date: </label>
                     <input type="text" id="endDate" name="endDate" required value="-Choose date-">
                     <br><br>
                     <button type="submit" id="submitRentForm" disabled>Submit</button>
                 </form>
             </div>
         </div>
-    <form th:method="post"
-          th:action="@{/house/add-to-favorites/{uuid}(uuid= ${uuid})}">
-        <button class="details_button">Add to favorites
-        </button>
-        <th:block class="favorite-icon" th:if="${isFavorite}">
-            <i id="favorite" class="favorite mdi mdi-star" style="font-size: 47px; color: #fda417;"></i>
-        </th:block>
-    </form>
+        <form th:method="post"
+              th:action="@{/house/add-to-favorites/{uuid}(uuid= ${uuid})}">
+            <button class="details_button">Add to favorites
+            </button>
+            <th:block class="favorite-icon" th:if="${isFavorite}">
+                <i id="favorite" class="favorite mdi mdi-star" style="font-size: 47px; color: #fda417;"></i>
+            </th:block>
+        </form>
+        <form th:method="delete"
+              th:action="@{/house/details/{uuid}(uuid= ${uuid})}">
+            <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
+            </button>
+        </form>
+    </div>
     <article class="comment-section">
         <h2>Comments</h2>
 

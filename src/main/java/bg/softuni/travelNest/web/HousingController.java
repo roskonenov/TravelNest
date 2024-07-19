@@ -84,6 +84,13 @@ public class HousingController {
         return "redirect:/house/details/" + housingId;
     }
 
+    @DeleteMapping("/details/{uuid}")
+    public String deleteHousing(@PathVariable("uuid") UUID housingId,
+                                @AuthenticationPrincipal CurrentUser currentUser){
+        housingService.deleteHousing(currentUser, housingId);
+        return "redirect:/house/rental";
+    }
+
     @GetMapping("/add")
     public String showAddHousing() {
         return "add_housing";

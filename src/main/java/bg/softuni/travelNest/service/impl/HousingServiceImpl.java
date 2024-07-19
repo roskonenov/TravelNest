@@ -6,15 +6,13 @@ import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
-import bg.softuni.travelNest.repository.CityRepository;
-import bg.softuni.travelNest.repository.CommentRepository;
-import bg.softuni.travelNest.repository.HousingRepository;
-import bg.softuni.travelNest.repository.UserRepository;
+import bg.softuni.travelNest.repository.*;
 import bg.softuni.travelNest.service.CurrentUser;
 import bg.softuni.travelNest.service.HousingService;
 import bg.softuni.travelNest.service.PictureService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +34,7 @@ public class HousingServiceImpl implements HousingService {
     private final CityRepository cityRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
+    private final HousingRentRepository housingRentRepository;
 
 
     @Override
@@ -82,7 +81,7 @@ public class HousingServiceImpl implements HousingService {
     public void addComment(AddCommentDTO addCommentDTO, UUID housingId, User user) {
 
         Housing housing = housingRepository.findById(housingId)
-                .orElseThrow(() -> new ObjectNotFoundException("This property does not exist"));
+                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
 
         commentRepository.saveAndFlush(new HousingComment(addCommentDTO.getText(), housing, user));
     }
@@ -92,6 +91,19 @@ public class HousingServiceImpl implements HousingService {
     public void addToFavorites(User user, UUID housingId) {
 
         user.getFavorites().add(housingRepository.findById(housingId)
-                .orElseThrow(() -> new ObjectNotFoundException("No such property!")));
+                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found")));
+    }
+
+    @Override
+    @Transactional
+    public void deleteHousing(CurrentUser currentUser, UUID housingId) {
+        if (!currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
+
+        Housing housing = housingRepository.findById(housingId)
+                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
+        commentRepository.deleteAllWhereHousing(housing);
+        housingRepository.deleteAllFromUsersFavoritesWhereHousingId(housingId);
+        housingRentRepository.deleteAllWhereHousing(housing);
+        housingRepository.delete(housing);
     }
 }
