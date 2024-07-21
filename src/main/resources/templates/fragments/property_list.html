@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Property List</title>
+</head>
+<body>
+<div th:fragment="property_list(propertyData, refDetailsLink)">
+    <div class="property_list"
+         th:each="property : ${propertyData}"
+         th:object="${property}">
+        <div class="property_item"
+             th:data-city="*{city}">
+            <img th:src="*{pictureUrl}" alt="Housing picture">
+            <h2 th:text="*{city}"></h2>
+            <p th:text="*{address}"></p>
+            <div class="btn_main">
+                <div class="details_button"><a th:href="@{${refDetailsLink} (uuid=*{id})}">See details</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

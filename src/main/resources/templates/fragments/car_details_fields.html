@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Details Fields</title>
+</head>
+<body>
+<div th:fragment="car_details_fields">
+    <p><strong>Make:</strong> <span th:text="*{make}"></span></p>
+    <p><strong>Model:</strong> <span th:text="*{model}"></span></p>
+    <p><strong>Engine:</strong> <span th:text="*{engine}"></span></p>
+    <p><strong>Doors:</strong> <span th:text="*{doors}"></span></p>
+</div>
+</body>
+</html>

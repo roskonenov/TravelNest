@@ -63,11 +63,11 @@ document.addEventListener("DOMContentLoaded", function() {
         let start = new Date(startDate);
         let end = new Date(endDate);
 
-        if (start < currentDate) {
-            alert("Start date cannot be before the current date.");
-            submitBtn.disabled = true;
-            return false;
-        }
+        // if (start < currentDate) {
+        //     alert("Start date cannot be before the current date.");
+        //     submitBtn.disabled = true;
+        //     return false;
+        // }
 
         if (end <= start) {
             alert("End date must be after the start date.");

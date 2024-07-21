@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Housing Fields</title>
+</head>
+<body>
+<div th:fragment="housing_fields">
+    <div class="add_property_field form-group">
+        <label th:for="floor">Floor</label>
+        <input th:field="*{floor}"
+               th:errorclass="is-invalid"
+               type="number" class="add_property_box form-control" id="floor" name="floor" required>
+        <small th:errors="*{floor}" class="invalid-feedback danger">Floor error
+            message!</small>
+    </div>
+    <div class="add_property_field form-group">
+        <label th:for="rooms">Number of Rooms</label>
+        <input th:field="*{rooms}"
+               th:errorclass="is-invalid"
+               type="number" class="add_property_box form-control" id="rooms" name="rooms" required>
+        <small th:errors="*{rooms}" class="invalid-feedback danger">Rooms error
+            message!</small>
+    </div>
+</div>
+</body>
+</html>

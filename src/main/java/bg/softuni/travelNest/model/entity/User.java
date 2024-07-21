@@ -3,6 +3,7 @@ package bg.softuni.travelNest.model.entity;
 import bg.softuni.travelNest.model.entity.base.BaseEntityUuid;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,16 +36,23 @@ public class User extends BaseEntityUuid {
     @JoinTable(name = "users_favorite_housings",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "housing_id", referencedColumnName = "id"))
-    private Set<Housing> favorites;
+    private Set<Housing> favoriteHousings;
 
-    @OneToMany(mappedBy = "landlord")
+    @ManyToMany
+    @JoinTable(name = "users_favorite_cars",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id"))
+    private Set<Car> favoriteCars;
+
+    @OneToMany(mappedBy = "owner")
     private Set<Housing> myHousingAdds;
 
     public User() {
         setRoles(new ArrayList<>());
         setComments(new ArrayList<>());
-        setFavorites(new HashSet<>());
+        setFavoriteHousings(new HashSet<>());
         setMyHousingAdds(new HashSet<>());
+        setFavoriteCars(new HashSet<>());
     }
 
     public User(String username, String email, String password) {

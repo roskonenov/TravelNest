@@ -1,11 +1,9 @@
 package bg.softuni.travelNest.model.entity;
 
-import bg.softuni.travelNest.model.entity.base.BaseEntityUuid;
+import bg.softuni.travelNest.model.entity.base.RentItem;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
-import bg.softuni.travelNest.model.entity.rentEntity.HousingRentPeriod;
+import bg.softuni.travelNest.model.entity.rentPeriodEntity.HousingRentPeriod;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,25 +16,13 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "housing")
-public class Housing extends BaseEntityUuid {
+public class Housing extends RentItem {
 
-    @ManyToOne
-    @JoinColumn(name = "city_id", referencedColumnName = "id")
-    private CityEntity city;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String address;
-
-    @NotNull
-    @PositiveOrZero
-    private BigDecimal price;
-
+    @Column(nullable = false)
     private Integer floor;
 
+    @Column(nullable = false)
     private Integer rooms;
-
-    @Column(name = "picture_url", columnDefinition = "TEXT")
-    private String pictureUrl;
 
     @OneToMany(mappedBy = "housing")
     private List<HousingComment> comments;
@@ -44,39 +30,21 @@ public class Housing extends BaseEntityUuid {
     @OneToMany(mappedBy = "housing")
     private List<HousingRentPeriod> rentPeriods;
 
-    @ManyToOne
-    private User landlord;
-
     public Housing() {
-        setComments(new ArrayList<>());
+        super();
         setRentPeriods(new ArrayList<>());
+        setComments(new ArrayList<>());
     }
 
-    public Housing(CityEntity city, String address, BigDecimal price, Integer floor, Integer rooms, String pictureUrl, User landlord) {
-        this();
-        this.city = city;
-        this.address = address;
-        this.price = price;
+    public Housing(CityEntity city, String address, BigDecimal price, Integer floor, Integer rooms, String pictureUrl, User owner) {
+        super(city, address, price, pictureUrl, owner);
         this.floor = floor;
         this.rooms = rooms;
-        this.pictureUrl = pictureUrl;
-        this.landlord = landlord;
+        setRentPeriods(new ArrayList<>());
+        setComments(new ArrayList<>());
     }
 
-    public Housing setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-        return this;
-    }
 
-    public Housing setCity(CityEntity city) {
-        this.city = city;
-        return this;
-    }
-
-    public Housing setLandlord(User landlord) {
-        this.landlord = landlord;
-        return this;
-    }
 
     @Override
     public boolean equals(Object o) {

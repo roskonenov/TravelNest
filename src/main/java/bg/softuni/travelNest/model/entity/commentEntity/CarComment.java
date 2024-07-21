@@ -1,6 +1,6 @@
 package bg.softuni.travelNest.model.entity.commentEntity;
 
-import bg.softuni.travelNest.model.entity.Housing;
+import bg.softuni.travelNest.model.entity.Car;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import jakarta.persistence.DiscriminatorValue;
@@ -13,22 +13,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue("housing")
-public class HousingComment extends Comment {
+@DiscriminatorValue("car")
+public class CarComment extends Comment {
 
-    private static final String type = "HOUSING";
+    private static final String type = "CAR";
 
     @ManyToOne
-    @JoinColumn(name = "housing_id", referencedColumnName = "id")
-    private Housing housing;
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car car;
 
-    public HousingComment() {
+    protected CarComment() {
         super(type);
     }
 
-    public HousingComment(String text, Housing housing, User owner) {
-        super(type, text, owner );
-        this.housing = housing;
+    public CarComment(String text, User owner, Car car) {
+        super(type, text, owner);
+        this.car = car;
     }
 }
-

@@ -53,11 +53,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(currentUser.getUsername())
                 .orElseThrow(() -> new ObjectNotFoundException("Current user not found"));
     }
-
-    @Override
-    public boolean isFavorite(CurrentUser currentUser, UUID id) {
-        return this.findUser(currentUser)
-                .getFavorites()
-                .contains(housingRepository.findById(id).orElse(new Housing()));
-    }
 }

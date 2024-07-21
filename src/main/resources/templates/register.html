@@ -100,9 +100,6 @@
                                     <i class="mdi mdi-onepassword"></i>
                                     <small th:errors="*{password}" class="invalid-feedback dander">Password error
                                         message!</small>
-                                    <div th:if="${passwordDiff}" style="color: red; font-size: 15px">Passwords did not
-                                        match!
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input th:for="confirm-password"

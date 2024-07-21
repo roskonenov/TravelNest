@@ -8,10 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -29,8 +26,9 @@ public class RentController {
         return new RentDTO();
     }
 
-    @PostMapping("/house/rent/{uuid}")
-    public String rentHousing(@PathVariable("uuid") UUID housingId,
+    @PostMapping("/{propertyType}/rent/{uuid}")
+    public String rentHousing(@PathVariable("uuid") UUID propertyId,
+                              @PathVariable("propertyType") String propertyType,
                               @AuthenticationPrincipal CurrentUser currentUser,
                               @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                               @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
@@ -38,12 +36,12 @@ public class RentController {
                               RedirectAttributes rAttr) {
 
         rentDTO.setRenter(userService.findUser(currentUser));
-        rentDTO.setId(housingId);
+        rentDTO.setId(propertyId);
 
-        String message = rentService.rent(rentDTO);
+        String message = rentService.rent(rentDTO, propertyType);
 
         rAttr.addFlashAttribute("message", message);
 
-        return "redirect:/house/details/" + housingId;
+        return "redirect:/" + propertyType + "/details/" + propertyId;
     }
 }

@@ -43,34 +43,8 @@
 </div>
 <!-- header section end -->
 <div class="container">
-    <div class="filter_section">
-        <label for="cityFilter">Filter by city:</label>
-        <select id="cityFilter" class="nice-select">
-            <option value="all">All Cities</option>
-            <option th:each="city : ${cities}"
-            th:value="${city}"
-            th:text="${city}">
-            </option>
-        </select>
-        <div class="create-box">
-            <span class="place">You have a place to rent? </span>
-            <a th:href="@{/house/add}" class="create text-black text-small"> Create new ad</a>
-        </div>
-    </div>
-
-    <div class="houses_list"
-         th:each="property : ${housingData}"
-         th:object="${property}">
-        <div class="house_item"
-             th:data-city="*{city}">
-            <img th:src="*{pictureUrl}" alt="House in Sofia">
-            <h2 th:text="*{city}"></h2>
-            <p th:text="*{address}"></p>
-            <div class="btn_main">
-                <div class="details_button"><a th:href="@{/house/details/{uuid} (uuid=*{id})}">See details</a></div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{fragments/city_filter::city_filter(${cities}, ${refPropertyAddLink})}"></div>
+    <div th:replace="~{fragments/property_list::property_list(${propertyData}, ${refDetailsLink})}"></div>
 </div>
 <!-- footer section start -->
 <div th:replace="~{fragments/footer_section::footer_section}"></div>

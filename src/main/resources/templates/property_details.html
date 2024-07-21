@@ -45,23 +45,26 @@
 </div>
 <!-- header section end -->
 <div class="housing-details container"
-     th:object="${housingDetails}">
+     th:object="${propertyDetails}">
     <h2>Property Details</h2>
     <div th:if="${message}">
         <p th:text="${message}" style="color: orange; font-size: 15px"></p>
     </div>
     <div class="row">
         <div class="main_image_container">
-            <img th:src="@{${housingDetails.getPictureUrl()}}" alt="Main House Image" id="mainImage"
+            <img th:src="@{*{pictureUrl}}" alt="Main Property Image" id="mainImage"
                  class="housing-details main_image">
         </div>
         <div class="housing-details details_section">
-
-            <p><strong>City:</strong> <span th:text="${housingDetails.getCity()}"></span></p>
-            <p><strong>Address:</strong> <span th:text="${housingDetails.getAddress()}"></span></p>
-            <p><strong>Floor:</strong> <span th:text="${housingDetails.getFloor()}"></span></p>
-            <p><strong>Rooms:</strong> <span th:text="${housingDetails.getRooms()}"></span></p>
-            <p><strong>Price:</strong> <span th:text="${housingDetails.getPrice()}"></span>/day</p>
+            <p><strong>City:</strong> <span th:text="*{city}"></span></p>
+            <p><strong>Address:</strong> <span th:text="*{address}"></span></p>
+            <th:block th:if="${propertyType == 'housing'}">
+                <div th:replace="~{fragments/housing_details_fields::housing_details_fields}"></div>
+            </th:block>
+            <th:block th:if="${propertyType == 'car'}">
+                <div th:replace="~{fragments/car_details_fields::car_details_fields}"></div>
+            </th:block>
+            <p><strong>Price:</strong> <span th:text="*{price}"></span>/day</p>
         </div>
     </div>
     <div class="row">
@@ -70,10 +73,10 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Select Dates</h2>
-                <form th:action="@{/house/rent/{uuid}(uuid= ${uuid})}"
+                <form th:action="@{/{propertyType}/rent/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}"
                       th:method="post">
-                    <h1>Rent Periods</h1>
-                    <table>
+                    <h1>Unavailable Rent Periods</h1>
+                    <table class="rented_periods">
                         <thead>
                         <tr>
                             <th>Start Date</th>
@@ -98,15 +101,15 @@
             </div>
         </div>
         <form th:method="post"
-              th:action="@{/house/add-to-favorites/{uuid}(uuid= ${uuid})}">
+              th:action="@{/{propertyType}/add-to-favorites/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}">
             <button class="details_button">Add to favorites
             </button>
             <th:block class="favorite-icon" th:if="${isFavorite}">
-                <i id="favorite" class="favorite mdi mdi-star" style="font-size: 47px; color: #fda417;"></i>
+                <i id="favorite" class="favorite mdi mdi-star" style="font-size: 52px; color: #fda417;"></i>
             </th:block>
         </form>
         <form th:method="delete"
-              th:action="@{/house/details/{uuid}(uuid= ${uuid})}">
+              th:action="@{/{propertyType}/details/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}">
             <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
             </button>
         </form>
@@ -117,7 +120,7 @@
         <!-- Existing Comments -->
         <div class="comment_box container" id="comments">
             <div class="housing-details comment"
-                 th:each="comment : ${housingDetails.getComments()}">
+                 th:each="comment : *{comments}">
                 <div class="author" th:text="${comment.getUser().getUsername()}">Author Name</div>
                 <div class="comment_text" th:text="${comment.getText()}">Comment text goes here...</div>
             </div>
@@ -125,7 +128,7 @@
 
         <!-- Add New Comment -->
         <form class="add-comment"
-              th:action="@{/house/details/{uuid}(uuid=${uuid})}"
+              th:action="@{/{propertyType}/details/{uuid} (uuid=${uuid}, propertyType= ${propertyType})}"
               th:method="post"
               th:object="${commentData}">
             <h3 class="table-title title">Add a Comment</h3>
@@ -159,6 +162,7 @@
 <script src="/js/add_comment.js"></script>
 <!-- Flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script src="/js/flatpickr.js"></script>
 </body>
 </html>

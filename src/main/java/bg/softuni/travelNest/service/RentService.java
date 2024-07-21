@@ -1,7 +1,8 @@
 package bg.softuni.travelNest.service;
 
 import bg.softuni.travelNest.model.dto.RentDTO;
-import bg.softuni.travelNest.model.entity.rentEntity.HousingRentPeriod;
+import bg.softuni.travelNest.model.entity.rentPeriodEntity.CarRentPeriod;
+import bg.softuni.travelNest.model.entity.rentPeriodEntity.HousingRentPeriod;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +12,9 @@ public interface RentService {
 
     List<HousingRentPeriod> getHousingRentPeriods(UUID housingId);
 
+    List<CarRentPeriod> getCarRentPeriods(UUID propertyId);
+
     boolean isAvailable(UUID houseId, LocalDate startDate, LocalDate endDate);
 
-    String rent(RentDTO rentDTO);
+    String rent(RentDTO rentDTO, String propertyType);
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class HousingDTO {
+public class PropertyDTO {
     private UUID id;
     private String city;
     private String pictureUrl;

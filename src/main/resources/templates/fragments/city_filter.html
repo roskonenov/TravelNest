@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>City Filter</title>
+</head>
+<body>
+<div th:fragment="city_filter(cities, refPropertyAddLink)">
+<div class="filter_section">
+    <label for="cityFilter">Filter by city:</label>
+    <select id="cityFilter" class="nice-select">
+        <option value="all">All Cities</option>
+        <option th:each="city : ${cities}"
+                th:value="${city}"
+                th:text="${city}">
+        </option>
+    </select>
+    <div class="create-box">
+        <span class="place">You have a property to rent? </span>
+        <a th:href="@{${refPropertyAddLink}}" class="create text-black text-small"> Create new ad</a>
+    </div>
+</div>
+</div>
+</body>
+</html>

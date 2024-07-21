@@ -1725,11 +1725,11 @@ textarea#comment.massage-bt::placeholder {
 }
 .invalid-feedback {
     font-size: 15px;
-    color: #ce344d;
+    color: darkred;
 }
 #error{
     font-size: 15px;
-    color: #ce344d;
+    color: darkred;
 }
 
 /*pop-up-window*/
@@ -1817,7 +1817,7 @@ textarea#comment.massage-bt::placeholder {
     float: left;
 }
 
-.house_item{
+.property_item{
     display: inline-flex;!important;
     background-color: #fda417;
     border-radius: 30px;
@@ -1891,7 +1891,7 @@ textarea#comment.massage-bt::placeholder {
     text-align: right;
 }
 
-.house_item img{
+.property_item img{
     height: 150px;
     width: 200px;
     margin: 30px 30px;
@@ -1900,13 +1900,13 @@ textarea#comment.massage-bt::placeholder {
     box-shadow: 0 0 15px 0 #5a5959;
 }
 
-.house_item p{
+.property_item p{
     align-self: center;
     width: 600px;
     font-size: 17px;
 }
 
-.house_item h2{
+.property_item h2{
     align-self: center;
     font-size: 17px;
     font-weight: bold;
@@ -1915,7 +1915,7 @@ textarea#comment.massage-bt::placeholder {
     text-align: left;
     padding-bottom: 0;
 }
-.house_item .btn_main{
+.property_item .btn_main{
     align-items: flex-end;
     justify-content: flex-end;
 }
@@ -1995,6 +1995,12 @@ textarea#comment.massage-bt::placeholder {
     flex-direction: row-reverse;
     justify-content: space-between;
 }
+
+.image-upload-error, .invalid-feedback{
+    color: darkred;
+    font-size: 15px;
+}
+
 
 /*housing details*/
 
@@ -2117,12 +2123,12 @@ textarea#comment.massage-bt::placeholder {
 
 .add-comment .invalid-feedback .dander{
     font-size: 15px;!important;
-    color: #bd081d;!important;
+    color: darkred;!important;
 }
 
 #error{
     font-size: 15px;
-    color: #bd081d;
+    color: darkred;
 }
 
 /*flatpickr*/
@@ -2195,4 +2201,25 @@ textarea#comment.massage-bt::placeholder {
     background-color: #ffffff;
     color: #252525;
     border: 1px solid black;
+}
+
+.modal-content .rented_periods{
+align-content: center;
+}
+
+.modal-content .rented_periods td, th{
+    padding: 0 20px;
+    display: inline-flex;
+    color: #305281;
+}
+.modal-content .rented_periods th{
+    margin-right: 10px;
+}
+
+.modal-content h1{
+    padding-left: 30px;
+}
+
+.rented_periods{
+    margin-left: 50px;
 }

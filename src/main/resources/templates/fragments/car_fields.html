@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Fields</title>
+</head>
+<body>
+<div th:fragment="car_fields">
+    <div class="add_property_field form-group">
+        <label th:for="make">Make</label>
+        <input th:field="*{make}"
+               th:errorclass="is-invalid"
+               type="text" class="add_property_box form-control" id="make" name="make" required>
+        <small th:errors="*{make}" class="invalid-feedback danger">Make error message!</small>
+    </div>
+    <div class="add_property_field form-group">
+        <label th:for="model">Model</label>
+        <input th:field="*{model}"
+               th:errorclass="is-invalid"
+               type="text" class="add_property_box form-control" id="model" name="model" required>
+        <small th:errors="*{model}" class="invalid-feedback danger">Model error message!</small>
+    </div>
+    <div class="add_property_field form-group">
+        <label th:for="engine">Engine</label>
+        <select class="add_property_box form-control"
+                th:errorclass="is-invalid" id="engine" name="engine">
+            <option value="" disabled selected>-Select engine type-</option>
+            <option
+                    th:field="*{engine}"
+                    th:each="engine : ${engines}"
+                    th:value="${engine}"
+                    th:text="${engine}">City
+            </option>
+        </select>
+        <small th:errors="*{engine}" class="invalid-feedback danger">Invalid Engine Type!</small>
+    </div>
+    <div class="add_property_field form-group">
+        <label th:for="doors">Doors</label>
+        <input th:field="*{doors}"
+               th:errorclass="is-invalid"
+               type="text" class="add_property_box form-control" id="doors" name="doors" required>
+        <small th:errors="*{doors}" class="invalid-feedback danger">Doors error message!</small>
+    </div>
+</div>
+</body>
+</html>

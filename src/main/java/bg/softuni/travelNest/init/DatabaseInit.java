@@ -12,6 +12,9 @@ import bg.softuni.travelNest.repository.HousingRepository;
 import bg.softuni.travelNest.repository.RoleRepository;
 import bg.softuni.travelNest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -29,6 +32,8 @@ public class DatabaseInit implements CommandLineRunner {
 
     private static final String INPUT_FILE_PATH = "src/main/resources/static/housing.txt";
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseInit.class);
+
     private final CityRepository cityRepository;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
@@ -41,8 +46,8 @@ public class DatabaseInit implements CommandLineRunner {
         cityInit();
         rolesInit();
         usersInit();
-        housingInit();
-        System.out.println("DATABASE INITIATED!");
+        propertyInit();
+        LOGGER.info("DATABASE INITIATED!");
     }
 
     private void cityInit() {
@@ -93,17 +98,17 @@ public class DatabaseInit implements CommandLineRunner {
         );
     }
 
-    private void housingInit() throws IOException {
+    private void propertyInit() throws IOException {
         if (housingRepository.count() != 0) return;
 
         Files.readAllLines(Path.of(INPUT_FILE_PATH))
                 .forEach(line -> {
                     String[] fields = line.split("\\s+");
-                    housingRepository.saveAndFlush(createEntity(fields));
+                    housingRepository.saveAndFlush(createHousingEntity(fields));
                 });
     }
 
-    private Housing createEntity(String[] fields) {
+    private Housing createHousingEntity(String[] fields) {
         return new Housing(cityRepository.findByName(getPropperString(fields[0])),
                 getPropperString(fields[1]),
                 BigDecimal.valueOf(Integer.parseInt(fields[2])),

@@ -22,6 +22,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ModelAttribute("registerData")
+    public RegisterDto registerDto(){
+        return new RegisterDto();
+    }
+
     @GetMapping("/login")
     public String showLogin(){
         return "login";
@@ -31,11 +36,6 @@ public class UserController {
     public String loginError(Model model){
         model.addAttribute("showError", true);
         return "login";
-    }
-
-    @ModelAttribute("registerData")
-    public RegisterDto registerDto(){
-        return new RegisterDto();
     }
 
     @GetMapping("/register")

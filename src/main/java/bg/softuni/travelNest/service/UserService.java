@@ -12,6 +12,4 @@ public interface UserService {
     boolean register(RegisterDto registerDto);
 
     User findUser(CurrentUser currentUser);
-
-    boolean isFavorite(CurrentUser currentUser, UUID id);
 }

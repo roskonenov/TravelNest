@@ -1,4 +1,4 @@
-package bg.softuni.travelNest.model.entity.rentEntity;
+package bg.softuni.travelNest.model.entity.rentPeriodEntity;
 
 import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.base.RentPeriod;

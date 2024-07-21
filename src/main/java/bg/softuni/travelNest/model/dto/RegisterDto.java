@@ -1,6 +1,7 @@
 package bg.softuni.travelNest.model.dto;
 
 import bg.softuni.travelNest.validation.annotation.Email;
+import bg.softuni.travelNest.validation.annotation.EqualPasswords;
 import bg.softuni.travelNest.validation.annotation.Password;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualPasswords(message = "{user.password.not.match}")
 public class RegisterDto {
 
     @NotBlank(message = "{user.username.not.empty}")

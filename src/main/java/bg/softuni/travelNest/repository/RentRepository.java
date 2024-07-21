@@ -2,24 +2,27 @@ package bg.softuni.travelNest.repository;
 
 import bg.softuni.travelNest.model.entity.Car;
 import bg.softuni.travelNest.model.entity.Housing;
-import bg.softuni.travelNest.model.entity.base.Comment;
+import bg.softuni.travelNest.model.entity.base.RentPeriod;
+import bg.softuni.travelNest.model.entity.rentPeriodEntity.HousingRentPeriod;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
-@Repository
-public interface CommentRepository extends JpaRepository<Comment, UUID> {
+import java.util.Optional;
 
-    List<Comment> findByType(String type);
+@Repository
+public interface RentRepository extends JpaRepository<RentPeriod, Long> {
 
     @Modifying
-    @Query(value = "DELETE FROM HousingComment hc WHERE hc.housing = :housing")
+    @Query(value = "DELETE FROM HousingRentPeriod hr WHERE hr.housing = :housing")
     void deleteAllWhereHousing(Housing housing);
 
     @Modifying
-    @Query(value = "DELETE FROM CarComment cc WHERE cc.car = :car")
+    @Query(value = "DELETE FROM CarRentPeriod cr WHERE cr.car = :car")
     void deleteAllWhereCar(Car car);
+
+    Optional<List<RentPeriod>> findByEndDateIsLessThanEqual(LocalDate date);
 }
