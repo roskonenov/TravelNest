@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class HousingDetailsDTO {
 
+    private String type;
     private String city;
     private String address;
     private BigDecimal price;

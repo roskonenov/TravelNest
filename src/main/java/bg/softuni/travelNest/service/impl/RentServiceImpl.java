@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -47,10 +46,16 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public boolean isAvailable(UUID propertyId, LocalDate startDate, LocalDate endDate) {
-        return getHousingRentPeriods(propertyId)
-                .stream().noneMatch(period ->
-                        (startDate.isBefore(period.getEndDate()) && endDate.isAfter(period.getStartDate())));
+    public boolean isAvailable(String propertyType, UUID propertyId, LocalDate startDate, LocalDate endDate) {
+        if ("housing".equals(propertyType)) {
+            return getHousingRentPeriods(propertyId)
+                    .stream().noneMatch(period ->
+                            (startDate.isBefore(period.getEndDate()) && endDate.isAfter(period.getStartDate())));
+        } else {
+            return getCarRentPeriods(propertyId)
+                    .stream().noneMatch(period ->
+                            (startDate.isBefore(period.getEndDate()) && endDate.isAfter(period.getStartDate())));
+        }
     }
 
     @Override
@@ -60,7 +65,7 @@ public class RentServiceImpl implements RentService {
         if ("housing".equals(propertyType)) {
              housingRepository.findById(rentDTO.getId())
                     .ifPresent(housing -> {
-                        if (isAvailable(rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
+                        if (isAvailable(propertyType, rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
                             message.set(applyRent(rentDTO, housing, propertyType));
                         } else {
                             message.set("The property is not available during the selected period!");
@@ -69,7 +74,7 @@ public class RentServiceImpl implements RentService {
         }else {
             carRepository.findById(rentDTO.getId())
                     .ifPresent(car -> {
-                        if (isAvailable(rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
+                        if (isAvailable(propertyType, rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
                             message.set(applyRent(rentDTO, car, propertyType));
                         } else {
                             message.set("The property is not available during the selected period!");

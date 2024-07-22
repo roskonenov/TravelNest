@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @MappedSuperclass
-public class BaseEntityId {
+public abstract class BaseEntityId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

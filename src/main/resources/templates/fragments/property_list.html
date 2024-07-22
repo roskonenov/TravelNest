@@ -12,8 +12,11 @@
         <div class="property_item"
              th:data-city="*{city}">
             <img th:src="*{pictureUrl}" alt="Housing picture">
-            <h2 th:text="*{city}"></h2>
-            <p th:text="*{address}"></p>
+            <ul>
+                <li><h1 th:text="*{title}"></h1></li>
+                <li><h2 th:text="*{city}"></h2></li>
+                <li><p th:text="*{address}"></p></li>
+            </ul>
             <div class="btn_main">
                 <div class="details_button"><a th:href="@{${refDetailsLink} (uuid=*{id})}">See details</a></div>
             </div>

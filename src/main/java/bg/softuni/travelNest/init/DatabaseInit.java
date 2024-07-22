@@ -1,16 +1,12 @@
 package bg.softuni.travelNest.init;
 
 import bg.softuni.travelNest.config.InitConfig;
-import bg.softuni.travelNest.model.entity.CityEntity;
-import bg.softuni.travelNest.model.entity.Housing;
-import bg.softuni.travelNest.model.entity.Role;
-import bg.softuni.travelNest.model.entity.User;
+import bg.softuni.travelNest.model.entity.*;
 import bg.softuni.travelNest.model.enums.City;
+import bg.softuni.travelNest.model.enums.Engine;
+import bg.softuni.travelNest.model.enums.HousingType;
 import bg.softuni.travelNest.model.enums.RoleEnum;
-import bg.softuni.travelNest.repository.CityRepository;
-import bg.softuni.travelNest.repository.HousingRepository;
-import bg.softuni.travelNest.repository.RoleRepository;
-import bg.softuni.travelNest.repository.UserRepository;
+import bg.softuni.travelNest.repository.*;
 import lombok.RequiredArgsConstructor;
 
 import org.slf4j.Logger;
@@ -30,8 +26,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DatabaseInit implements CommandLineRunner {
 
-    private static final String INPUT_FILE_PATH = "src/main/resources/static/housing.txt";
-
+    private static final String HOUSING_INPUT_FILE_PATH = "src/main/resources/static/housing.txt";
+    
+    private static final String CAR_INPUT_FILE_PATH = "src/main/resources/static/car.txt";
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseInit.class);
 
     private final CityRepository cityRepository;
@@ -40,13 +38,15 @@ public class DatabaseInit implements CommandLineRunner {
     private final HousingRepository housingRepository;
     private final PasswordEncoder passwordEncoder;
     private final InitConfig initConfig;
+    private final CarRepository carRepository;
 
     @Override
     public void run(String... args) throws Exception {
         cityInit();
         rolesInit();
         usersInit();
-        propertyInit();
+        housingInit();
+        carInit();
         LOGGER.info("DATABASE INITIATED!");
     }
 
@@ -98,24 +98,48 @@ public class DatabaseInit implements CommandLineRunner {
         );
     }
 
-    private void propertyInit() throws IOException {
+    private void housingInit() throws IOException {
         if (housingRepository.count() != 0) return;
 
-        Files.readAllLines(Path.of(INPUT_FILE_PATH))
+        Files.readAllLines(Path.of(HOUSING_INPUT_FILE_PATH))
                 .forEach(line -> {
                     String[] fields = line.split("\\s+");
                     housingRepository.saveAndFlush(createHousingEntity(fields));
                 });
     }
 
+    private void carInit() throws IOException {
+        if (carRepository.count() != 0) return;
+
+        Files.readAllLines(Path.of(CAR_INPUT_FILE_PATH))
+                .forEach(line -> {
+                    String[] fields = line.split("\\s+");
+                    carRepository.saveAndFlush(createCarEntity(fields));
+                });
+    }
+
     private Housing createHousingEntity(String[] fields) {
-        return new Housing(cityRepository.findByName(getPropperString(fields[0])),
+        return new Housing(
+                HousingType.valueOf(fields[0]),
+                cityRepository.findByName(getPropperString(fields[1])),
+                getPropperString(fields[2]),
+                BigDecimal.valueOf(Integer.parseInt(fields[3])),
+                Integer.parseInt(fields[4]),
+                Integer.parseInt(fields[5]),
+                fields[6],
+                userRepository.findByUsername(fields[7]).get());
+    }
+
+    private Car createCarEntity(String[] fields) {
+        return new Car(cityRepository.findByName(getPropperString(fields[0])),
                 getPropperString(fields[1]),
                 BigDecimal.valueOf(Integer.parseInt(fields[2])),
-                Integer.parseInt(fields[3]),
-                Integer.parseInt(fields[4]),
+                fields[3],
+                userRepository.findByUsername(fields[4]).get(),
                 fields[5],
-                userRepository.findByUsername(fields[6]).get());
+                fields[6],
+                Engine.valueOf(fields[7]),
+                Integer.parseInt(fields[8]));
     }
 
     private static String getPropperString(String text) {

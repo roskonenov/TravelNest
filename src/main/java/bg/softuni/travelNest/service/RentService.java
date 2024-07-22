@@ -14,7 +14,7 @@ public interface RentService {
 
     List<CarRentPeriod> getCarRentPeriods(UUID propertyId);
 
-    boolean isAvailable(UUID houseId, LocalDate startDate, LocalDate endDate);
+    boolean isAvailable(String propertyType, UUID houseId, LocalDate startDate, LocalDate endDate);
 
     String rent(RentDTO rentDTO, String propertyType);
 }

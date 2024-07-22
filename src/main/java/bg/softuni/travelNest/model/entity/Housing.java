@@ -3,6 +3,7 @@ package bg.softuni.travelNest.model.entity;
 import bg.softuni.travelNest.model.entity.base.RentItem;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
 import bg.softuni.travelNest.model.entity.rentPeriodEntity.HousingRentPeriod;
+import bg.softuni.travelNest.model.enums.HousingType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "housing")
 public class Housing extends RentItem {
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private HousingType type;
 
     @Column(nullable = false)
     private Integer floor;
@@ -36,8 +41,9 @@ public class Housing extends RentItem {
         setComments(new ArrayList<>());
     }
 
-    public Housing(CityEntity city, String address, BigDecimal price, Integer floor, Integer rooms, String pictureUrl, User owner) {
+    public Housing(HousingType type, CityEntity city, String address, BigDecimal price, Integer floor, Integer rooms, String pictureUrl, User owner) {
         super(city, address, price, pictureUrl, owner);
+        this.type = type;
         this.floor = floor;
         this.rooms = rooms;
         setRentPeriods(new ArrayList<>());
@@ -57,5 +63,10 @@ public class Housing extends RentItem {
     @Override
     public int hashCode() {
         return Objects.hash(getAddress(), getCity(), getPrice(), getFloor(), getRooms(), getPictureUrl());
+    }
+
+    public Housing setType(HousingType type) {
+        this.type = type;
+        return this;
     }
 }

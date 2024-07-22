@@ -3,6 +3,7 @@ package bg.softuni.travelNest.model.dto;
 import bg.softuni.travelNest.validation.annotation.ImageType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class AddRentalHousingDTO {
 
+    @NotBlank(message = "{property.type.not.empty}")
+    private String type;
+
     @NotBlank(message = "{property.address.not.empty}")
     private String address;
 
@@ -27,11 +31,11 @@ public class AddRentalHousingDTO {
     private BigDecimal price;
 
     @NotNull(message = "{property.floor.not.empty}")
-    @PositiveOrZero(message = "{property.floor.positive}")
+    @Positive(message = "{property.floor.positive}")
     private Integer floor;
 
     @NotNull(message = "{property.rooms.not.empty}")
-    @PositiveOrZero(message = "{property.rooms.positive}")
+    @Positive(message = "{property.rooms.positive}")
     private Integer rooms;
 
     @NotNull(message = "{property.file.not.empty}")

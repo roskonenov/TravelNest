@@ -7,6 +7,20 @@
 <body>
 <div th:fragment="housing_fields">
     <div class="add_property_field form-group">
+        <label th:for="type">Type</label>
+        <select class="add_property_box form-control"
+                th:errorclass="is-invalid" id="type" name="type">
+            <option value="" disabled selected>-Select type-</option>
+            <option
+                    th:field="*{type}"
+                    th:each="type : ${housingTypes}"
+                    th:value="${type}"
+                    th:text="${type}">Type
+            </option>
+        </select>
+        <small th:errors="*{type}" class="invalid-feedback danger">Invalid Type!</small>
+    </div>
+    <div class="add_property_field form-group">
         <label th:for="floor">Floor</label>
         <input th:field="*{floor}"
                th:errorclass="is-invalid"

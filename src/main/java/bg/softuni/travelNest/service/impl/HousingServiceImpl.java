@@ -6,6 +6,7 @@ import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
+import bg.softuni.travelNest.model.enums.HousingType;
 import bg.softuni.travelNest.repository.*;
 import bg.softuni.travelNest.service.CurrentUser;
 import bg.softuni.travelNest.service.PropertyService;
@@ -45,6 +46,7 @@ public class HousingServiceImpl implements PropertyService {
         }
         return housingRepository.save(
                 (Housing)  modelMapper.map(addRentalHousingDTO, Housing.class)
+                        .setType(HousingType.valueOf(addRentalHousingDTO.getType().toUpperCase()))
                         .setOwner(userService.findUser(currentUser))
                         .setCity(cityRepository.findByName(addRentalHousingDTO.getCity()))
                         .setPictureUrl(pictureService.uploadImage(addRentalHousingDTO.getImage()))
@@ -75,6 +77,10 @@ public class HousingServiceImpl implements PropertyService {
                 .map(housingRental -> {
                     PropertyDTO map = modelMapper.map(housingRental, PropertyDTO.class);
                     map.setCity(housingRental.getCity().getName());
+                    map.setTitle(String.format("%s %d %s",
+                            housingRental.getType().toString().toLowerCase(),
+                            housingRental.getRooms(),
+                            housingRental.getRooms() > 1 ? "rooms" : "room"));
                     return map;
                 }).toList();
     }
@@ -91,7 +97,6 @@ public class HousingServiceImpl implements PropertyService {
     @Override
     @Transactional
     public void addToFavorites(User user, UUID housingId) {
-
         user.getFavoriteHousings().add(housingRepository.findById(housingId)
                 .orElseThrow(() -> new ObjectNotFoundException("Rental property not found")));
     }

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public abstract class RentItem extends BaseEntityUuid{
 
     @ManyToOne
-    @JoinColumn(name = "city_id", referencedColumnName = "id")
+    @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
     private CityEntity city;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -25,7 +25,7 @@ public abstract class RentItem extends BaseEntityUuid{
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(name = "picture_url", columnDefinition = "TEXT")
+    @Column(name = "picture_url", columnDefinition = "TEXT", nullable = false)
     private String pictureUrl;
 
     @ManyToOne

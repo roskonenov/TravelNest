@@ -3,6 +3,7 @@ package bg.softuni.travelNest.web;
 import bg.softuni.travelNest.model.dto.AddCommentDTO;
 import bg.softuni.travelNest.model.dto.AddRentalHousingDTO;
 import bg.softuni.travelNest.model.enums.City;
+import bg.softuni.travelNest.model.enums.HousingType;
 import bg.softuni.travelNest.service.CurrentUser;
 import bg.softuni.travelNest.service.RentService;
 import bg.softuni.travelNest.service.UserService;
@@ -34,6 +35,13 @@ public class HousingController {
     public List<String> cities() {
         return Arrays.stream(City.values())
                 .map(City::toString)
+                .toList();
+    }
+
+    @ModelAttribute("housingTypes")
+    public List<String> types() {
+        return Arrays.stream(HousingType.values())
+                .map(HousingType::toString)
                 .toList();
     }
 
@@ -123,7 +131,7 @@ public class HousingController {
 
         UUID uuid = housingService.add(addRentalHousingDTO, currentUser);
 
-        return uuid != null ? "redirect:/house/details/" + uuid
+        return uuid != null ? "redirect:/housing/details/" + uuid
                 : "redirect:/housing/add";
     }
 }

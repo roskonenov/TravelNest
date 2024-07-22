@@ -16,7 +16,8 @@
         </option>
     </select>
     <div class="create-box">
-        <span class="place">You have a property to rent? </span>
+        <span th:if="${refPropertyAddLink == '/housing/add'}" class="place">You have a place to rent? </span>
+        <span th:if="${refPropertyAddLink == '/car/add'}" class="place">You have a car to rent? </span>
         <a th:href="@{${refPropertyAddLink}}" class="create text-black text-small"> Create new ad</a>
     </div>
 </div>

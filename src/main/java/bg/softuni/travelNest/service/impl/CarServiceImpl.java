@@ -3,11 +3,9 @@ package bg.softuni.travelNest.service.impl;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.*;
 import bg.softuni.travelNest.model.entity.Car;
-import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import bg.softuni.travelNest.model.entity.commentEntity.CarComment;
-import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
 import bg.softuni.travelNest.repository.CarRepository;
 import bg.softuni.travelNest.repository.CityRepository;
 import bg.softuni.travelNest.repository.CommentRepository;
@@ -93,6 +91,7 @@ public class CarServiceImpl implements PropertyService {
     }
 
     @Override
+    @Transactional
     public void addToFavorites(User user, UUID carId) {
         user.getFavoriteCars().add(carRepository.findById(carId)
                 .orElseThrow(() -> new ObjectNotFoundException("Rental property not found")));

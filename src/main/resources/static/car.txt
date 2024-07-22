@@ -1,0 +1,12 @@
+BURGAS ул._Крайморска_34_Б 140 https://i.imgur.com/qVQdHZ2.jpeg roskonenov Toyota Corolla PETROL 5
+BURGAS ул._Одрин_23 100 https://i.imgur.com/TdjW1PK.jpeg roskonenov Honda Civic DIESEL 3
+VARNA бул._Варненчик_124 120 https://i.imgur.com/H6t0WmH.jpeg elena_jelyazkova Ford Mustang GAS 5
+VARNA ул._Черно_море_16_А 150 https://i.imgur.com/hf5QjQP.jpeg elena_jelyazkova BMW X5 PETROL 5
+SOFIA бул._Витоша_90 150 https://i.imgur.com/Y7SD7ih.jpeg georgi79 Audi A4 ELECTRIC 3
+SOFIA бул._Стамболийски_101 140 https://i.imgur.com/XtpqlB6.jpeg georgi79 Mercedes-Benz C-Class DIESEL 5
+SOFIA бул._България_243_Г 120 https://i.imgur.com/1Vtz47T.jpeg georgi79 Volkswagen Golf HYBRID 3
+PLOVDIV бул._Мария_Луиза_47 160 https://i.imgur.com/X4hXMMf.jpeg roskonenov Nissan Altima PETROL 3
+PLOVDIV бул._Шести_септември_163 150 https://i.imgur.com/7fWR04T.jpeg roskonenov Subaru Outback DIESEL 5
+PLOVDIV ул._Иван_Вазов_14 120 https://i.imgur.com/IUMAQrI.jpeg roskonenov Hyundai Elantra ELECTRIC 3
+STARA_ZAGORA бул._Славянски_15_А 150 https://i.imgur.com/49iEnSa.jpeg elena_jelyazkova Chevrolet Camaro PETROL 3
+STARA_ZAGORA ул._Св._Богородица_115 150 https://i.imgur.com/hah1jlg.jpeg elena_jelyazkova Kia Sorento GAS 5

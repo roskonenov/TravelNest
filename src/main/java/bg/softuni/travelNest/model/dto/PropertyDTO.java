@@ -11,6 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PropertyDTO {
     private UUID id;
+    private String title;
     private String city;
     private String pictureUrl;
     private String address;

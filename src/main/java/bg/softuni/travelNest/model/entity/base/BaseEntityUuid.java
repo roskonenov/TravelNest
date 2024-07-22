@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @MappedSuperclass
-public class BaseEntityUuid {
+public abstract class BaseEntityUuid {
 
     @Id
     @UuidGenerator

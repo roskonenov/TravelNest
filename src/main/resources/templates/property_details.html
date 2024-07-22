@@ -56,15 +56,15 @@
                  class="housing-details main_image">
         </div>
         <div class="housing-details details_section">
-            <p><strong>City:</strong> <span th:text="*{city}"></span></p>
-            <p><strong>Address:</strong> <span th:text="*{address}"></span></p>
+            <p><strong>City: </strong> <span th:text="*{city}"></span></p>
+            <p><strong>Address: </strong> <span th:text="*{address}"></span></p>
             <th:block th:if="${propertyType == 'housing'}">
                 <div th:replace="~{fragments/housing_details_fields::housing_details_fields}"></div>
             </th:block>
             <th:block th:if="${propertyType == 'car'}">
                 <div th:replace="~{fragments/car_details_fields::car_details_fields}"></div>
             </th:block>
-            <p><strong>Price:</strong> <span th:text="*{price}"></span>/day</p>
+            <p><strong>Price: </strong> <span th:text="*{price}"></span>/day</p>
         </div>
     </div>
     <div class="row">
