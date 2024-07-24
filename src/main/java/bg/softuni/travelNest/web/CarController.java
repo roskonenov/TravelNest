@@ -132,7 +132,7 @@ public class CarController {
     @DeleteMapping("/details/{uuid}")
     public String deleteCar(@PathVariable("uuid") UUID carId,
                             @AuthenticationPrincipal CurrentUser currentUser) {
-        carService.deleteHousing(currentUser, carId);
+        carService.deleteProperty(currentUser, carId);
         return "redirect:/car/rental";
     }
 }

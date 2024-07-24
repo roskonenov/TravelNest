@@ -2245,3 +2245,59 @@ align-content: center;
 .rented_periods{
     margin-left: 50px;
 }
+
+/*object_not_found*/
+
+.error-container {
+    display: block;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    margin: 100px auto;
+    max-width: 600px;
+    background: #fda417;
+    padding: 20px;
+    width: 100%;
+    height: 275px;
+    border: 2px solid #fd7e14;
+    border-radius: 10px;
+    color: #5a5959;
+    box-shadow: 0 0 15px 0 #5a5959;
+}
+
+.error-container .row{
+    flex-wrap: nowrap;
+}
+
+.dinosaur {
+    max-width: 50%;
+    height: 200px;
+    align-self: center;
+}
+
+.error-message {
+    width: 100%;
+    font-size: 25px;
+    font-weight: 650;
+    color: #305281;
+    text-align: center;
+    place-self: center;
+    background-color: transparent;
+}
+
+.home-link {
+    width: 150px;
+    float: right;
+    font-size: 16px;
+    text-align: center;
+    color: #ffffff;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 40px;
+    padding: 8px;
+}
+
+.home-link:hover {
+    background-color: #ffffff;
+    color: #252525;
+    border: 1px solid black;
+}

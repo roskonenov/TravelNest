@@ -68,7 +68,7 @@ public class RentServiceImpl implements RentService {
                         if (isAvailable(propertyType, rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
                             message.set(applyRent(rentDTO, housing, propertyType));
                         } else {
-                            message.set("The property is not available during the selected period!");
+                            message.set("The housing is not available during the selected period!");
                         }
                     });
         }else {
@@ -77,7 +77,7 @@ public class RentServiceImpl implements RentService {
                         if (isAvailable(propertyType, rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
                             message.set(applyRent(rentDTO, car, propertyType));
                         } else {
-                            message.set("The property is not available during the selected period!");
+                            message.set("The car is not available during the selected period!");
                         }
                     });
         }

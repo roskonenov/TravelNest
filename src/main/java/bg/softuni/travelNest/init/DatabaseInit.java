@@ -131,7 +131,8 @@ public class DatabaseInit implements CommandLineRunner {
     }
 
     private Car createCarEntity(String[] fields) {
-        return new Car(cityRepository.findByName(getPropperString(fields[0])),
+        return new Car(
+                cityRepository.findByName(getPropperString(fields[0])),
                 getPropperString(fields[1]),
                 BigDecimal.valueOf(Integer.parseInt(fields[2])),
                 fields[3],

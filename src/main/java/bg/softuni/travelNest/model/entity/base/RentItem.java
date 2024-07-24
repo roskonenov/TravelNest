@@ -53,6 +53,4 @@ public abstract class RentItem extends BaseEntityUuid{
         this.owner = owner;
         return this;
     }
-
-
 }

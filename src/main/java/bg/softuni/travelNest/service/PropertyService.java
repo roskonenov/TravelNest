@@ -19,7 +19,7 @@ public interface PropertyService {
 
     void addToFavorites(User user, UUID housingId);
 
-    void deleteHousing(CurrentUser currentUser, UUID housingId);
+    void deleteProperty(CurrentUser currentUser, UUID housingId);
 
     boolean isFavorite(CurrentUser currentUser, UUID propertyId);
 }

@@ -103,7 +103,7 @@ public class HousingServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public void deleteHousing(CurrentUser currentUser, UUID housingId) {
+    public void deleteProperty(CurrentUser currentUser, UUID housingId) {
         if (!currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
 
         Housing housing = housingRepository.findById(housingId)

@@ -77,6 +77,7 @@ public class CarServiceImpl implements PropertyService {
                 .stream()
                 .map(carRental -> {
                     PropertyDTO map = modelMapper.map(carRental, PropertyDTO.class);
+                    map.setTitle(carRental.getMake() + " " + carRental.getModel());
                     map.setCity(carRental.getCity().getName());
                     return map;
                 }).toList();
@@ -99,7 +100,7 @@ public class CarServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public void deleteHousing(CurrentUser currentUser, UUID carId) {
+    public void deleteProperty(CurrentUser currentUser, UUID carId) {
         if (!currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
 
         Car car = carRepository.findById(carId)
