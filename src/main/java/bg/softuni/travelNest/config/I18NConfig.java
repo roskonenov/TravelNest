@@ -23,7 +23,7 @@ public class I18NConfig {
     }
 
     @Bean
-    public LocaleResolver localResolver(){
+    public LocaleResolver localeResolver(){
         return new CookieLocaleResolver("lang");
     }
 

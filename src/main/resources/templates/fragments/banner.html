@@ -16,10 +16,10 @@
                         <div class="col-sm-12">
                             <div class="banner_taital_main">
                                 <div class="opacity">
-                                    <h1 class="banner_taital">FIND A PLACE TO STAY</h1>
-                                    <p class="banner_text">See all available accommodation, where you will travel.</p>
+                                    <h1 class="banner_taital" th:text="#{banner_title_one}">FIND A PLACE TO STAY</h1>
+                                    <p class="banner_text" th:text="#{banner_subtitle_one}">See all available accommodation, where you will travel.</p>
                                     <div class="btn_main">
-                                        <div class="started_text"><a th:href="@{/housing/rental}">Find places</a></div>
+                                        <div class="started_text"><a th:href="@{/housing/rental}" th:text="#{banner_button_one}">Find places</a></div>
                                     </div>
                                 </div>
 
@@ -34,11 +34,11 @@
                         <div class="col-sm-12">
                             <div class="banner_taital_main">
                                 <div class="opacity">
-                                    <h1 class="banner_taital">VISIT LOCAL SIGHTS, MUSEUMS, AND EVENTS</h1>
-                                    <p class="banner_text">You can purchase a ticket through us, where one is
+                                    <h1 class="banner_taital" th:text="#{banner_title_two}">VISIT LOCAL SIGHTS, MUSEUMS, AND EVENTS</h1>
+                                    <p class="banner_text" th:text="#{banner_subtitle_two}">You can purchase a ticket through us, where one is
                                         required. </p>
                                     <div class="btn_main">
-                                        <div class="started_text"><a href="#">Find amusement</a></div>
+                                        <div class="started_text"><a href="#" th:text="#{banner_button_two}">Find amusement</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -52,11 +52,11 @@
                         <div class="col-sm-12">
                             <div class="banner_taital_main">
                                 <div class="opacity">
-                                    <h1 class="banner_taital">RENT A CAR</h1>
-                                    <p class="banner_text">Travel anywhere in comfort with a rental car, provided by
+                                    <h1 class="banner_taital" th:text="#{banner_title_three}">RENT A CAR</h1>
+                                    <p class="banner_text" th:text="#{banner_subtitle_three}">Travel anywhere in comfort with a rental car, provided by
                                         us.</p>
                                     <div class="btn_main">
-                                        <div class="started_text"><a th:href="@{/car/rental}">See Cars</a></div>
+                                        <div class="started_text"><a th:href="@{/car/rental}" th:text="#{banner_button_three}">See Cars</a></div>
                                     </div>
                                 </div>
                             </div>

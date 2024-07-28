@@ -7,24 +7,24 @@
 <body>
 <div th:fragment="car_fields">
     <div class="add_property_field form-group">
-        <label th:for="make">Make</label>
+        <label th:for="make" th:text="#{car_fields_make}">Make</label>
         <input th:field="*{make}"
                th:errorclass="is-invalid"
                type="text" class="add_property_box form-control" id="make" name="make" required>
         <small th:errors="*{make}" class="invalid-feedback danger">Make error message!</small>
     </div>
     <div class="add_property_field form-group">
-        <label th:for="model">Model</label>
+        <label th:for="model" th:text="#{car_fields_model}">Model</label>
         <input th:field="*{model}"
                th:errorclass="is-invalid"
                type="text" class="add_property_box form-control" id="model" name="model" required>
         <small th:errors="*{model}" class="invalid-feedback danger">Model error message!</small>
     </div>
     <div class="add_property_field form-group">
-        <label th:for="engine">Engine</label>
+        <label th:for="engine" th:text="#{car_fields_engine}">Engine</label>
         <select class="add_property_box form-control"
                 th:errorclass="is-invalid" id="engine" name="engine">
-            <option value="" disabled selected>-Select engine type-</option>
+            <option value="" disabled selected th:text="#{car_fields_select_engine}">-Select engine type-</option>
             <option
                     th:field="*{engine}"
                     th:each="engine : ${engines}"
@@ -35,7 +35,7 @@
         <small th:errors="*{engine}" class="invalid-feedback danger">Invalid Engine Type!</small>
     </div>
     <div class="add_property_field form-group">
-        <label th:for="doors">Doors</label>
+        <label th:for="doors" th:text="#{car_fields_doors}">Doors</label>
         <input th:field="*{doors}"
                th:errorclass="is-invalid"
                type="text" class="add_property_box form-control" id="doors" name="doors" required>
