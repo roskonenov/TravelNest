@@ -106,7 +106,7 @@ public class RentServiceImpl implements RentService {
         }
     }
 
-    @Scheduled(cron = "*/15 0-2 14 * * *")
+    @Scheduled(cron = "0 0 14 * * *")
     private void cleanRentDatabase(){
         rentRepository.deleteAll(rentRepository.findByEndDateIsLessThanEqual(LocalDate.now())
                 .orElse(new ArrayList<>()));

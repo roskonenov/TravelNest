@@ -18,7 +18,7 @@ public class SecurityConfig {
             "/",
             "/users/login",
             "/users/login-error",
-            "/users/register",
+            "/users/register"
     };
 
     @Bean
@@ -39,7 +39,6 @@ public class SecurityConfig {
                         .key("remember Me Encryption Key")
                         .rememberMeCookieName("rememberMeCookie")
                         .tokenValiditySeconds(604800))
-                .logout(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout
                         .logoutUrl("/users/logout")
                         .logoutSuccessUrl("/")

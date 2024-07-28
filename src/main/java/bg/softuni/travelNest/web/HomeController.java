@@ -1,6 +1,6 @@
 package bg.softuni.travelNest.web;
 
-import bg.softuni.travelNest.service.CurrentUser;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -22,8 +22,8 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHome(@AuthenticationPrincipal UserDetails userDetails, Model model){
-        if (userDetails instanceof CurrentUser currentUser) {
-            model.addAttribute("username", currentUser.getUsername());
+        if (userDetails instanceof TravelNestUserDetails travelNestUserDetails) {
+            model.addAttribute("username", travelNestUserDetails.getUsername());
         }else {
             model.addAttribute("username", "guest");
         }

@@ -5,7 +5,7 @@ import bg.softuni.travelNest.model.dto.AddCommentDTO;
 import bg.softuni.travelNest.model.dto.AddRentalCarDTO;
 import bg.softuni.travelNest.model.enums.City;
 import bg.softuni.travelNest.model.enums.Engine;
-import bg.softuni.travelNest.service.CurrentUser;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import bg.softuni.travelNest.service.RentService;
 import bg.softuni.travelNest.service.UserService;
 import bg.softuni.travelNest.service.impl.CarServiceImpl;
@@ -74,7 +74,7 @@ public class CarController {
     @PostMapping("/add")
     public String addCar(@Valid AddRentalCarDTO addRentalCarDTO,
                          BindingResult bindingResult,
-                         @AuthenticationPrincipal CurrentUser currentUser,
+                         @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                          RedirectAttributes rAttr) throws IOException {
 
         if (bindingResult.hasErrors()) {
@@ -84,7 +84,7 @@ public class CarController {
             return "redirect:/car/add";
         }
 
-        UUID uuid = carService.add(addRentalCarDTO, currentUser);
+        UUID uuid = carService.add(addRentalCarDTO, travelNestUserDetails);
 
         return uuid != null ? "redirect:/car/details/" + uuid
                 : "redirect:/car/add";
@@ -92,10 +92,10 @@ public class CarController {
 
     @GetMapping("/details/{uuid}")
     public String showCarDetails(@PathVariable("uuid") UUID propertyId,
-                                 @AuthenticationPrincipal CurrentUser currentUser,
+                                 @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                                  Model model) {
 
-        if (carService.isFavorite(currentUser, propertyId)) {
+        if (carService.isFavorite(travelNestUserDetails, propertyId)) {
             model.addAttribute("isFavorite", true);
         }
         model.addAttribute("rentPeriods", rentService.getCarRentPeriods(propertyId));
@@ -106,7 +106,7 @@ public class CarController {
 
     @PostMapping("/details/{uuid}")
     public String addComment(@PathVariable("uuid") UUID carId,
-                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                              @Valid AddCommentDTO addCommentDTO,
                              BindingResult bindingResult,
                              RedirectAttributes rAttr) {
@@ -117,22 +117,22 @@ public class CarController {
             return "redirect:/car/details/" + carId;
         }
 
-        carService.addComment(addCommentDTO, carId, userService.findUser(currentUser));
+        carService.addComment(addCommentDTO, carId, userService.findUser(travelNestUserDetails));
         return "redirect:/car/details/" + carId;
     }
 
     @PostMapping("/add-to-favorites/{uuid}")
     public String addToFavorites(@PathVariable("uuid") UUID carId,
-                                 @AuthenticationPrincipal CurrentUser currentUser) {
+                                 @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails) {
 
-        carService.addToFavorites(userService.findUser(currentUser), carId);
+        carService.addToFavorites(userService.findUser(travelNestUserDetails), carId);
         return "redirect:/car/details/" + carId;
     }
 
     @DeleteMapping("/details/{uuid}")
     public String deleteCar(@PathVariable("uuid") UUID carId,
-                            @AuthenticationPrincipal CurrentUser currentUser) {
-        carService.deleteProperty(currentUser, carId);
+                            @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails) {
+        carService.deleteProperty(travelNestUserDetails, carId);
         return "redirect:/car/rental";
     }
 }

@@ -48,13 +48,13 @@
                                 <a th:href="@{/users/login}">Login</a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a href="#">
+                                <a th:href="@{http://localhost:8081/my-account}">
                                     <i class="fa fa-user" aria-hidden="true">
                                     </i>
                                 </a>
                             </li>
                             <li th:if="${activeLink == 'index'}">
-                                <a href="#" class="text-center">User:
+                                <a th:href="@{http://localhost:8081/my-account}" class="text-center">User:
                                     <th:block th:text="${username}"></th:block>
                                     !
                                 </a>

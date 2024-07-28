@@ -10,7 +10,7 @@ import bg.softuni.travelNest.repository.CarRepository;
 import bg.softuni.travelNest.repository.CityRepository;
 import bg.softuni.travelNest.repository.CommentRepository;
 import bg.softuni.travelNest.repository.RentRepository;
-import bg.softuni.travelNest.service.CurrentUser;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import bg.softuni.travelNest.service.PictureService;
 import bg.softuni.travelNest.service.PropertyService;
 import bg.softuni.travelNest.service.UserService;
@@ -42,13 +42,13 @@ public class CarServiceImpl implements PropertyService {
 
 
     @Override
-    public UUID add(Object addDTO, CurrentUser currentUser) throws IOException {
+    public UUID add(Object addDTO, TravelNestUserDetails travelNestUserDetails) throws IOException {
         if (!(addDTO instanceof AddRentalCarDTO addRentalCarDTO)) {
             return null;
         }
         return carRepository.save(
                 (Car)  modelMapper.map(addRentalCarDTO, Car.class)
-                        .setOwner(userService.findUser(currentUser))
+                        .setOwner(userService.findUser(travelNestUserDetails))
                         .setCity(cityRepository.findByName(addRentalCarDTO.getCity()))
                         .setPictureUrl(pictureService.uploadImage(addRentalCarDTO.getImage()))
         ).getId();
@@ -100,8 +100,8 @@ public class CarServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public void deleteProperty(CurrentUser currentUser, UUID carId) {
-        if (!currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
+    public void deleteProperty(TravelNestUserDetails travelNestUserDetails, UUID carId) {
+        if (!travelNestUserDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
 
         Car car = carRepository.findById(carId)
                 .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
@@ -112,9 +112,14 @@ public class CarServiceImpl implements PropertyService {
     }
 
     @Override
-    public boolean isFavorite(CurrentUser currentUser, UUID propertyId) {
-        return userService.findUser(currentUser)
+    public boolean isFavorite(TravelNestUserDetails travelNestUserDetails, UUID propertyId) {
+        return userService.findUser(travelNestUserDetails)
                 .getFavoriteCars()
                 .contains(carRepository.findById(propertyId).orElse(new Car()));
+    }
+
+    @Override
+    public List<PropertyDTO> findUserFavorites(UUID uuid) {
+        return List.of();
     }
 }

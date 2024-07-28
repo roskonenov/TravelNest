@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface PropertyService {
 
-    UUID add(Object addDTO, CurrentUser currentUser) throws IOException;
+    UUID add(Object addDTO, TravelNestUserDetails travelNestUserDetails) throws IOException;
 
     Object findDetailsById(UUID id);
 
@@ -19,7 +19,9 @@ public interface PropertyService {
 
     void addToFavorites(User user, UUID housingId);
 
-    void deleteProperty(CurrentUser currentUser, UUID housingId);
+    void deleteProperty(TravelNestUserDetails travelNestUserDetails, UUID housingId);
 
-    boolean isFavorite(CurrentUser currentUser, UUID propertyId);
+    boolean isFavorite(TravelNestUserDetails travelNestUserDetails, UUID propertyId);
+
+    List<PropertyDTO> findUserFavorites(UUID uuid);
 }

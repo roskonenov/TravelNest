@@ -8,7 +8,7 @@ import bg.softuni.travelNest.model.entity.base.Comment;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
 import bg.softuni.travelNest.model.enums.HousingType;
 import bg.softuni.travelNest.repository.*;
-import bg.softuni.travelNest.service.CurrentUser;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import bg.softuni.travelNest.service.PropertyService;
 import bg.softuni.travelNest.service.PictureService;
 import bg.softuni.travelNest.service.UserService;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -39,7 +40,7 @@ public class HousingServiceImpl implements PropertyService {
 
 
     @Override
-    public UUID add(Object addDTO, CurrentUser currentUser) throws IOException {
+    public UUID add(Object addDTO, TravelNestUserDetails travelNestUserDetails) throws IOException {
 
         if (!(addDTO instanceof AddRentalHousingDTO addRentalHousingDTO)) {
             return null;
@@ -47,7 +48,7 @@ public class HousingServiceImpl implements PropertyService {
         return housingRepository.save(
                 (Housing)  modelMapper.map(addRentalHousingDTO, Housing.class)
                         .setType(HousingType.valueOf(addRentalHousingDTO.getType().toUpperCase()))
-                        .setOwner(userService.findUser(currentUser))
+                        .setOwner(userService.findUser(travelNestUserDetails))
                         .setCity(cityRepository.findByName(addRentalHousingDTO.getCity()))
                         .setPictureUrl(pictureService.uploadImage(addRentalHousingDTO.getImage()))
         ).getId();
@@ -77,10 +78,7 @@ public class HousingServiceImpl implements PropertyService {
                 .map(housingRental -> {
                     PropertyDTO map = modelMapper.map(housingRental, PropertyDTO.class);
                     map.setCity(housingRental.getCity().getName());
-                    map.setTitle(String.format("%s %d %s",
-                            housingRental.getType().toString().toLowerCase(),
-                            housingRental.getRooms(),
-                            housingRental.getRooms() > 1 ? "rooms" : "room"));
+                    map.setTitle(getTitle(housingRental));
                     return map;
                 }).toList();
     }
@@ -103,8 +101,8 @@ public class HousingServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public void deleteProperty(CurrentUser currentUser, UUID housingId) {
-        if (!currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
+    public void deleteProperty(TravelNestUserDetails travelNestUserDetails, UUID housingId) {
+        if (!travelNestUserDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
 
         Housing housing = housingRepository.findById(housingId)
                 .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
@@ -115,9 +113,30 @@ public class HousingServiceImpl implements PropertyService {
     }
 
     @Override
-    public boolean isFavorite(CurrentUser currentUser, UUID housingId) {
-        return userService.findUser(currentUser)
+    public boolean isFavorite(TravelNestUserDetails travelNestUserDetails, UUID housingId) {
+        return userService.findUser(travelNestUserDetails)
                 .getFavoriteHousings()
                 .contains(housingRepository.findById(housingId).orElse(new Housing()));
+    }
+
+    @Override
+    public List<PropertyDTO> findUserFavorites(UUID uuid) {
+        return housingRepository.findAllByUserFavorites(uuid)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(housing -> {
+                    PropertyDTO map = modelMapper.map(housing, PropertyDTO.class);
+                    map.setCity(housing.getCity().getName());
+                    map.setTitle(getTitle(housing));
+                    return map;
+                })
+                .toList();
+    }
+
+    private static String getTitle(Housing housing) {
+        return String.format("%s %d %s",
+                housing.getType().toString().toLowerCase(),
+                housing.getRooms(),
+                housing.getRooms() > 1 ? "rooms" : "room");
     }
 }

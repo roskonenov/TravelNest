@@ -5,14 +5,12 @@ import bg.softuni.travelNest.model.enums.RoleEnum;
 import bg.softuni.travelNest.repository.UserRepository;
 import bg.softuni.travelNest.model.entity.User;
 
-import bg.softuni.travelNest.service.CurrentUser;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.ArrayList;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -30,7 +28,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     private static UserDetails map(User user){
-        return new CurrentUser(
+        return new TravelNestUserDetails(
+                user.getId(),
                 user.getUsername(),
                 user.getPassword(),
                 user.getRoles().stream().map(Role::getRole).map(UserDetailsServiceImpl::map).toList(),

@@ -4,7 +4,7 @@ import bg.softuni.travelNest.model.dto.AddCommentDTO;
 import bg.softuni.travelNest.model.dto.AddRentalHousingDTO;
 import bg.softuni.travelNest.model.enums.City;
 import bg.softuni.travelNest.model.enums.HousingType;
-import bg.softuni.travelNest.service.CurrentUser;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import bg.softuni.travelNest.service.RentService;
 import bg.softuni.travelNest.service.UserService;
 import bg.softuni.travelNest.service.impl.HousingServiceImpl;
@@ -65,10 +65,10 @@ public class HousingController {
 
     @GetMapping("/details/{uuid}")
     public String showHousingDetails(@PathVariable("uuid") UUID propertyId,
-                                     @AuthenticationPrincipal CurrentUser currentUser,
+                                     @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                                      Model model) {
 
-        if (housingService.isFavorite(currentUser, propertyId)) {
+        if (housingService.isFavorite(travelNestUserDetails, propertyId)) {
             model.addAttribute("isFavorite", true);
         }
         model.addAttribute("rentPeriods", rentService.getHousingRentPeriods(propertyId));
@@ -79,15 +79,15 @@ public class HousingController {
 
     @PostMapping("/add-to-favorites/{uuid}")
     public String addToFavorites(@PathVariable("uuid") UUID housingId,
-                                 @AuthenticationPrincipal CurrentUser currentUser) {
+                                 @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails) {
 
-        housingService.addToFavorites(userService.findUser(currentUser), housingId);
+        housingService.addToFavorites(userService.findUser(travelNestUserDetails), housingId);
         return "redirect:/housing/details/" + housingId;
     }
 
     @PostMapping("/details/{uuid}")
     public String addComment(@PathVariable("uuid") UUID housingId,
-                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                              @Valid AddCommentDTO addCommentDTO,
                              BindingResult bindingResult,
                              RedirectAttributes rAttr) {
@@ -98,14 +98,14 @@ public class HousingController {
             return "redirect:/housing/details/" + housingId;
         }
 
-        housingService.addComment(addCommentDTO, housingId, userService.findUser(currentUser));
+        housingService.addComment(addCommentDTO, housingId, userService.findUser(travelNestUserDetails));
         return "redirect:/housing/details/" + housingId;
     }
 
     @DeleteMapping("/details/{uuid}")
     public String deleteHousing(@PathVariable("uuid") UUID housingId,
-                                @AuthenticationPrincipal CurrentUser currentUser) {
-        housingService.deleteProperty(currentUser, housingId);
+                                @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails) {
+        housingService.deleteProperty(travelNestUserDetails, housingId);
         return "redirect:/housing/rental";
     }
 
@@ -119,7 +119,7 @@ public class HousingController {
     @PostMapping("/add")
     public String addHousing(@Valid AddRentalHousingDTO addRentalHousingDTO,
                              BindingResult bindingResult,
-                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                              RedirectAttributes rAttr) throws IOException {
 
         if (bindingResult.hasErrors()) {
@@ -129,7 +129,7 @@ public class HousingController {
             return "redirect:/housing/add";
         }
 
-        UUID uuid = housingService.add(addRentalHousingDTO, currentUser);
+        UUID uuid = housingService.add(addRentalHousingDTO, travelNestUserDetails);
 
         return uuid != null ? "redirect:/housing/details/" + uuid
                 : "redirect:/housing/add";

@@ -1,7 +1,7 @@
 package bg.softuni.travelNest.web;
 
 import bg.softuni.travelNest.model.dto.RentDTO;
-import bg.softuni.travelNest.service.CurrentUser;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import bg.softuni.travelNest.service.RentService;
 import bg.softuni.travelNest.service.UserService;
 import lombok.AllArgsConstructor;
@@ -29,13 +29,13 @@ public class RentController {
     @PostMapping("/{propertyType}/rent/{uuid}")
     public String rentHousing(@PathVariable("uuid") UUID propertyId,
                               @PathVariable("propertyType") String propertyType,
-                              @AuthenticationPrincipal CurrentUser currentUser,
+                              @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                               @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                               @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
                               RentDTO rentDTO,
                               RedirectAttributes rAttr) {
 
-        rentDTO.setRenter(userService.findUser(currentUser));
+        rentDTO.setRenter(userService.findUser(travelNestUserDetails));
         rentDTO.setId(propertyId);
 
         String message = rentService.rent(rentDTO, propertyType);
