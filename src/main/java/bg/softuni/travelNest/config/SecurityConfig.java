@@ -18,7 +18,7 @@ public class SecurityConfig {
             "/",
             "/users/login",
             "/users/login-error",
-            "/users/register"
+            "/users/register",
     };
 
     @Bean

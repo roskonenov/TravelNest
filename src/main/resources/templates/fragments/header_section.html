@@ -48,13 +48,13 @@
                                 <a th:href="@{/users/login}">Login</a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a th:href="@{http://localhost:8081/my-account}">
+                                <a th:href="@{/my-account}">
                                     <i class="fa fa-user" aria-hidden="true">
                                     </i>
                                 </a>
                             </li>
                             <li th:if="${activeLink == 'index'}">
-                                <a th:href="@{http://localhost:8081/my-account}" class="text-center">User:
+                                <a th:href="@{/my-account}" class="text-center">User:
                                     <th:block th:text="${username}"></th:block>
                                     !
                                 </a>
@@ -70,6 +70,15 @@
                     <div class="quote_btn"
                          sec:authorize="isAnonymous()">
                         <a th:href="@{/users/register}">Register</a>
+                    </div>
+                    <div class="nav-item language" >
+                        <form th:method="get">
+                            <label class="text-black" for="lang">Language</label>
+                            <select id="lang" name="lang" onchange="this.form.submit()">
+                                <option value="en_US" th:selected="${#locale.toString() == 'en_US'}">English</option>
+                                <option value="bg_BG" th:selected="${#locale.toString() == 'bg_BG'}">Български</option>
+                            </select>
+                        </form>
                     </div>
                 </section>
             </div>

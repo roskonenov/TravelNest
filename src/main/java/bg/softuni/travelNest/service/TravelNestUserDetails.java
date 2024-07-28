@@ -29,7 +29,7 @@ public class TravelNestUserDetails extends User {
         return Map.of(
                 "username", getUsername(),
                 "email", getEmail(),
-                "roles", getAuthorities()
+                "roles", getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
         );
     }
 }
