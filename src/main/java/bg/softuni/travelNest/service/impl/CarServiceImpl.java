@@ -84,8 +84,8 @@ public class CarServiceImpl implements PropertyService {
     }
 
     @Override
-    public void addComment(AddCommentDTO addCommentDTO, UUID housingId, User user) {
-        Car car = carRepository.findById(housingId)
+    public void addComment(AddCommentDTO addCommentDTO, UUID carId, User user) {
+        Car car = carRepository.findById(carId)
                 .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
 
         commentRepository.saveAndFlush(new CarComment(addCommentDTO.getText(), user, car));

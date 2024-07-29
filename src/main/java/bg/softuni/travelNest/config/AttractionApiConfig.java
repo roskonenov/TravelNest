@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @NoArgsConstructor
 @Configuration
-@ConfigurationProperties(prefix = "my.account.redirect")
-public class MyAccountConfig {
+@ConfigurationProperties(prefix = "attraction.api")
+public class AttractionApiConfig {
 
     private String baseUrl;
 }

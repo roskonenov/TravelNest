@@ -28,7 +28,6 @@ public class TravelNestUserDetails extends User {
    public Map<String, Object> setClaims(){
         return Map.of(
                 "username", getUsername(),
-                "email", getEmail(),
                 "roles", getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
         );
     }
