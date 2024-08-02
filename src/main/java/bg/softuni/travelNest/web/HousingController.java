@@ -59,7 +59,7 @@ public class HousingController {
     public String showRentalHousing(Model model) {
         model.addAttribute("propertyData", housingService.findAllAdds());
         model.addAttribute("refDetailsLink", "/housing/details/{uuid}");
-        model.addAttribute("refPropertyAddLink", "/housing/add");
+        model.addAttribute("refAddLink", "/housing/add");
         return "property_rental";
     }
 

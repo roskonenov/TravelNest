@@ -1,8 +1,8 @@
 document.getElementById('cityFilter').addEventListener('change', function() {
     const selectedCity = this.value;
-    const houseItems = document.querySelectorAll('.property_item');
+    const items = document.querySelectorAll('.property_item, .attraction-card');
 
-    houseItems.forEach(function(item) {
+    items.forEach(function(item) {
         if (selectedCity === 'all' || item.getAttribute('data-city') === selectedCity) {
             item.style.display = 'inline-flex';
         } else {

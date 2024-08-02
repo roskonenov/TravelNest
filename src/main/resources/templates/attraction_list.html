@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -43,43 +44,27 @@
 </div>
 <!-- header section end -->
 <div class="container">
-    <div th:replace="~{fragments/city_filter::city_filter(${cities}, ${refPropertyAddLink})}"></div>
-    <div th:replace="~{fragments/property_list::property_list(${propertyData}, ${refDetailsLink})}"></div>
+    <div th:replace="~{fragments/city_filter::city_filter(${cities}, ${refAddLink})}"></div>
 </div>
 <div class="card-container">
     <!-- Example of an attraction card -->
     <div class="row">
-        <div class="card">
-            <img src="path_to_image.jpg" alt="Attraction Image">
+        <div class="attraction-card"
+             th:each="attraction : ${attractionList}"
+             th:object="${attraction}"
+             th:data-city="*{cityName}"
+        >
+            <img th:src="*{pictureUrl}" alt="Attraction Image">
             <div class="card-content">
-                <div class="card-title">Attraction Title 1</div>
-                <div class="card-city">City 1</div>
-                <div class="card-description">This is a brief description of the attraction. It provides a short
+                <div class="card-title" th:text="*{title}">Attraction Title 1</div>
+                <div class="card-city" th:text="*{cityName}">City 1</div>
+                <div class="card-description" th:text="*{description}">This is a brief description of the attraction. It
+                    provides a short
                     overview of what visitors can expect.
                 </div>
             </div>
         </div>
-        <!-- Repeat for more attractions -->
-        <div class="card">
-            <img src="path_to_image.jpg" alt="Attraction Image">
-            <div class="card-content">
-                <div class="card-title">Attraction Title 2</div>
-                <div class="card-city">City 2</div>
-                <div class="card-description">This is a brief description of the attraction. It provides a short
-                    overview of what visitors can expect.
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="path_to_image.jpg" alt="Attraction Image">
-            <div class="card-content">
-                <div class="card-title">Attraction Title 3</div>
-                <div class="card-city">City 3</div>
-                <div class="card-description">This is a brief description of the attraction. It provides a short
-                    overview of what visitors can expect.
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 

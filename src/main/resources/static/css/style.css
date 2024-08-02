@@ -2302,7 +2302,7 @@ align-content: center;
 
 /*attraction-list*/
 
-.card-container {
+.card-container {;
     margin-top: 200px;
     display: flex;
     align-items: center;
@@ -2310,25 +2310,34 @@ align-content: center;
     justify-content: space-evenly
 }
 
-.card {
+.card-container .row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.attraction-card {
     background-color: #fda417;
     border: 2px solid #fd7e14;
     border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     margin: 20px 30px;
     overflow: hidden;
-    width: 300px;
+    width: 400px;
+    height: 500px;
     display: flex;
     flex-direction: column;
 }
 
-.card img {
-    width: 100%;
-    height: auto;
+.attraction-card img {
+    width: 400px;
+    height: 300px;
 }
 
 .card-content {
     padding: 15px;
+    margin-bottom: 10px;
 }
 
 .card-title {
@@ -2344,6 +2353,7 @@ align-content: center;
 }
 
 .card-description {
+    height: 150px;
     font-size: 0.9em;
     color: #777777;
 }

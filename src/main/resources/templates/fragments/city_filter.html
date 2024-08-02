@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 <head>
     <meta charset="UTF-8">
     <title>City Filter</title>
 </head>
 <body>
-<div th:fragment="city_filter(cities, refPropertyAddLink)">
+<div th:fragment="city_filter(cities, refAddLink)">
 <div class="filter_section">
     <label for="cityFilter" th:text="#{city_filter_label}">Filter by city:</label>
     <select id="cityFilter" class="nice-select">
@@ -16,9 +16,15 @@
         </option>
     </select>
     <div class="create-box">
-        <span th:if="${refPropertyAddLink == '/housing/add'}" class="place" th:text="#{city_filter_place_to_rent}">You have a place to rent? </span>
-        <span th:if="${refPropertyAddLink == '/car/add'}" class="place" th:text="#{city_filter_car_to_rent}">You have a car to rent? </span>
-        <a th:href="@{${refPropertyAddLink}}" class="create text-black text-small" th:text="#{city_filter_new_add}"> Create new ad</a>
+        <span th:if="${refAddLink == '/housing/add'}" class="place" th:text="#{city_filter_place_to_rent}">You have a place to rent? </span>
+        <span th:if="${refAddLink == '/car/add'}" class="place" th:text="#{city_filter_car_to_rent}">You have a car to rent? </span>
+        <span th:if="${refAddLink == '/attractions/add'}" sec:authorize="hasRole('ADMIN')" class="place" th:text="#{city_filter_add_new_attraction}">Add new attraction? </span>
+        <a th:href="@{${refAddLink}}"
+           class="create text-black text-small"
+           th:if="${refAddLink == '/housing/add' or
+                    refAddLink == '/car/add' or
+                    refAddLink == '/attractions/add' and #authorization.expression('hasRole(''ADMIN'')')}"
+           th:text="#{city_filter_new_add}"> Create new ad</a>
     </div>
 </div>
 </div>

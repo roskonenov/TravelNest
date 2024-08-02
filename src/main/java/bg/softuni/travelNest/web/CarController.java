@@ -60,7 +60,7 @@ public class CarController {
     public String showRentalCars(Model model) {
         model.addAttribute("propertyData", carService.findAllAdds());
         model.addAttribute("refDetailsLink", "/car/details/{uuid}");
-        model.addAttribute("refPropertyAddLink", "/car/add");
+        model.addAttribute("refAddLink", "/car/add");
         return "property_rental";
     }
 
