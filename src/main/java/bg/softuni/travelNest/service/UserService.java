@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface UserService {
 
-    boolean passwordDiff(String password, String confirmPassword);
-
     boolean register(RegisterDto registerDto);
 
     User findUser(TravelNestUserDetails travelNestUserDetails);

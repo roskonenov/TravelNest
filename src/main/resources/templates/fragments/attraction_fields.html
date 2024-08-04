@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attraction Fields</title>
+</head>
+<body>
+<div th:fragment="attraction_fields">
+    <div class="add_property_field form-group">
+        <label th:for="title">Title</label>
+        <input th:field="*{title}"
+               th:errorclass="is-invalid"
+               type="text" class="add_property_box form-control" id="title" name="title" required>
+        <small th:errors="*{title}" class="invalid-feedback danger">Title error message!</small>
+    </div>
+    <div class="add_property_field form-group">
+        <label th:for="description">Description</label>
+        <input th:field="*{description}"
+               th:errorclass="is-invalid"
+               type="text" class="add_property_box form-control" id="description" name="description" required>
+        <small th:errors="*{description}" class="invalid-feedback danger">Description error message!</small>
+    </div>
+</div>
+</body>
+</html>

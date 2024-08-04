@@ -25,11 +25,6 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public boolean passwordDiff(String password, String confirmPassword) {
-        return !password.equals(confirmPassword);
-    }
-
-    @Override
     public boolean register(RegisterDto registerDto) {
         if (userRepository.existsByUsernameOrEmail(registerDto.getUsername(), registerDto.getEmail())) return false;
 

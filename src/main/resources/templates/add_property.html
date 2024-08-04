@@ -43,11 +43,12 @@
 </div>
 <!-- header section end -->
 <div class="add_property_background container mt-5">
-    <h1 class="add_property mb-4">Add Rental Property</h1>
+    <h1 th:unless="${entityType == 'attractions'}" class="add_property mb-4">Add Rental Property</h1>
+    <h1 th:if="${entityType == 'attractions'}" class="add_property mb-4">Add Attraction</h1>
     <div class="row">
         <form th:method="post"
               th:action="@{${action}}"
-              th:object="${addRentalData}"
+              th:object="${addData}"
               enctype="multipart/form-data">
             <div class="add_property_field form-group">
                 <label th:for="city">City</label>
@@ -63,7 +64,7 @@
                 </select>
                 <small th:errors="*{city}" class="invalid-feedback danger">Invalid City!</small>
             </div>
-            <th:block th:if="${propertyType == 'car'}">
+            <th:block th:if="${entityType == 'car'}">
                 <div th:replace="~{fragments/car_fields::car_fields}"></div>
             </th:block>
             <div class="add_property_field form-group">
@@ -86,8 +87,11 @@
                        name="price" required>
                 <small th:errors="*{price}" class="invalid-feedback danger">Price error message!</small>
             </div>
-            <th:block th:if="${propertyType == 'housing'}">
-                <div th:if="${propertyType == 'housing'}" th:replace="~{fragments/housig_fields::housing_fields}"></div>
+            <th:block th:if="${entityType == 'attractions'}">
+                <div th:if="${entityType == 'attractions'}" th:replace="~{fragments/attraction_fields::attraction_fields}"></div>
+            </th:block>
+            <th:block th:if="${entityType == 'housing'}">
+                <div th:if="${entityType == 'housing'}" th:replace="~{fragments/housig_fields::housing_fields}"></div>
             </th:block>
             <div class="add_property_field form-group">
                 <label th:for="image">Upload Image</label>
@@ -104,11 +108,14 @@
         </form>
         <div class="col-md-6 padding_left_15">
             <div class="add_rent_property">
-                <img th:if="${propertyType == 'housing'}"
+                <img th:if="${entityType == 'housing'}"
                      th:src="'https://cdn.pixabay.com/photo/2024/02/29/10/47/house-8603946_1280.png'" width="500"
                      height="500" alt="add_rent_property image">
-                <img th:if="${propertyType == 'car'}"
+                <img th:if="${entityType == 'car'}"
                      th:src="'https://cdn.pixabay.com/photo/2018/02/02/17/28/car-keys-3125905_1280.jpg'" width="500"
+                     height="500" alt="add_rent_property image">
+                <img th:if="${entityType == 'attractions'}"
+                     th:src="'https://cdn.pixabay.com/photo/2015/11/06/11/35/alexander-1026303_1280.jpg'" width="500"
                      height="500" alt="add_rent_property image">
             </div>
         </div>

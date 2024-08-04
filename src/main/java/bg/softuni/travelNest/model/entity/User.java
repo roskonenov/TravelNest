@@ -1,10 +1,8 @@
 package bg.softuni.travelNest.model.entity;
 
-import bg.softuni.travelNest.model.dto.AttractionDTO;
 import bg.softuni.travelNest.model.entity.base.BaseEntityUuid;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 

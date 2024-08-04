@@ -58,10 +58,10 @@
         <div class="housing-details details_section">
             <p><strong>City: </strong> <span th:text="*{city}"></span></p>
             <p><strong>Address: </strong> <span th:text="*{address}"></span></p>
-            <th:block th:if="${propertyType == 'housing'}">
+            <th:block th:if="${entityType == 'housing'}">
                 <div th:replace="~{fragments/housing_details_fields::housing_details_fields}"></div>
             </th:block>
-            <th:block th:if="${propertyType == 'car'}">
+            <th:block th:if="${entityType == 'car'}">
                 <div th:replace="~{fragments/car_details_fields::car_details_fields}"></div>
             </th:block>
             <p><strong>Price: </strong> <span th:text="*{price}"></span>/day</p>
@@ -73,7 +73,7 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Select Dates</h2>
-                <form th:action="@{/{propertyType}/rent/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}"
+                <form th:action="@{/{entityType}/rent/{uuid} (uuid= ${uuid}, entityType= ${entityType})}"
                       th:method="post">
                     <h1>Unavailable Rent Periods</h1>
                     <table class="rented_periods">
@@ -101,7 +101,7 @@
             </div>
         </div>
         <form th:method="post"
-              th:action="@{/{propertyType}/add-to-favorites/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}">
+              th:action="@{/{entityType}/add-to-favorites/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
             <button class="details_button">Add to favorites
             </button>
             <th:block class="favorite-icon" th:if="${isFavorite}">
@@ -109,7 +109,7 @@
             </th:block>
         </form>
         <form th:method="delete"
-              th:action="@{/{propertyType}/details/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}">
+              th:action="@{/{entityType}/details/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
             <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
             </button>
         </form>
@@ -128,7 +128,7 @@
 
         <!-- Add New Comment -->
         <form class="add-comment"
-              th:action="@{/{propertyType}/details/{uuid} (uuid=${uuid}, propertyType= ${propertyType})}"
+              th:action="@{/{entityType}/details/{uuid} (uuid=${uuid}, entityType= ${entityType})}"
               th:method="post"
               th:object="${commentData}">
             <h3 class="table-title title">Add a Comment</h3>

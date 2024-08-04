@@ -81,7 +81,7 @@
             </div>
         </form>
         <form th:method="delete"
-              th:action="@{/{propertyType}/details/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}">
+              th:action="@{/{entityType}/details/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
             <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
             </button>
         </form>

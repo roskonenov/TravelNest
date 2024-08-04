@@ -46,7 +46,7 @@ public class CarController {
                 .toList();
     }
 
-    @ModelAttribute("addRentalData")
+    @ModelAttribute("addData")
     public AddRentalCarDTO addRentalCarDTO(){
         return new AddRentalCarDTO();
     }
@@ -66,7 +66,7 @@ public class CarController {
 
     @GetMapping("/add")
     public String showAddCar(Model model) {
-        model.addAttribute("propertyType", "car");
+        model.addAttribute("entityType", "car");
         model.addAttribute("action", "/car/add");
         return "add_property";
     }
@@ -78,9 +78,9 @@ public class CarController {
                          RedirectAttributes rAttr) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            rAttr.addFlashAttribute("addRentalData", addRentalCarDTO);
-            rAttr.addFlashAttribute("org.springframework.validation.BindingResult.addRentalData", bindingResult);
-            rAttr.addFlashAttribute("propertyType", "car");
+            rAttr.addFlashAttribute("addData", addRentalCarDTO);
+            rAttr.addFlashAttribute("org.springframework.validation.BindingResult.addData", bindingResult);
+            rAttr.addFlashAttribute("entityType", "car");
             return "redirect:/car/add";
         }
 
@@ -100,7 +100,7 @@ public class CarController {
         }
         model.addAttribute("rentPeriods", rentService.getCarRentPeriods(propertyId));
         model.addAttribute("propertyDetails", carService.findDetailsById(propertyId));
-        model.addAttribute("propertyType", "car");
+        model.addAttribute("entityType", "car");
         return "property_details";
     }
 

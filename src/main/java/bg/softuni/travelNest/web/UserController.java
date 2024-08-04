@@ -46,15 +46,11 @@ public class UserController {
     @PostMapping("/register")
     public String register(@Valid RegisterDto registerDto, BindingResult bindingResult, RedirectAttributes rAttr){
 
-        boolean passwordDiff = userService.passwordDiff(registerDto.getPassword(), registerDto.getConfirmPassword());
-        if (bindingResult.hasErrors() || passwordDiff){
+        if (bindingResult.hasErrors()){
 
             rAttr.addFlashAttribute("registerData", registerDto);
             rAttr.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
 
-            if (passwordDiff) {
-                rAttr.addFlashAttribute("passwordDiff", true);
-            }
            return "redirect:/users/register";
         }
 

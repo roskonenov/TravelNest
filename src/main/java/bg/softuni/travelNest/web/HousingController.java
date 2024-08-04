@@ -45,7 +45,7 @@ public class HousingController {
                 .toList();
     }
 
-    @ModelAttribute("addRentalData")
+    @ModelAttribute("addData")
     public AddRentalHousingDTO rentalPropertyDTO() {
         return new AddRentalHousingDTO();
     }
@@ -73,7 +73,7 @@ public class HousingController {
         }
         model.addAttribute("rentPeriods", rentService.getHousingRentPeriods(propertyId));
         model.addAttribute("propertyDetails", housingService.findDetailsById(propertyId));
-        model.addAttribute("propertyType", "housing");
+        model.addAttribute("entityType", "housing");
         return "property_details";
     }
 
@@ -111,7 +111,7 @@ public class HousingController {
 
     @GetMapping("/add")
     public String showAddHousing(Model model) {
-        model.addAttribute("propertyType", "housing");
+        model.addAttribute("entityType", "housing");
         model.addAttribute("action", "/housing/add");
         return "add_property";
     }
@@ -123,8 +123,8 @@ public class HousingController {
                              RedirectAttributes rAttr) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            rAttr.addFlashAttribute("addRentalData", addRentalHousingDTO);
-            rAttr.addFlashAttribute("org.springframework.validation.BindingResult.addRentalData", bindingResult);
+            rAttr.addFlashAttribute("addData", addRentalHousingDTO);
+            rAttr.addFlashAttribute("org.springframework.validation.BindingResult.addData", bindingResult);
             rAttr.addFlashAttribute("propertyType", "housing");
             return "redirect:/housing/add";
         }

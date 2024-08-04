@@ -26,9 +26,9 @@ public class RentController {
         return new RentDTO();
     }
 
-    @PostMapping("/{propertyType}/rent/{uuid}")
+    @PostMapping("/{entityType}/rent/{uuid}")
     public String rentHousing(@PathVariable("uuid") UUID propertyId,
-                              @PathVariable("propertyType") String propertyType,
+                              @PathVariable("entityType") String entityType,
                               @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                               @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                               @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
@@ -38,10 +38,10 @@ public class RentController {
         rentDTO.setRenter(userService.findUser(travelNestUserDetails));
         rentDTO.setId(propertyId);
 
-        String message = rentService.rent(rentDTO, propertyType);
+        String message = rentService.rent(rentDTO, entityType);
 
         rAttr.addFlashAttribute("message", message);
 
-        return "redirect:/" + propertyType + "/details/" + propertyId;
+        return "redirect:/" + entityType + "/details/" + propertyId;
     }
 }

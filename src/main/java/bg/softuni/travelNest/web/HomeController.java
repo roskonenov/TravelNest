@@ -15,11 +15,6 @@ public class HomeController {
         return "services";
     }
 
-    @GetMapping("/projects")
-    public String getProjects(){
-        return "projects";
-    }
-
     @GetMapping("/")
     public String showHome(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if (userDetails instanceof TravelNestUserDetails travelNestUserDetails) {
@@ -28,11 +23,6 @@ public class HomeController {
             model.addAttribute("username", "guest");
         }
         return "index";
-    }
-
-    @GetMapping("/testimonial")
-    public String testimonial(){
-        return "testimonial";
     }
 
     @GetMapping("/contact")

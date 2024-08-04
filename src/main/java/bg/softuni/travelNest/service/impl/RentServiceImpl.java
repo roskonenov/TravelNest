@@ -46,8 +46,8 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public boolean isAvailable(String propertyType, UUID propertyId, LocalDate startDate, LocalDate endDate) {
-        if ("housing".equals(propertyType)) {
+    public boolean isAvailable(String entityType, UUID propertyId, LocalDate startDate, LocalDate endDate) {
+        if ("housing".equals(entityType)) {
             return getHousingRentPeriods(propertyId)
                     .stream().noneMatch(period ->
                             (startDate.isBefore(period.getEndDate()) && endDate.isAfter(period.getStartDate())));
