@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ObjectNotFoundException.class)
-    public String ObjectNotFoundHandler(Model model, ObjectNotFoundException onfe){
+    public String objectNotFoundHandler(Model model, ObjectNotFoundException onfe){
         model.addAttribute("message", onfe.getMessage());
         return "object_not_found";
     }

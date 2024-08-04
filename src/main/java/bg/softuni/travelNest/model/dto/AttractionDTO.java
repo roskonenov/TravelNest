@@ -5,11 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class AttractionDTO {
+
+    private UUID id;
 
     private String title;
 
@@ -19,7 +22,7 @@ public class AttractionDTO {
 
     private String pictureUrl;
 
-    private BigDecimal prise;
+    private BigDecimal price;
 
     private String description;
 

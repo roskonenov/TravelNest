@@ -1967,6 +1967,7 @@ width: 400px;
 }
 .housing-details .details_section, .comments_section, .add_comment_section {
     margin-top: 20px;
+    width: 530px;
 }
 .housing-details .comment {
     border-bottom: 1px solid #ccc;
@@ -2330,6 +2331,17 @@ align-content: center;
     flex-direction: column;
 }
 
+.button-overlay {
+    position: relative;
+    display: inline-block;
+}
+.button-overlay .btn_main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(5%, 75%);
+}
+
 .attraction-card img {
     width: 400px;
     height: 300px;
@@ -2356,4 +2368,22 @@ align-content: center;
     height: 150px;
     font-size: 0.9em;
     color: #777777;
+}
+
+.ticket_count{
+    display: flex;
+    align-items: center;
+    width: auto;
+    padding-top: 0;
+    margin: 30px 15px;
+}
+
+.ticket_count .add_property_box{
+    margin-left: 15px;
+    width: 70px;
+    height: 30px;
+}
+
+.ticket_count label{
+    margin: 0;
 }

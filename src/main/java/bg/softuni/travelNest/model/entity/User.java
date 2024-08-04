@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.model.entity;
 
+import bg.softuni.travelNest.model.dto.AttractionDTO;
 import bg.softuni.travelNest.model.entity.base.BaseEntityUuid;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import jakarta.persistence.*;

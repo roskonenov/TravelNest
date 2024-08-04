@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Attractions List</title>
+    <title>Housing details</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -33,6 +33,7 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 <!-- header top section start -->
@@ -43,36 +44,49 @@
     <div th:replace="~{fragments/header_section::header_section(activeLink='services')}"></div>
 </div>
 <!-- header section end -->
-<div class="container">
-    <div th:replace="~{fragments/city_filter::city_filter(${cities}, ${refAddLink})}"></div>
-</div>
-<div class="card-container">
-    <!-- Example of an attraction card -->
+<div class="housing-details container"
+     th:object="${attractionDetails}">
+    <h2 th:text="*{title}">Property Details</h2>
+    <span th:if="*{isPaid() == true}">
+    <div th:if="${message}">
+        <p th:text="${message}" style="color: orange; font-size: 15px"></p>
+    </div>
+    </span>
     <div class="row">
-        <div class="attraction-card"
-             th:each="attraction : ${attractionList}"
-             th:object="${attraction}"
-             th:data-city="*{cityName}">
-            <div class="button-overlay">
-                <img th:src="*{pictureUrl}" alt="Attraction Image">
-                <div class="btn_main">
-                    <div class="details_button"><a th:href="@{${refDetailsLink} (uuid=*{id})}">See details</a></div>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="card-title" th:text="*{title}">Attraction Title 1</div>
-                <div class="card-city" th:text="*{cityName}">City 1</div>
-                <div class="card-description" th:text="*{description}">This is a brief description of the attraction. It
-                    provides a short
-                    overview of what visitors can expect.
-                </div>
-
-            </div>
+        <div class="main_image_container">
+            <img th:src="@{*{pictureUrl}}" alt="Main Property Image" id="mainImage"
+                 class="housing-details main_image">
         </div>
+        <div class="housing-details details_section">
+            <p><strong>City: </strong> <span th:text="*{cityName}"></span></p>
+            <p><strong>Address: </strong> <span th:text="*{address}"></span></p>
+            <p th:if="${attractionDetails.isPaid() == true}"><strong>Price: </strong> <span th:text="*{price}"></span> lv.</p>
+            <p><span th:text="*{description}"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <form th:method="post"
+              th:action="@{/attractions/details/{uuid} (uuid = ${uuid})}"
+              th:object="${tickets}"
+              th:if="${attractionDetails.isPaid() == true}">
+            <button class="details_button" id="buyButton">Buy ticket</button>
 
+            <div class="add_property_field ticket_count form-group">
+                <label th:for="count">Count of tickets</label>
+                <input th:field="*{count}"
+                       th:errorclass="is-invalid"
+                       type="number" class="add_property_box form-control" id="count" name="count" required>
+                <small th:errors="*{count}" class="invalid-feedback danger">Tickets count error
+                    message!</small>
+            </div>
+        </form>
+        <form th:method="delete"
+              th:action="@{/{propertyType}/details/{uuid} (uuid= ${uuid}, propertyType= ${propertyType})}">
+            <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
+            </button>
+        </form>
     </div>
 </div>
-
 <!-- footer section start -->
 <div th:replace="~{fragments/footer_section::footer_section}"></div>
 <!-- footer section end -->
@@ -89,6 +103,10 @@
 <!-- script js -->
 <script src="/js/script.js"></script>
 
-<script src="/js/filter-properties.js"></script>
+<script src="/js/add_comment.js"></script>
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script src="/js/flatpickr.js"></script>
 </body>
 </html>
