@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Service
-
 public class AttractionServiceImpl implements AttractionService {
 
     private final @Qualifier("attractionsRestClient") RestClient restClient;
@@ -38,7 +37,7 @@ public class AttractionServiceImpl implements AttractionService {
     public List<String> getAttractionCities() {
         return restClient.get()
                 .uri("/attractions/cities")
-                .accept(MediaType.APPLICATION_JSON, MediaType.MULTIPART_FORM_DATA)
+                .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
     }

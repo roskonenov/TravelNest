@@ -3,6 +3,7 @@ package bg.softuni.travelNest.service.impl;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.*;
 import bg.softuni.travelNest.model.entity.Car;
+import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import bg.softuni.travelNest.model.entity.commentEntity.CarComment;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.lang.Object;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -77,7 +79,7 @@ public class CarServiceImpl implements PropertyService {
                 .stream()
                 .map(carRental -> {
                     PropertyDTO map = modelMapper.map(carRental, PropertyDTO.class);
-                    map.setTitle(carRental.getMake() + " " + carRental.getModel());
+                    map.setTitle(getTitle(carRental));
                     map.setCity(carRental.getCity().getName());
                     return map;
                 }).toList();
@@ -120,6 +122,21 @@ public class CarServiceImpl implements PropertyService {
 
     @Override
     public List<PropertyDTO> findUserFavorites(UUID uuid) {
-        return List.of();
+        return carRepository.findAllByUserFavorites(uuid)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(car -> {
+                    PropertyDTO map = modelMapper.map(car, PropertyDTO.class);
+                    map.setCity(car.getCity().getName());
+                    map.setTitle(getTitle(car));
+                    return map;
+                })
+                .toList();
+    }
+
+    private static String getTitle(Car car) {
+        return String.format("%s %s",
+                car.getMake(),
+                car.getModel());
     }
 }
