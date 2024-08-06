@@ -9,5 +9,4 @@ class TravelNestApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

@@ -2,6 +2,7 @@ package bg.softuni.travelNest.service.impl;
 
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.AddCommentDTO;
+import bg.softuni.travelNest.model.dto.AddRentalCarDTO;
 import bg.softuni.travelNest.model.dto.CarDetailsDTO;
 import bg.softuni.travelNest.model.dto.PropertyDTO;
 import bg.softuni.travelNest.model.entity.Car;
@@ -15,16 +16,21 @@ import bg.softuni.travelNest.service.PictureService;
 import bg.softuni.travelNest.service.TravelNestUserDetails;
 import bg.softuni.travelNest.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -35,12 +41,12 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CarServiceImplTest {
 
-    private static final UUID USER_ID = UUID.fromString("67f7f8fa-df4a-42c3-b694-042d345efb44");
+    private static final UUID USER_ID = UUID.randomUUID();
     private static final String USERNAME = "testUsername";
     private static final String PASSWORD = "testPassword";
     private static final Collection<SimpleGrantedAuthority> AUTHORITIES = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
     private static final String EMAIL = "test@test.test";
-    private static final UUID CAR_ID = UUID.fromString("275f3666-3d29-4406-b5cf-026ad8d6a191");
+    private static final UUID CAR_ID = UUID.randomUUID();
     private static final String ADDRESS = "testAddress";
     private static final String CITY = String.valueOf(City.PLOVDIV);
     private static final BigDecimal PRICE = BigDecimal.TEN;
@@ -58,11 +64,11 @@ class CarServiceImplTest {
 
     private User testUser;
 
-    @Mock
-    private PictureService pictureService;
+    @InjectMocks
+    private PictureServiceImpl pictureService;
 
-    @Mock
-    private UserService userService;
+    @InjectMocks
+    private UserServiceImpl userService;
 
     private Car car;
 
@@ -76,15 +82,19 @@ class CarServiceImplTest {
 
     @Mock
     private CityRepository mockCityRepository;
+
     @Mock
     private CarRepository mockCarRepository;
+
     @Mock
     private CommentRepository mockCommentRepository;
+
     @Mock
     private RentRepository mockRentRepository;
+
     @Mock
     private UserRepository mockUserRepository;
-    
+
     @BeforeEach
     void setUp() {
 
@@ -122,42 +132,43 @@ class CarServiceImplTest {
         car.setPrice(PRICE);
     }
 
-//    @Test
-//    void add() throws IOException {
-//        AddRentalCarDTO addRentalCarDTO = new AddRentalCarDTO();
-//        addRentalCarDTO.setAddress(ADDRESS);
-//        addRentalCarDTO.setCity(CITY);
-//        addRentalCarDTO.setDoors(DOORS);
-//        addRentalCarDTO.setEngine(ENGINE);
-//        addRentalCarDTO.setMake(MAKE);
-//        addRentalCarDTO.setModel(MODEL);
-//        addRentalCarDTO.setPrice(PRICE);
-//        addRentalCarDTO.setImage(new MockMultipartFile(
-//                "test.xlsx",
-//                new FileInputStream("F:\\Росен курсове\\Project\\TravelNest\\src\\main\\resources\\static\\images\\about-img.png")));
-//
-//        when(mockUserRepository.findByUsername(USERNAME))
-//                .thenReturn(Optional.of(testUser));
-//
-//        when(mockCityRepository.findByName(CITY))
-//                .thenReturn(new CityEntity(CITY));
-//
-//        toTest.add(addRentalCarDTO, testUserDetails);
-//
-//        verify(mockCarRepository).save(carArgumentCaptor.capture());
-//        Car actualCar = carArgumentCaptor.getValue();
-//        assertEquals(addRentalCarDTO.getAddress(), actualCar.getAddress());
-//        assertEquals(addRentalCarDTO.getCity(), actualCar.getCity().getName());
-//        assertEquals(addRentalCarDTO.getDoors(), actualCar.getDoors());
-//        assertEquals(addRentalCarDTO.getEngine(), actualCar.getEngine());
-//        assertEquals(addRentalCarDTO.getMake(), actualCar.getMake());
-//        assertEquals(addRentalCarDTO.getModel(), actualCar.getModel());
-//        assertEquals(addRentalCarDTO.getPrice(), actualCar.getPrice());
-//        assertEquals("/test-image-url", actualCar.getPictureUrl());
-//    }
+    @Test
+    @Disabled
+    void add() throws IOException {
+        AddRentalCarDTO addRentalCarDTO = new AddRentalCarDTO();
+        addRentalCarDTO.setAddress(ADDRESS);
+        addRentalCarDTO.setCity(CITY);
+        addRentalCarDTO.setDoors(DOORS);
+        addRentalCarDTO.setEngine(ENGINE);
+        addRentalCarDTO.setMake(MAKE);
+        addRentalCarDTO.setModel(MODEL);
+        addRentalCarDTO.setPrice(PRICE);
+        addRentalCarDTO.setImage(new MockMultipartFile(
+                "test.xlsx",
+                new FileInputStream("F:\\Росен курсове\\Project\\TravelNest\\src\\main\\resources\\static\\images\\about-img.png")));
+
+        when(mockUserRepository.findByUsername(USERNAME))
+                .thenReturn(Optional.of(testUser));
+
+        when(mockCityRepository.findByName(CITY))
+                .thenReturn(new CityEntity(CITY));
+
+        toTest.add(addRentalCarDTO, testUserDetails);
+
+        verify(mockCarRepository).save(carArgumentCaptor.capture());
+        Car actualCar = carArgumentCaptor.getValue();
+        assertEquals(addRentalCarDTO.getAddress(), actualCar.getAddress());
+        assertEquals(addRentalCarDTO.getCity(), actualCar.getCity().getName());
+        assertEquals(addRentalCarDTO.getDoors(), actualCar.getDoors());
+        assertEquals(addRentalCarDTO.getEngine(), actualCar.getEngine());
+        assertEquals(addRentalCarDTO.getMake(), actualCar.getMake());
+        assertEquals(addRentalCarDTO.getModel(), actualCar.getModel());
+        assertEquals(addRentalCarDTO.getPrice(), actualCar.getPrice());
+        assertEquals("/test-image-url", actualCar.getPictureUrl());
+    }
 
     @Test
-    void findDetailsById_Return_Object() {
+    void findDetailsById_Return_CarDetailsDTO() {
 
         when(mockCarRepository.findById(CAR_ID))
                 .thenReturn(Optional.of(car));
@@ -165,7 +176,7 @@ class CarServiceImplTest {
         when(mockCommentRepository.findByType(COMMENT_TYPE))
                 .thenReturn(new ArrayList<>());
 
-        CarDetailsDTO detailsById = (CarDetailsDTO) toTest.findDetailsById(CAR_ID);
+        CarDetailsDTO detailsById = toTest.findDetailsById(CAR_ID);
 
         assertEquals(CITY, detailsById.getCity());
         assertEquals(ADDRESS, detailsById.getAddress());

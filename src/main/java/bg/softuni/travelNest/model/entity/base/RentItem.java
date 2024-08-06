@@ -16,16 +16,16 @@ import java.math.BigDecimal;
 public abstract class RentItem extends BaseEntityUuid{
 
     @ManyToOne
-    @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
     private CityEntity city;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String address;
 
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(name = "picture_url", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "picture_url", nullable = false)
     private String pictureUrl;
 
     @ManyToOne

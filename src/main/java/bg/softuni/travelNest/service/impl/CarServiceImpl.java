@@ -57,7 +57,7 @@ public class CarServiceImpl implements PropertyService {
     }
 
     @Override
-    public Object findDetailsById(UUID id) {
+    public CarDetailsDTO findDetailsById(UUID id) {
         return carRepository.findById(id)
                 .map(carRental -> {
                     CarDetailsDTO map = modelMapper.map(carRental, CarDetailsDTO.class);
@@ -121,8 +121,8 @@ public class CarServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<PropertyDTO> findUserFavorites(UUID uuid) {
-        return carRepository.findAllByUserFavorites(uuid)
+    public List<PropertyDTO> findUserFavorites(UUID userId) {
+        return carRepository.findAllByUserFavorites(userId)
                 .orElse(new ArrayList<>())
                 .stream()
                 .map(car -> {

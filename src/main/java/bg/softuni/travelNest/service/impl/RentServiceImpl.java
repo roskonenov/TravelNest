@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.RentDTO;
 import bg.softuni.travelNest.model.entity.Car;
 import bg.softuni.travelNest.model.entity.Housing;
@@ -9,7 +10,7 @@ import bg.softuni.travelNest.repository.CarRepository;
 import bg.softuni.travelNest.repository.RentRepository;
 import bg.softuni.travelNest.repository.HousingRepository;
 import bg.softuni.travelNest.service.RentService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,7 +23,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RentServiceImpl implements RentService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RentServiceImpl.class);
@@ -35,14 +36,14 @@ public class RentServiceImpl implements RentService {
     public List<HousingRentPeriod> getHousingRentPeriods(UUID housingId) {
         return housingRepository.findById(housingId)
                 .map(Housing::getRentPeriods)
-                .orElse(new ArrayList<>());
+                .orElseThrow(() -> new ObjectNotFoundException("We couldn't find this property"));
     }
 
     @Override
     public List<CarRentPeriod> getCarRentPeriods(UUID propertyId) {
         return carRepository.findById(propertyId)
                 .map(Car::getRentPeriods)
-                .orElse(new ArrayList<>());
+                .orElseThrow(() -> new ObjectNotFoundException("We couldn't find this property"));
     }
 
     @Override
@@ -51,11 +52,12 @@ public class RentServiceImpl implements RentService {
             return getHousingRentPeriods(propertyId)
                     .stream().noneMatch(period ->
                             (startDate.isBefore(period.getEndDate()) && endDate.isAfter(period.getStartDate())));
-        } else {
+        } else if ("car".equals(entityType)){
             return getCarRentPeriods(propertyId)
                     .stream().noneMatch(period ->
                             (startDate.isBefore(period.getEndDate()) && endDate.isAfter(period.getStartDate())));
         }
+        throw new ObjectNotFoundException("Something went wrong!");
     }
 
     @Override
@@ -71,7 +73,7 @@ public class RentServiceImpl implements RentService {
                             message.set("The housing is not available during the selected period!");
                         }
                     });
-        }else {
+        }else if ("car".equals(propertyType)){
             carRepository.findById(rentDTO.getId())
                     .ifPresent(car -> {
                         if (isAvailable(propertyType, rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {

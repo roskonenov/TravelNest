@@ -50,7 +50,7 @@ public class DatabaseInit implements CommandLineRunner {
         LOGGER.info("DATABASE INITIATED!");
     }
 
-    private void cityInit() {
+    void cityInit() {
         if (cityRepository.count() != Arrays.stream(City.values()).count()) {
 
             Arrays.stream(City.values())
@@ -63,7 +63,7 @@ public class DatabaseInit implements CommandLineRunner {
         }
     }
 
-    private void rolesInit() {
+    void rolesInit() {
         if (roleRepository.count() != Arrays.stream(RoleEnum.values()).count()) {
 
                     Arrays.stream(RoleEnum.values())
@@ -77,7 +77,7 @@ public class DatabaseInit implements CommandLineRunner {
         }
     }
 
-    private void usersInit() {
+    void usersInit() {
         if (userRepository.count() != 0) return;
 
         userRepository.saveAllAndFlush(List.of(
@@ -98,7 +98,7 @@ public class DatabaseInit implements CommandLineRunner {
         );
     }
 
-    private void housingInit() throws IOException {
+    void housingInit() throws IOException {
         if (housingRepository.count() != 0) return;
 
         Files.readAllLines(Path.of(HOUSING_INPUT_FILE_PATH))
@@ -108,7 +108,7 @@ public class DatabaseInit implements CommandLineRunner {
                 });
     }
 
-    private void carInit() throws IOException {
+    void carInit() throws IOException {
         if (carRepository.count() != 0) return;
 
         Files.readAllLines(Path.of(CAR_INPUT_FILE_PATH))

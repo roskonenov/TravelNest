@@ -18,5 +18,5 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
     void deleteAllFromUsersFavoriteCarsWhereHousingId(UUID carId);
 
     @Query(nativeQuery = true, value = "SELECT * FROM cars c JOIN users_favorite_cars ufc ON c.id = ufc.car_id WHERE ufc.user_id = :userId")
-    Optional<List<Car>> findAllByUserFavorites(UUID uuid);
+    Optional<List<Car>> findAllByUserFavorites(UUID userId);
 }
