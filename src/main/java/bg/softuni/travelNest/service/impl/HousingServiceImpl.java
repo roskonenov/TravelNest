@@ -45,13 +45,12 @@ public class HousingServiceImpl implements PropertyService {
         if (!(addDTO instanceof AddRentalHousingDTO addRentalHousingDTO)) {
             return null;
         }
-        return housingRepository.save(
-                (Housing)  modelMapper.map(addRentalHousingDTO, Housing.class)
-                        .setType(HousingType.valueOf(addRentalHousingDTO.getType().toUpperCase()))
-                        .setOwner(userService.findUser(travelNestUserDetails))
-                        .setCity(cityRepository.findByName(addRentalHousingDTO.getCity()))
-                        .setPictureUrl(pictureService.uploadImage(addRentalHousingDTO.getImage()))
-        ).getId();
+        Housing housing = modelMapper.map(addRentalHousingDTO, Housing.class);
+        housing.setType(HousingType.valueOf(addRentalHousingDTO.getType().toUpperCase()));
+        housing.setOwner(userService.findUser(travelNestUserDetails));
+        housing.setCity(cityRepository.findByName(addRentalHousingDTO.getCity()));
+        housing.setPictureUrl(pictureService.uploadImage(addRentalHousingDTO.getImage()));
+        return housingRepository.save(housing).getId();
     }
 
     @Override

@@ -21,8 +21,8 @@ public class RestConfig {
                 .build();
     }
 
-    @Bean("attractionsRestClient")
-    public RestClient attractionsRestClient(AttractionApiConfig attractionApiConfig,
+    @Bean("attractionRestClient")
+    public RestClient attractionRestClient(AttractionApiConfig attractionApiConfig,
                                             ClientHttpRequestInterceptor requestInterceptor){
         return RestClient.builder()
                 .baseUrl(attractionApiConfig.getBaseUrl())

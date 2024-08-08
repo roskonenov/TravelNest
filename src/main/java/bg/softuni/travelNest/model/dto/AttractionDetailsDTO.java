@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Getter
@@ -27,6 +29,12 @@ public class AttractionDetailsDTO {
     private String description;
 
     private boolean isPaid;
+
+    private LocalDate startDate;
+
+    private LocalDate endDate;
+
+    private LocalTime time;
 
     public AttractionDetailsDTO setCityName(String cityName) {
         this.cityName = cityName;

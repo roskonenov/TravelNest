@@ -30,8 +30,8 @@ public class RentController {
     public String rentHousing(@PathVariable("uuid") UUID propertyId,
                               @PathVariable("entityType") String entityType,
                               @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
-                              @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                              @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+                              @RequestParam("startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
+                              @RequestParam("endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate,
                               RentDTO rentDTO,
                               RedirectAttributes rAttr) {
 

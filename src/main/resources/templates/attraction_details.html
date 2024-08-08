@@ -62,11 +62,14 @@
             <p><strong>Address: </strong> <span th:text="*{address}"></span></p>
             <p th:if="${attractionDetails.isPaid() == true}"><strong>Price: </strong> <span th:text="*{price}"></span> lv.</p>
             <p><span th:text="*{description}"></span></p>
+            <th:block th:if="${entityType == 'event'}">
+                <div th:replace="~{fragments/event_details_fields::event_details_fields}"></div>
+            </th:block>
         </div>
     </div>
     <div class="row">
         <form th:method="post"
-              th:action="@{/attractions/details/{uuid} (uuid = ${uuid})}"
+              th:action="@{/{entityType}/details/{uuid} (uuid = ${uuid}, entityType = ${entityType})}"
               th:object="${tickets}"
               th:if="${attractionDetails.isPaid() == true}">
             <button class="details_button" id="buyButton">Buy ticket</button>
@@ -81,7 +84,7 @@
             </div>
         </form>
         <form th:method="delete"
-              th:action="@{/{entityType}/details/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
+              th:action="@{/{entityType}/details/{uuid} (uuid= ${uuid}, entityType = ${entityType})}">
             <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
             </button>
         </form>

@@ -23,7 +23,7 @@
     <!-- fevicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"/>
     <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <!-- fonts -->
@@ -32,6 +32,8 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <body>
 <!-- header top section start -->
@@ -43,8 +45,8 @@
 </div>
 <!-- header section end -->
 <div class="add_property_background container mt-5">
-    <h1 th:unless="${entityType == 'attractions'}" class="add_property mb-4">Add Rental Property</h1>
-    <h1 th:if="${entityType == 'attractions'}" class="add_property mb-4">Add Attraction</h1>
+    <h1 th:unless="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4">Add Rental Property</h1>
+    <h1 th:if="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4">Add Attraction</h1>
     <div class="row">
         <form th:method="post"
               th:action="@{${action}}"
@@ -87,11 +89,14 @@
                        name="price" required>
                 <small th:errors="*{price}" class="invalid-feedback danger">Price error message!</small>
             </div>
-            <th:block th:if="${entityType == 'attractions'}">
-                <div th:if="${entityType == 'attractions'}" th:replace="~{fragments/attraction_fields::attraction_fields}"></div>
+            <th:block th:if="${entityType == 'attraction' or entityType == 'event' }">
+                <div th:if="${entityType == 'attraction'}" th:replace="~{fragments/attraction_fields::attraction_fields}"></div>
             </th:block>
             <th:block th:if="${entityType == 'housing'}">
                 <div th:if="${entityType == 'housing'}" th:replace="~{fragments/housig_fields::housing_fields}"></div>
+            </th:block>
+            <th:block th:if="${entityType == 'event'}">
+                <div th:if="${entityType == 'event'}" th:replace="~{fragments/event_fields::event_fields}"></div>
             </th:block>
             <div class="add_property_field form-group">
                 <label th:for="image">Upload Image</label>
@@ -114,8 +119,11 @@
                 <img th:if="${entityType == 'car'}"
                      th:src="'https://cdn.pixabay.com/photo/2018/02/02/17/28/car-keys-3125905_1280.jpg'" width="500"
                      height="500" alt="add_rent_property image">
-                <img th:if="${entityType == 'attractions'}"
+                <img th:if="${entityType == 'attraction'}"
                      th:src="'https://cdn.pixabay.com/photo/2015/11/06/11/35/alexander-1026303_1280.jpg'" width="500"
+                     height="500" alt="add_rent_property image">
+                <img th:if="${entityType == 'event'}"
+                     th:src="'https://cdn.pixabay.com/photo/2020/04/03/13/13/cinema-4998849_1280.png'" width="500"
                      height="500" alt="add_rent_property image">
             </div>
         </div>
@@ -136,5 +144,13 @@
 <script src="/js/bootstrap.min.js"></script>
 <!-- script js -->
 <script src="/js/script.js"></script>
+
+<script src="/js/datepicker.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </body>
 </html>

@@ -2005,6 +2005,10 @@ width: 400px;
     border-color: #5a5959; !important;
 }
 
+.add_rent_property, #img{
+    padding-top: 120px;
+}
+
 .add_picture{
     border-color: #fd7e14;
     margin: 10px 0 10px 0;
@@ -2015,6 +2019,7 @@ width: 400px;
     align-items: stretch;
     flex-direction: row-reverse;
     justify-content: space-between;
+
 }
 
 .image-upload-error, .invalid-feedback{
@@ -2171,8 +2176,8 @@ width: 400px;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
+    width: 30%;
+    max-width: 400px;
 }
 .close {
     color: #fd7e14;

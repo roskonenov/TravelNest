@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -35,4 +37,10 @@ public class AddAttractionDTO {
 
     @NotBlank(message = "{attraction.description.not.empty}")
     private String description;
+
+    private LocalDate startDate;
+
+    private LocalDate endDate;
+
+    private LocalTime time;
 }

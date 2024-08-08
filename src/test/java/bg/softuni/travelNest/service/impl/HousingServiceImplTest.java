@@ -86,6 +86,9 @@ class HousingServiceImplTest {
     @Mock
     private UserRepository mockUserRepository;
 
+    @Mock
+    private RoleRepository roleRepository;
+
     @Captor
     private ArgumentCaptor<Housing> housingArgumentCaptor;
 
@@ -96,7 +99,8 @@ class HousingServiceImplTest {
     void setUp() {
         userService = new UserServiceImpl(
                 mockUserRepository,
-                Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8()
+                Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8(),
+                roleRepository
         );
 
         toTest = new HousingServiceImpl(

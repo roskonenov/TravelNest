@@ -12,7 +12,7 @@ public interface AttractionService {
 
     List<String> getAttractionCities();
 
-    List<AttractionDetailsDTO> getAllAttractions();
+    List<AttractionDetailsDTO> getAllAttractions(String attractionType);
 
     AttractionDetailsDTO getAttractionById(UUID attractionId);
 
@@ -20,7 +20,7 @@ public interface AttractionService {
 
     void buyTickets(TicketDTO tickets, UUID attractionId);
 
-    UUID add(AddAttractionDTO addAttractionDTO) throws IOException;
+    UUID add(AddAttractionDTO addAttractionDTO, String attractionType) throws IOException;
 
     void deleteById(UUID attractionId);
 }

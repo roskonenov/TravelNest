@@ -2,7 +2,10 @@ package bg.softuni.travelNest.service.impl;
 
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.RegisterDto;
+import bg.softuni.travelNest.model.entity.Role;
 import bg.softuni.travelNest.model.entity.User;
+import bg.softuni.travelNest.model.enums.RoleEnum;
+import bg.softuni.travelNest.repository.RoleRepository;
 import bg.softuni.travelNest.repository.UserRepository;
 import bg.softuni.travelNest.service.TravelNestUserDetails;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,9 +29,13 @@ class UserServiceImplTest {
     private final static String USERNAME = "testUsername";
     private final static String PASSWORD = "testPassword";
     private final static String EMAIL = "test@email.com";
+    private final static Role ROLE = new Role(RoleEnum.USER);
 
     @Mock
     private UserRepository mockUserRepository;
+
+    @Mock
+    private RoleRepository mockRoleRepository;
 
     @Mock
     private PasswordEncoder mockPasswordEncoder;
@@ -63,6 +70,8 @@ class UserServiceImplTest {
                 .thenReturn(1L);
         when(mockPasswordEncoder.encode(PASSWORD))
                 .thenReturn(PASSWORD + PASSWORD);
+        when(mockRoleRepository.findByRole(ROLE.getRole()))
+                .thenReturn(ROLE);
 
         assertTrue(mockUserService.register(registerDto));
         verify(mockUserRepository, times(1)).saveAndFlush(any(User.class));

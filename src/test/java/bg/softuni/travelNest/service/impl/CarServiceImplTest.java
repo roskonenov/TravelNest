@@ -12,9 +12,7 @@ import bg.softuni.travelNest.model.entity.commentEntity.CarComment;
 import bg.softuni.travelNest.model.enums.City;
 import bg.softuni.travelNest.model.enums.Engine;
 import bg.softuni.travelNest.repository.*;
-import bg.softuni.travelNest.service.PictureService;
 import bg.softuni.travelNest.service.TravelNestUserDetails;
-import bg.softuni.travelNest.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -95,12 +93,16 @@ class CarServiceImplTest {
     @Mock
     private UserRepository mockUserRepository;
 
+    @Mock
+    private RoleRepository roleRepository;
+
     @BeforeEach
     void setUp() {
 
         userService = new UserServiceImpl(
                 mockUserRepository,
-                Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8()
+                Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8(),
+                roleRepository
         );
 
         toTest = new CarServiceImpl(

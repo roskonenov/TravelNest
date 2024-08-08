@@ -45,15 +45,13 @@ public class CarServiceImpl implements PropertyService {
 
     @Override
     public UUID add(Object addDTO, TravelNestUserDetails travelNestUserDetails) throws IOException {
-        if (!(addDTO instanceof AddRentalCarDTO addRentalCarDTO)) {
-            return null;
-        }
-        return carRepository.save(
-                (Car)  modelMapper.map(addRentalCarDTO, Car.class)
-                        .setOwner(userService.findUser(travelNestUserDetails))
-                        .setCity(cityRepository.findByName(addRentalCarDTO.getCity()))
-                        .setPictureUrl(pictureService.uploadImage(addRentalCarDTO.getImage()))
-        ).getId();
+        if (!(addDTO instanceof AddRentalCarDTO addRentalCarDTO)) return null;
+
+        Car car = modelMapper.map(addRentalCarDTO, Car.class);
+        car.setOwner(userService.findUser(travelNestUserDetails));
+        car.setCity(cityRepository.findByName(addRentalCarDTO.getCity()));
+        car.setPictureUrl(pictureService.uploadImage(addRentalCarDTO.getImage()));
+        return carRepository.save(car).getId();
     }
 
     @Override

@@ -6,6 +6,7 @@ import bg.softuni.travelNest.model.dto.TicketDTO;
 import bg.softuni.travelNest.service.AttractionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -15,47 +16,49 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/attractions")
 public class AttractionController {
 
     private final AttractionService attractionService;
 
     @ModelAttribute("cities")
-    public List<String> showCities(){
-       return attractionService.getAttractionCities();
+    public List<String> showCities() {
+        return attractionService.getAttractionCities();
     }
 
     @ModelAttribute("tickets")
-    public TicketDTO ticketDTO(){
+    public TicketDTO ticketDTO() {
         return new TicketDTO();
     }
 
     @ModelAttribute("attractionDetails")
-    public AttractionDetailsDTO attractionDTO(){
+    public AttractionDetailsDTO attractionDTO() {
         return new AttractionDetailsDTO();
     }
 
     @ModelAttribute("addData")
-    public AddAttractionDTO addAttractionDTO(){
+    public AddAttractionDTO addAttractionDTO() {
         return new AddAttractionDTO();
     }
 
-    @GetMapping("/list")
-    public String showAttractions(Model model){
-        model.addAttribute("attractionList", attractionService.getAllAttractions());
-        model.addAttribute("refAddLink", "/attractions/add");
-        model.addAttribute("refDetailsLink", "/attractions/details/{uuid}");
+    @GetMapping("/{attraction-type}/list")
+    public String showAttractions(@PathVariable("attraction-type") String attractionType, Model model) {
+        model.addAttribute("attractionType", attractionType);
+        model.addAttribute("attractionList", attractionService.getAllAttractions(attractionType));
+        model.addAttribute("refAddLink", String.format("/%s/add", attractionType));
+        model.addAttribute("refDetailsLink", String.format("/%s/details/{uuid}", attractionType));
         return "attraction_list";
     }
 
-    @GetMapping("/details/{uuid}")
+    @GetMapping("/{attraction-type}/details/{uuid}")
     public String showAttractionDetails(Model model,
-                                        @PathVariable UUID uuid){
+                                        @PathVariable UUID uuid,
+                                        @PathVariable("attraction-type") String attractionType) {
 
         TicketDTO tickets = attractionService.getTickets(uuid);
         String message = String.format("You have %d bought tickets", tickets.getCount());
@@ -63,56 +66,60 @@ public class AttractionController {
         model.addAttribute("attractionDetails", attractionService.getAttractionById(uuid));
         model.addAttribute("tickets", tickets);
         model.addAttribute("message", message);
-        model.addAttribute("entityType", "attractions");
+        model.addAttribute("entityType", attractionType);
 
         return "attraction_details";
     }
 
-    @GetMapping("/add")
-    public String showAddAttraction(Model model){
-        model.addAttribute("entityType", "attractions");
-        model.addAttribute("refAddLink", "/attractions/add");
+    @GetMapping("/{attraction-type}/add")
+    public String showAddAttraction(Model model,
+                                    @PathVariable("attraction-type") String attractionType) {
+        model.addAttribute("entityType", attractionType);
+        model.addAttribute("refAddLink", String.format("/%s/add", attractionType));
         return "add_property";
     }
 
-    @PostMapping("/add")
-    public String addAttraction(@Valid AddAttractionDTO addAttractionDTO,
-                         BindingResult bindingResult,
+    @PostMapping("/{attraction-type}/add")
+    public String addAttraction(@PathVariable("attraction-type") String attractionType,
+                                @Valid AddAttractionDTO addAttractionDTO,
+                                BindingResult bindingResult,
                                 RedirectAttributes rAttr) throws IOException {
 
         if (bindingResult.hasErrors()) {
             rAttr.addFlashAttribute("addData", addAttractionDTO);
             rAttr.addFlashAttribute("org.springframework.validation.BindingResult.addData", bindingResult);
-            rAttr.addFlashAttribute("entityType", "attractions");
-            return "redirect:/attractions/add";
+            rAttr.addFlashAttribute("entityType", attractionType);
+            return String.format("redirect:/%s/add", attractionType);
         }
 
-        UUID uuid = attractionService.add(addAttractionDTO);
+        UUID uuid = attractionService.add(addAttractionDTO, attractionType);
 
-        return uuid != null ? "redirect:/attractions/details/" + uuid
-                : "redirect:/attractions/add";
+        return uuid != null ? String.format("redirect:/%s/details/%s", attractionType, uuid)
+                : String.format("redirect:/%s/add", attractionType);
     }
 
-    @PostMapping("/details/{uuid}")
-    public String buyTickets(@PathVariable("uuid") UUID attractionId,
+    @PostMapping("/{attraction-type}/details/{uuid}")
+    public String buyTickets(@PathVariable("attraction-type") String attractionType,
+                             @PathVariable("uuid") UUID attractionId,
                              @AuthenticationPrincipal UserDetails userDetails,
                              @Valid TicketDTO tickets,
                              BindingResult bindingResult,
-                             RedirectAttributes rAttr){
+                             RedirectAttributes rAttr) {
 
         tickets.setUsername(userDetails.getUsername());
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             rAttr.addFlashAttribute("tickets", tickets);
             rAttr.addFlashAttribute("org.springframework.validation.BindingResult.tickets", bindingResult);
-            return "redirect:/attractions/details/" + attractionId;
+            return String.format("redirect:/%s/details/%s", attractionType, attractionId);
         }
         attractionService.buyTickets(tickets, attractionId);
-        return "redirect:/attractions/details/" + attractionId;
+        return String.format("redirect:/%s/details/%s", attractionType, attractionId);
     }
 
-    @DeleteMapping("/details/{uuid}")
-    public String deleteAttraction(@PathVariable("uuid") UUID attractionId){
+    @DeleteMapping("/{attraction-type}/details/{uuid}")
+    public String deleteAttraction(@PathVariable("uuid") UUID attractionId,
+                                   @PathVariable("attraction-type") String attractionType) {
         attractionService.deleteById(attractionId);
-        return "redirect:/attractions/list";
+        return String.format("redirect:/%s/list", attractionType);
     }
 }

@@ -18,12 +18,13 @@
     <div class="create-box">
         <span th:if="${refAddLink == '/housing/add'}" class="place" th:text="#{city_filter_place_to_rent}">You have a place to rent? </span>
         <span th:if="${refAddLink == '/car/add'}" class="place" th:text="#{city_filter_car_to_rent}">You have a car to rent? </span>
-        <span th:if="${refAddLink == '/attractions/add'}" sec:authorize="hasRole('ADMIN')" class="place" th:text="#{city_filter_add_new_attraction}">Add new attraction? </span>
+        <span th:if="${refAddLink == '/attraction/add' or refAddLink == '/event/add'}" sec:authorize="hasRole('ADMIN')" class="place" th:text="#{city_filter_add_new_attraction}">Add new attraction? </span>
         <a th:href="@{${refAddLink}}"
            class="create text-black text-small"
            th:if="${refAddLink == '/housing/add' or
                     refAddLink == '/car/add' or
-                    refAddLink == '/attractions/add' and #authorization.expression('hasRole(''ADMIN'')')}"
+                    refAddLink == '/attraction/add' and #authorization.expression('hasRole(''ADMIN'')') or
+                    refAddLink == '/event/add' and #authorization.expression('hasRole(''ADMIN'')')}"
            th:text="#{city_filter_new_add}"> Create new ad</a>
     </div>
 </div>

@@ -20,10 +20,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class DatabaseInitTest {
 
-    private static final String PASSWORD = "testPassword";
-    private static final String CITY_NAME = "TEST_CITY_NAME";
-    private static final String USERNAME = "testUsername";
-
     @Mock
     private CityRepository mockCityRepository;
 

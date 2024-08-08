@@ -23,11 +23,11 @@ import java.util.UUID;
 @Service
 public class AttractionServiceImpl implements AttractionService {
 
-    private final @Qualifier("attractionsRestClient") RestClient restClient;
+    private final @Qualifier("attractionRestClient") RestClient restClient;
     private final ModelMapper modelMapper;
     private final PictureService pictureService;
 
-    public AttractionServiceImpl(@Qualifier("attractionsRestClient") RestClient restClient, ModelMapper modelMapper, PictureService pictureService) {
+    public AttractionServiceImpl(@Qualifier("attractionRestClient") RestClient restClient, ModelMapper modelMapper, PictureService pictureService) {
         this.restClient = restClient;
         this.modelMapper = modelMapper;
         this.pictureService = pictureService;
@@ -36,16 +36,16 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     public List<String> getAttractionCities() {
         return restClient.get()
-                .uri("/attractions/cities")
+                .uri("/attraction/cities")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
     }
 
     @Override
-    public List<AttractionDetailsDTO> getAllAttractions() {
+    public List<AttractionDetailsDTO> getAllAttractions(String attractionType) {
         return restClient.get()
-                .uri("/attractions/list")
+                .uri("/{attraction-type}/list", attractionType)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
@@ -54,7 +54,7 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     public AttractionDetailsDTO getAttractionById(UUID attractionId) {
         return restClient.get()
-                .uri("/attractions/details/{uuid}", attractionId)
+                .uri("/attraction/details/{uuid}", attractionId)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError,
@@ -67,7 +67,7 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     public TicketDTO getTickets(UUID uuid) {
         return restClient.get()
-                .uri("/attractions/tickets/{uuid}", uuid)
+                .uri("/attraction/tickets/{uuid}", uuid)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(TicketDTO.class);
@@ -76,16 +76,16 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     public void buyTickets(TicketDTO tickets, UUID attractionId) {
         restClient.post()
-                .uri("/attractions/details/{uuid}", attractionId)
+                .uri("/attraction/details/{uuid}", attractionId)
                 .body(tickets)
                 .retrieve();
     }
 
     @Override
-    public UUID add(AddAttractionDTO addAttractionDTO) throws IOException {
+    public UUID add(AddAttractionDTO addAttractionDTO, String attractionType) throws IOException {
         ;
         return Objects.requireNonNull(restClient.post()
-                        .uri("/attractions/add")
+                        .uri("/{attraction-type}/add", attractionType)
                         .accept(MediaType.APPLICATION_JSON)
                         .body(modelMapper.map(addAttractionDTO, AttractionDetailsDTO.class)
                                 .setCityName(addAttractionDTO.getCity())
@@ -99,7 +99,7 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     public void deleteById(UUID attractionId) {
         restClient.delete()
-                .uri("/attractions/delete/{uuid}", attractionId)
+                .uri("/attraction/delete/{uuid}", attractionId)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError,
                         ((request, response) -> {

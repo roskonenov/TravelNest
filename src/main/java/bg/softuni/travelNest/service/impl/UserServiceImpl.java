@@ -2,9 +2,9 @@ package bg.softuni.travelNest.service.impl;
 
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.RegisterDto;
-import bg.softuni.travelNest.model.entity.Role;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.enums.RoleEnum;
+import bg.softuni.travelNest.repository.RoleRepository;
 import bg.softuni.travelNest.repository.UserRepository;
 import bg.softuni.travelNest.service.TravelNestUserDetails;
 import bg.softuni.travelNest.service.UserService;
@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
     @Override
     public boolean register(RegisterDto registerDto) {
@@ -35,8 +36,8 @@ public class UserServiceImpl implements UserService {
                         .setPassword(passwordEncoder.encode(registerDto.getPassword()))
                         .setRoles(List.of(
                                 userRepository.count() == 0
-                                ?       new Role(RoleEnum.ADMIN)
-                                :       new Role(RoleEnum.USER)
+                                ?       roleRepository.findByRole(RoleEnum.ADMIN)
+                                :       roleRepository.findByRole(RoleEnum.USER)
                         ))
         );
         return true;
