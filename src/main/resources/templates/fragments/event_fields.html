@@ -7,17 +7,17 @@
 <body>
 <div th:fragment="event_fields">
     <div class="add_property_field">
-        <label th:for="startDate" id="startDateLabel">Start date:</label>
+        <label th:for="startDate" id="startDateLabel" th:text="#{event.details.fields.start.date}">Start date:</label>
         <input th:field="*{startDate}"
                class="add_property_box form-control" type="text" id="startDate" name="startDate" autocomplete="off" required value="-Choose date-">
     </div>
     <div class="add_property_field">
-        <label th:for="endDate" id="endDateLabel">End date:</label>
+        <label th:for="endDate" id="endDateLabel" th:text="#{event.details.fields.end.date}">End date:</label>
         <input th:field="*{endDate}"
                class="add_property_box form-control" type="text" id="endDate" name="endDate" autocomplete="off" required value="-Choose date-">
     </div>
     <div class="add_property_field form-group">
-        <label th:for="time" id="timeLabel">Time: </label>
+        <label th:for="time" id="timeLabel" th:text="#{event.details.fields.time}">Time: </label>
         <input th:field="*{time}"
                class="add_property_box form-control" type="text" id="time" name="time" autocomplete="off" required value="-Choose time-">
     </div>

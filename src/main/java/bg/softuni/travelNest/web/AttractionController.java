@@ -28,7 +28,10 @@ public class AttractionController {
 
     @ModelAttribute("cities")
     public List<String> showCities() {
-        return attractionService.getAttractionCities();
+        return attractionService.getAttractionCities()
+                .stream()
+                .map(city -> city.replaceAll("\\s+", "."))
+                .toList();
     }
 
     @ModelAttribute("tickets")

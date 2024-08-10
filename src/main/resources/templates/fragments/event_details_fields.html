@@ -6,9 +6,9 @@
 </head>
 <body>
 <div th:fragment="event_details_fields">
-    <p><strong>Start date: </strong> <span th:text="*{startDate}"></span></p>
-    <p><strong>End date: </strong> <span th:text="*{endDate}"></span></p>
-    <p><strong>Time: </strong> <span th:text="*{time}"></span></p>
+    <p><strong th:text="#{event.details.fields.start.date}">Start date: </strong> <span th:text="*{startDate}"></span></p>
+    <p><strong th:text="#{event.details.fields.end.date}">End date: </strong> <span th:text="*{endDate}"></span></p>
+    <p><strong th:text="#{event.details.fields.time}">Time: </strong> <span th:text="*{time}"></span></p>
 </div>
 </body>
 </html>

@@ -61,7 +61,7 @@
                             th:field="*{city}"
                             th:each="city : ${cities}"
                             th:value="${city}"
-                            th:text="${city}">City
+                            th:text="#{|city.filter.${city}|}">City
                     </option>
                 </select>
                 <small th:errors="*{city}" class="invalid-feedback danger">Invalid City!</small>

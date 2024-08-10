@@ -35,7 +35,7 @@ public class CarController {
     @ModelAttribute("cities")
     public List<String> cities() {
         return Arrays.stream(City.values())
-                .map(City::toString)
+                .map(city -> city.toString().replaceAll("\\s+", "."))
                 .toList();
     }
 

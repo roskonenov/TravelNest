@@ -12,7 +12,7 @@
         <option value="all" th:text="#{city_filter_all_cities}">All Cities</option>
         <option th:each="city : ${cities}"
                 th:value="${city}"
-                th:text="${city}">
+                th:text="#{|city.filter.${city}|}">
         </option>
     </select>
     <div class="create-box">

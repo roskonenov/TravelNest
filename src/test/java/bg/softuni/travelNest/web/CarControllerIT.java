@@ -20,6 +20,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -111,6 +112,7 @@ class CarControllerIT {
     }
 
     @Test
+    @Transactional
     void addCar() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
                 "image",

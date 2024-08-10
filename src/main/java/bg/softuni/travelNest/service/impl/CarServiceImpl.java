@@ -49,9 +49,9 @@ public class CarServiceImpl implements PropertyService {
 
         Car car = modelMapper.map(addRentalCarDTO, Car.class);
         car.setOwner(userService.findUser(travelNestUserDetails));
-        car.setCity(cityRepository.findByName(addRentalCarDTO.getCity()));
+        car.setCity(cityRepository.findByName(addRentalCarDTO.getCity().replaceAll("\\.", " ")));
         car.setPictureUrl(pictureService.uploadImage(addRentalCarDTO.getImage()));
-        return carRepository.save(car).getId();
+        return carRepository.saveAndFlush(car).getId();
     }
 
     @Override

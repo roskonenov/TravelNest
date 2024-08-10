@@ -7,6 +7,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
@@ -38,8 +39,10 @@ public class AddAttractionDTO {
     @NotBlank(message = "{attraction.description.not.empty}")
     private String description;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate startDate;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate endDate;
 
     private LocalTime time;

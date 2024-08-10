@@ -88,7 +88,7 @@ public class AttractionServiceImpl implements AttractionService {
                         .uri("/{attraction-type}/add", attractionType)
                         .accept(MediaType.APPLICATION_JSON)
                         .body(modelMapper.map(addAttractionDTO, AttractionDetailsDTO.class)
-                                .setCityName(addAttractionDTO.getCity())
+                                .setCityName(addAttractionDTO.getCity().replaceAll("\\.", " "))
                                 .setPaid(!addAttractionDTO.getPrice().equals(BigDecimal.ZERO))
                                 .setPictureUrl(pictureService.uploadImage(addAttractionDTO.getImage())))
                         .retrieve()

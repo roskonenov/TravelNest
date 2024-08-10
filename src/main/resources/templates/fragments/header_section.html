@@ -18,26 +18,26 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/}"
-                           th:classappend="${activeLink == 'index'}? 'active'">Home</a>
+                           th:classappend="${activeLink == 'index'}? 'active'" th:text="#{header.section.home}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/services}"
-                           th:classappend="${activeLink == 'services'}? 'active'">Services</a>
+                           th:classappend="${activeLink == 'services'}? 'active'" th:text="#{header.section.services}">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/about}"
-                           th:classappend="${activeLink == 'about'}? 'active'">About</a>
+                           th:classappend="${activeLink == 'about'}? 'active'" th:text="#{header.section.about}">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/contact}"
-                           th:classappend="${activeLink == 'contact'}? 'active'">Contact Us</a>
+                           th:classappend="${activeLink == 'contact'}? 'active'" th:text="#{header.section.contacts}">Contact Us</a>
                     </li>
                 </ul>
                 <section class="form-inline my-2 my-lg-0">
                     <div class="login_text">
                         <ul>
                             <li sec:authorize="isAnonymous()">
-                                <a th:href="@{/users/login}">Login</a>
+                                <a th:href="@{/users/login}" th:text="#{header.section.login}">Login</a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
                                 <a th:href="@{/my-account}">
@@ -46,9 +46,8 @@
                                 </a>
                             </li>
                             <li th:if="${activeLink == 'index'}">
-                                <a th:href="@{/my-account}" class="text-center">User:
-                                    <th:block th:text="${username}"></th:block>
-                                    !
+                                <a th:href="@{/my-account}" class="text-center"
+                                   th:text="#{header.section.user} + ' ' + ${username} + '!'">User:
                                 </a>
                             </li>
                         </ul>
@@ -57,15 +56,15 @@
                           th:method="post"
                           th:action="@{/users/logout}"
                           sec:authorize="isAuthenticated()">
-                            <input class="btn" type="submit" value="Logout"/>
+                            <input class="btn" type="submit" th:value="#{header.section.logout}"/>
                     </form>
                     <div class="quote_btn"
                          sec:authorize="isAnonymous()">
-                        <a th:href="@{/users/register}">Register</a>
+                        <a th:href="@{/users/register}" th:text="#{header.section.register}">Register</a>
                     </div>
                     <div class="nav-item language" >
                         <form th:method="get">
-                            <label class="text-black" for="lang">Language</label>
+                            <label class="text-black" for="lang" th:text="#{header.section.language}">Language</label>
                             <select id="lang" name="lang" onchange="this.form.submit()">
                                 <option value="bg_BG" th:selected="${#locale.toString() == 'bg_BG'}">Български</option>
                                 <option value="en_US" th:selected="${#locale.toString() == 'en_US'}">English</option>

@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.*;
 import bg.softuni.travelNest.model.entity.Housing;
@@ -37,6 +38,7 @@ public class HousingServiceImpl implements PropertyService {
     private final CityRepository cityRepository;
     private final CommentRepository commentRepository;
     private final RentRepository rentRepository;
+    private final Messages messages;
 
 
     @Override
@@ -48,7 +50,7 @@ public class HousingServiceImpl implements PropertyService {
         Housing housing = modelMapper.map(addRentalHousingDTO, Housing.class);
         housing.setType(HousingType.valueOf(addRentalHousingDTO.getType().toUpperCase()));
         housing.setOwner(userService.findUser(travelNestUserDetails));
-        housing.setCity(cityRepository.findByName(addRentalHousingDTO.getCity()));
+        housing.setCity(cityRepository.findByName(addRentalHousingDTO.getCity().replaceAll("\\.", " ")));
         housing.setPictureUrl(pictureService.uploadImage(addRentalHousingDTO.getImage()));
         return housingRepository.save(housing).getId();
     }
@@ -76,8 +78,8 @@ public class HousingServiceImpl implements PropertyService {
                 .stream()
                 .map(housingRental -> {
                     PropertyDTO map = modelMapper.map(housingRental, PropertyDTO.class);
-                    map.setCity(housingRental.getCity().getName());
-                    map.setTitle(getTitle(housingRental));
+                    map.setCity(housingRental.getCity().getName().replaceAll("\\s+", "."));
+                    map.setTitle(getTitle(housingRental, messages));
                     return map;
                 }).toList();
     }
@@ -126,16 +128,20 @@ public class HousingServiceImpl implements PropertyService {
                 .map(housing -> {
                     PropertyDTO map = modelMapper.map(housing, PropertyDTO.class);
                     map.setCity(housing.getCity().getName());
-                    map.setTitle(getTitle(housing));
+                    map.setTitle(getTitle(housing, messages));
                     return map;
                 })
                 .toList();
     }
 
-    private static String getTitle(Housing housing) {
+    private static String getTitle(Housing housing, Messages messages) {
+
         return String.format("%s %d %s",
-                housing.getType().toString().toLowerCase(),
+                messages.get(String.format("housing.fields.%s",
+                        housing.getType().toString())),
                 housing.getRooms(),
-                housing.getRooms() > 1 ? "rooms" : "room");
+                housing.getRooms() > 1 ?
+                        messages.get("housing.fields.many.rooms") :
+                        messages.get("housing.fields.one.room"));
     }
 }

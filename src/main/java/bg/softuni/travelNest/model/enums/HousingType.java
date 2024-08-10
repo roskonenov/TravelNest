@@ -3,7 +3,7 @@ package bg.softuni.travelNest.model.enums;
 import java.util.Arrays;
 
 public enum HousingType {
-    HOUSE, APARTMENT, PENTHOUSE;
+    HOUSE, APARTMENT, PENTHOUSE, ATELIER, STUDIO;
 
     @Override
     public String toString() {

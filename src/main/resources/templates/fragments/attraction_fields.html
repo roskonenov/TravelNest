@@ -7,14 +7,14 @@
 <body>
 <div th:fragment="attraction_fields">
     <div class="add_property_field form-group">
-        <label th:for="title">Title</label>
+        <label th:for="title" th:text="#{attraction.fields.title}">Title</label>
         <input th:field="*{title}"
                th:errorclass="is-invalid"
                type="text" class="add_property_box form-control" id="title" name="title" required>
         <small th:errors="*{title}" class="invalid-feedback danger">Title error message!</small>
     </div>
     <div class="add_property_field form-group">
-        <label th:for="description">Description</label>
+        <label th:for="description" th:text="#{attraction.fields.description}">Description</label>
         <input th:field="*{description}"
                th:errorclass="is-invalid"
                type="text" class="add_property_box form-control" id="description" name="description" required>
