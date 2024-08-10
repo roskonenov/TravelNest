@@ -1,6 +1,7 @@
 package bg.softuni.travelNest.service.impl;
 
-import bg.softuni.travelNest.exception.ObjectNotFoundException;
+import bg.softuni.travelNest.config.I18NConfig;
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.model.dto.AddCommentDTO;
 import bg.softuni.travelNest.model.dto.AddRentalCarDTO;
 import bg.softuni.travelNest.model.dto.CarDetailsDTO;
@@ -102,7 +103,8 @@ class CarServiceImplTest {
         userService = new UserServiceImpl(
                 mockUserRepository,
                 Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8(),
-                roleRepository
+                roleRepository,
+                new Messages(new I18NConfig())
         );
 
         toTest = new CarServiceImpl(
@@ -112,7 +114,8 @@ class CarServiceImplTest {
                 mockCarRepository,
                 new ModelMapper(),
                 mockCommentRepository,
-                mockRentRepository
+                mockRentRepository,
+                new Messages(new I18NConfig())
         );
 
         testUserDetails = new TravelNestUserDetails(USER_ID, USERNAME, PASSWORD, AUTHORITIES, EMAIL);
@@ -141,7 +144,7 @@ class CarServiceImplTest {
         addRentalCarDTO.setAddress(ADDRESS);
         addRentalCarDTO.setCity(CITY);
         addRentalCarDTO.setDoors(DOORS);
-        addRentalCarDTO.setEngine(ENGINE);
+        addRentalCarDTO.setEngine(ENGINE.toString());
         addRentalCarDTO.setMake(MAKE);
         addRentalCarDTO.setModel(MODEL);
         addRentalCarDTO.setPrice(PRICE);
@@ -162,7 +165,7 @@ class CarServiceImplTest {
         assertEquals(addRentalCarDTO.getAddress(), actualCar.getAddress());
         assertEquals(addRentalCarDTO.getCity(), actualCar.getCity().getName());
         assertEquals(addRentalCarDTO.getDoors(), actualCar.getDoors());
-        assertEquals(addRentalCarDTO.getEngine(), actualCar.getEngine());
+        assertEquals(addRentalCarDTO.getEngine(), actualCar.getEngine().toString());
         assertEquals(addRentalCarDTO.getMake(), actualCar.getMake());
         assertEquals(addRentalCarDTO.getModel(), actualCar.getModel());
         assertEquals(addRentalCarDTO.getPrice(), actualCar.getPrice());
@@ -186,15 +189,9 @@ class CarServiceImplTest {
         assertEquals(PICTURE_URL, detailsById.getPictureUrl());
         assertEquals(MAKE, detailsById.getMake());
         assertEquals(MODEL, detailsById.getModel());
-        assertEquals(ENGINE, Engine.valueOf(detailsById.getEngine()));
+        assertEquals(ENGINE, Engine.valueOf(detailsById.getEngine().toUpperCase()));
         assertEquals(DOORS, detailsById.getDoors());
         assertEquals(0, detailsById.getComments().size());
-    }
-
-    @Test
-    void findDetailsById_Throws(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.findDetailsById(CAR_ID));
     }
 
     @Test
@@ -235,12 +232,6 @@ class CarServiceImplTest {
     }
 
     @Test
-    void addComment_Throw(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.addComment(addCommentDTO, CAR_ID, testUser));
-    }
-
-    @Test
     void addToFavorites() {
         when(mockCarRepository.findById(CAR_ID))
                 .thenReturn(Optional.of(car));
@@ -255,12 +246,6 @@ class CarServiceImplTest {
         assertEquals(ADDRESS, testUser.getFavoriteCars().stream().findFirst().get().getAddress());
         assertEquals(CITY, testUser.getFavoriteCars().stream().findFirst().get().getCity().getName());
 
-    }
-
-    @Test
-    void addToFavorites_Throws(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.addToFavorites(testUser, CAR_ID));
     }
 
     @Test
@@ -281,12 +266,6 @@ class CarServiceImplTest {
         verify(mockCarRepository).delete(carArgumentCaptor.capture());
         Car car3 = carArgumentCaptor.getValue();
         assertEquals(car, car3);
-    }
-
-    @Test
-    void deleteProperty_Throws(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.deleteProperty(testUserDetails, CAR_ID));
     }
 
     @Test

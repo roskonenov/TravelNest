@@ -3,17 +3,13 @@ package bg.softuni.travelNest.service.impl;
 import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.AddCommentDTO;
-import bg.softuni.travelNest.model.dto.CarDetailsDTO;
 import bg.softuni.travelNest.model.dto.HousingDetailsDTO;
 import bg.softuni.travelNest.model.dto.PropertyDTO;
-import bg.softuni.travelNest.model.entity.Car;
 import bg.softuni.travelNest.model.entity.CityEntity;
 import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
-import bg.softuni.travelNest.model.entity.commentEntity.CarComment;
 import bg.softuni.travelNest.model.entity.commentEntity.HousingComment;
 import bg.softuni.travelNest.model.enums.City;
-import bg.softuni.travelNest.model.enums.Engine;
 import bg.softuni.travelNest.model.enums.HousingType;
 import bg.softuni.travelNest.repository.*;
 import bg.softuni.travelNest.service.PictureService;
@@ -104,7 +100,8 @@ class HousingServiceImplTest {
         userService = new UserServiceImpl(
                 mockUserRepository,
                 Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8(),
-                roleRepository
+                roleRepository,
+                messages
         );
 
         toTest = new HousingServiceImpl(

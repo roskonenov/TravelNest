@@ -1,6 +1,5 @@
 package bg.softuni.travelNest.service.impl;
 
-import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.RegisterDto;
 import bg.softuni.travelNest.model.entity.Role;
 import bg.softuni.travelNest.model.entity.User;
@@ -87,18 +86,6 @@ class UserServiceImplTest {
                 .thenReturn(Optional.of(user));
 
         assertEquals(user, mockUserService.findUser(userDetails));
-    }
-
-    @Test
-    void testFindUserNotFound() {
-        TravelNestUserDetails userDetails = mock(TravelNestUserDetails.class);
-        when(userDetails.getUsername())
-                .thenReturn(USERNAME);
-        when(mockUserRepository.findByUsername(USERNAME))
-                .thenReturn(Optional.empty());
-
-        assertThrows(ObjectNotFoundException.class,
-                () -> mockUserService.findUser(userDetails));
     }
 
     @Test

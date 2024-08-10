@@ -54,14 +54,39 @@
             <div class="row">
                 <div class="col-md-6">
                     <form th:action="@{/contact}"
-                          th:method="post">
+                          th:method="post"
+                          th:object="${messageData}">
                         <div class="mail_section_1">
-                            <input type="text" class="mail_text" th:placeholder="#{contacts.name}" name="Name">
-                            <input type="text" class="mail_text" th:placeholder="#{contacts.number}"
-                                   name="Phone Number">
-                            <input type="text" class="mail_text" th:placeholder="#{contacts.email}" name="Email">
-                            <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment"
-                                      name="Massage"></textarea>
+                            <div class="email-field form-group">
+                                <input th:field="*{name}"
+                                       th:errorclass="is-invalid"
+                                       type="text" class="mail_text" th:placeholder="#{contacts.name}" name="name">
+                                <th:block th:errors="*{name}" class="invalid-feedback danger">Name error
+                                    message!</th:block>
+                            </div>
+                            <div class="email-field form-group">
+                                <input th:field="*{number}"
+                                       th:errorclass="is-invalid"
+                                       type="text" class="mail_text" th:placeholder="#{contacts.number}"
+                                       name="number">
+                                <th:block th:errors="*{number}" class="invalid-feedback danger">Number error
+                                    message!</th:block>
+                            </div>
+                            <div class="email-field form-group">
+                                <input th:field="*{email}"
+                                       th:errorclass="is-invalid"
+                                       type="text" class="mail_text" th:placeholder="#{contacts.email}" name="email">
+                                <th:block th:errors="*{email}" class="invalid-feedback danger">Email error
+                                    message!</th:block>
+                            </div>
+                            <div class="email-field form-group">
+                            <textarea th:field="*{text}"
+                                      th:errorclass="is-invalid"
+                                      class="massage-bt" placeholder="Massage" rows="5" id="comment"
+                                      name="message"></textarea>
+                                <th:block th:errors="*{text}" class="invalid-feedback danger">Text error
+                                    message!</th:block>
+                            </div>
                             <button class="details_button send_bt"
                                     th:href="@{/contact}"
                                     th:text="#{contacts.send}">

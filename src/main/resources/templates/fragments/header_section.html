@@ -40,13 +40,13 @@
                                 <a th:href="@{/users/login}" th:text="#{header.section.login}">Login</a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a th:href="@{/my-account}">
+                                <a th:href="@{/}">
                                     <i class="fa fa-user" aria-hidden="true">
                                     </i>
                                 </a>
                             </li>
                             <li th:if="${activeLink == 'index'}">
-                                <a th:href="@{/my-account}" class="text-center"
+                                <a th:href="@{/}" class="text-center"
                                    th:text="#{header.section.user} + ' ' + ${username} + '!'">User:
                                 </a>
                             </li>

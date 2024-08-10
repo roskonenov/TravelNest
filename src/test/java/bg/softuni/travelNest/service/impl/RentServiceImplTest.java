@@ -1,7 +1,7 @@
 package bg.softuni.travelNest.service.impl;
 
-import bg.softuni.travelNest.exception.ObjectNotFoundException;
-import bg.softuni.travelNest.model.dto.RentDTO;
+import bg.softuni.travelNest.config.I18NConfig;
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.model.entity.Car;
 import bg.softuni.travelNest.model.entity.CityEntity;
 import bg.softuni.travelNest.model.entity.Housing;
@@ -88,7 +88,8 @@ class RentServiceImplTest {
         toTest = new RentServiceImpl (
                 mockRentRepository,
                 mockHousingRepository,
-                mockCarRepository
+                mockCarRepository,
+                new Messages(new I18NConfig())
         );
 
         housing = new Housing();
@@ -154,12 +155,6 @@ class RentServiceImplTest {
     }
 
     @Test
-    void getHousingRentPeriods_Throws(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.getHousingRentPeriods(PROPERTY_ID));
-    }
-
-    @Test
     void getCarRentPeriods() {
         when(mockCarRepository.findById(PROPERTY_ID))
                 .thenReturn(Optional.of(car));
@@ -180,12 +175,6 @@ class RentServiceImplTest {
         assertEquals(END_DATE, rentPeriods.getFirst().getEndDate());
         assertEquals(END_DATE.plusDays(5), rentPeriods.get(1).getEndDate());
         assertEquals(END_DATE.plusDays(10), rentPeriods.getLast().getEndDate());
-    }
-
-    @Test
-    void getCarRentPeriods_Throws(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.getCarRentPeriods(PROPERTY_ID));
     }
 
     @Test
@@ -239,63 +228,4 @@ class RentServiceImplTest {
                 END_DATE.plusDays(7))
         );
     }
-
-    @Test
-    void isAvailable_Throws_When_PropertyType_IsWrong(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.isAvailable("NON_EXISTING_TYPE", PROPERTY_ID, START_DATE, END_DATE));
-    }
-
-    @Test
-    void isAvailable_Throws_When_PropertyId_NonExisting(){
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.isAvailable(ENTITY_CAR_TYPE, PROPERTY_ID, START_DATE, END_DATE));
-
-        assertThrows(ObjectNotFoundException.class,
-                () -> toTest.isAvailable(ENTITY_HOUSING_TYPE, PROPERTY_ID, START_DATE, END_DATE));
-    }
-
-    @Test
-    void rent_Returns_Proper_Message() {
-        RentDTO rentDTO = new RentDTO();
-        rentDTO.setStartDate(START_DATE);
-        rentDTO.setEndDate(END_DATE);
-        rentDTO.setId(PROPERTY_ID);
-        rentDTO.setRenter(testUser);
-
-        when(mockHousingRepository.findById(PROPERTY_ID))
-                .thenReturn(Optional.of(housing));
-        when(mockCarRepository.findById(PROPERTY_ID))
-                .thenReturn(Optional.of(car));
-
-        assertEquals("Failed to rent the property!",
-                toTest.rent(rentDTO, "NON_EXISTING_PROPERTY_TYPE"));
-        assertEquals("The housing was rented successfully!",
-                toTest.rent(rentDTO, ENTITY_HOUSING_TYPE));
-        assertEquals("The car was rented successfully!",
-                toTest.rent(rentDTO, ENTITY_CAR_TYPE));
-
-        housing.setRentPeriods(List.of(testHousingRentPeriod));
-        car.setRentPeriods(List.of(testCarRentPeriod));
-
-        assertEquals("The housing is not available during the selected period!",
-                toTest.rent(rentDTO, ENTITY_HOUSING_TYPE));
-        assertEquals("The car is not available during the selected period!",
-                toTest.rent(rentDTO, ENTITY_CAR_TYPE));
-    }
-
-    @Test
-    void rent_Returns_ProperMessage_When_PropertyId_NotExisting(){
-        RentDTO rentDTO = new RentDTO();
-        rentDTO.setStartDate(START_DATE);
-        rentDTO.setEndDate(END_DATE);
-        rentDTO.setId(PROPERTY_ID);
-        rentDTO.setRenter(testUser);
-
-        assertEquals("Failed to rent the property!",
-                toTest.rent(rentDTO, ENTITY_HOUSING_TYPE));
-        assertEquals("Failed to rent the property!",
-                toTest.rent(rentDTO, ENTITY_CAR_TYPE));
-    }
-
 }

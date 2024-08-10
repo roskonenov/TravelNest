@@ -2397,3 +2397,8 @@ align-content: center;
 .modal-content .modal-title{
     text-align: center;
 }
+
+.email-field{
+    font-size: 15px;
+    color: red;
+}
