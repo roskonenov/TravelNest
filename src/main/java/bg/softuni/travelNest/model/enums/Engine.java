@@ -1,5 +1,14 @@
 package bg.softuni.travelNest.model.enums;
 
+import java.util.Arrays;
+
 public enum Engine {
-    PETROL, DIESEL, GAS, ELECTRIC, HYBRID
+    PETROL, DIESEL, GAS, ELECTRIC, HYBRID;
+
+    @Override
+    public String toString() {
+        return Arrays.toString(Arrays.stream(name().split("_"))
+                        .map(word -> word.charAt(0) + word.substring(1).toLowerCase()).toArray())
+                .replaceAll("[\\[\\],]", "");
+    }
 }

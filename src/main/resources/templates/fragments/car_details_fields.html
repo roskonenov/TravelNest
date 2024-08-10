@@ -8,7 +8,7 @@
 <div th:fragment="car_details_fields">
     <p><strong th:text="#{car_details_fields_make}">Make:</strong> <span th:text="*{make}"></span></p>
     <p><strong th:text="#{car_details_fields_model}">Model:</strong> <span th:text="*{model}"></span></p>
-    <p><strong th:text="#{car_details_fields_engine}">Engine:</strong> <span th:text="*{engine}"></span></p>
+    <p><strong th:text="#{car_details_fields_engine}">Engine:</strong> <span th:text="#{|car.engine.*{engine}|}"></span></p>
     <p><strong th:text="#{car_details_fields_doors}">Doors:</strong> <span th:text="*{doors}"></span></p>
 </div>
 </body>

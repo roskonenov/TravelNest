@@ -56,7 +56,7 @@
                 <label th:for="city">City</label>
                 <select class="add_property_box form-control"
                         th:errorclass="is-invalid" id="city" name="city">
-                    <option value="" disabled selected>-Select city-</option>
+                    <option value="" disabled selected th:text="#{add.property.select.city}">-Select city-</option>
                     <option
                             th:field="*{city}"
                             th:each="city : ${cities}"
@@ -70,7 +70,7 @@
                 <div th:replace="~{fragments/car_fields::car_fields}"></div>
             </th:block>
             <div class="add_property_field form-group">
-                <label th:for="address">Address</label>
+                <label th:for="address" th:text="#{add.property.address}">Address</label>
                 <input
                         th:field="*{address}"
                         th:errorclass="is-invalid"
@@ -83,7 +83,7 @@
                     message!</small>
             </div>
             <div class="add_property_field form-group">
-                <label th:for="price">Price</label>
+                <label th:for="price" th:text="#{add.property.price}">Price</label>
                 <input th:field="*{price}"
                        th:errorclass="is-invalid" type="number" class="add_property_box form-control" id="price"
                        name="price" required>
@@ -99,7 +99,7 @@
                 <div th:if="${entityType == 'event'}" th:replace="~{fragments/event_fields::event_fields}"></div>
             </th:block>
             <div class="add_property_field form-group">
-                <label th:for="image">Upload Image</label>
+                <label th:for="image" th:text="#{add.property.upload.image}">Upload Image</label>
                 <input th:field="*{image}"
                        th:errorclass="is-invalid" type="file" class="form-control-file" id="image" name="image"
                        accept="image/*" required>
@@ -109,7 +109,7 @@
                     message!
                 </th:block>
             </div>
-            <button type="submit" class="add_picture btn btn-primary">Submit</button>
+            <button type="submit" class="add_picture btn btn-primary" th:text="#{add.property.submit}">Submit</button>
         </form>
         <div class="col-md-6 padding_left_15">
             <div class="add_rent_property">

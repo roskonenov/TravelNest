@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.AddAttractionDTO;
 import bg.softuni.travelNest.model.dto.AttractionDetailsDTO;
@@ -26,11 +27,13 @@ public class AttractionServiceImpl implements AttractionService {
     private final @Qualifier("attractionRestClient") RestClient restClient;
     private final ModelMapper modelMapper;
     private final PictureService pictureService;
+    private final Messages messages;
 
-    public AttractionServiceImpl(@Qualifier("attractionRestClient") RestClient restClient, ModelMapper modelMapper, PictureService pictureService) {
+    public AttractionServiceImpl(@Qualifier("attractionRestClient") RestClient restClient, ModelMapper modelMapper, PictureService pictureService, Messages messages) {
         this.restClient = restClient;
         this.modelMapper = modelMapper;
         this.pictureService = pictureService;
+        this.messages = messages;
     }
 
     @Override
@@ -59,7 +62,7 @@ public class AttractionServiceImpl implements AttractionService {
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError,
                         ((request, response) -> {
-                            throw new ObjectNotFoundException("This attraction does not exist");
+                            throw new ObjectNotFoundException(messages.get("message.error.attraction"));
                         }))
                 .body(AttractionDetailsDTO.class);
     }
@@ -88,7 +91,7 @@ public class AttractionServiceImpl implements AttractionService {
                         .uri("/{attraction-type}/add", attractionType)
                         .accept(MediaType.APPLICATION_JSON)
                         .body(modelMapper.map(addAttractionDTO, AttractionDetailsDTO.class)
-                                .setCityName(addAttractionDTO.getCity().replaceAll("\\.", " "))
+                                .setCity(addAttractionDTO.getCity().replaceAll("\\.", " "))
                                 .setPaid(!addAttractionDTO.getPrice().equals(BigDecimal.ZERO))
                                 .setPictureUrl(pictureService.uploadImage(addAttractionDTO.getImage())))
                         .retrieve()
@@ -103,7 +106,7 @@ public class AttractionServiceImpl implements AttractionService {
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError,
                         ((request, response) -> {
-                            throw new ObjectNotFoundException("This attraction does not exist");
+                            throw new ObjectNotFoundException(messages.get("message.error.attraction"));
                         }));
 
     }

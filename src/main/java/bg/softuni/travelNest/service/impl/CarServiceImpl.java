@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.*;
 import bg.softuni.travelNest.model.entity.Car;
@@ -7,6 +8,7 @@ import bg.softuni.travelNest.model.entity.Housing;
 import bg.softuni.travelNest.model.entity.User;
 import bg.softuni.travelNest.model.entity.base.Comment;
 import bg.softuni.travelNest.model.entity.commentEntity.CarComment;
+import bg.softuni.travelNest.model.enums.Engine;
 import bg.softuni.travelNest.repository.CarRepository;
 import bg.softuni.travelNest.repository.CityRepository;
 import bg.softuni.travelNest.repository.CommentRepository;
@@ -41,6 +43,7 @@ public class CarServiceImpl implements PropertyService {
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
     private final RentRepository rentRepository;
+    private final Messages messages;
 
 
     @Override
@@ -51,6 +54,7 @@ public class CarServiceImpl implements PropertyService {
         car.setOwner(userService.findUser(travelNestUserDetails));
         car.setCity(cityRepository.findByName(addRentalCarDTO.getCity().replaceAll("\\.", " ")));
         car.setPictureUrl(pictureService.uploadImage(addRentalCarDTO.getImage()));
+        car.setEngine(Engine.valueOf(addRentalCarDTO.getEngine().toUpperCase()));
         return carRepository.saveAndFlush(car).getId();
     }
 
@@ -59,7 +63,7 @@ public class CarServiceImpl implements PropertyService {
         return carRepository.findById(id)
                 .map(carRental -> {
                     CarDetailsDTO map = modelMapper.map(carRental, CarDetailsDTO.class);
-                    map.setCity(carRental.getCity().getName());
+                    map.setCity(carRental.getCity().getName().replaceAll("\\s+", "."));
                     map.setComments(commentRepository.findByType(COMMENT_TYPE)
                             .stream()
                             .map(comment -> (CarComment) comment)
@@ -68,7 +72,7 @@ public class CarServiceImpl implements PropertyService {
                             .toList());
                     return map;
                 })
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.car")));
     }
 
     @Override
@@ -78,7 +82,7 @@ public class CarServiceImpl implements PropertyService {
                 .map(carRental -> {
                     PropertyDTO map = modelMapper.map(carRental, PropertyDTO.class);
                     map.setTitle(getTitle(carRental));
-                    map.setCity(carRental.getCity().getName());
+                    map.setCity(carRental.getCity().getName().replaceAll("\\s+", "."));
                     return map;
                 }).toList();
     }
@@ -86,7 +90,7 @@ public class CarServiceImpl implements PropertyService {
     @Override
     public void addComment(AddCommentDTO addCommentDTO, UUID carId, User user) {
         Car car = carRepository.findById(carId)
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.car")));
 
         commentRepository.saveAndFlush(new CarComment(addCommentDTO.getText(), user, car));
     }
@@ -95,7 +99,7 @@ public class CarServiceImpl implements PropertyService {
     @Transactional
     public void addToFavorites(User user, UUID carId) {
         user.getFavoriteCars().add(carRepository.findById(carId)
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found")));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.car"))));
     }
 
     @Override
@@ -104,7 +108,7 @@ public class CarServiceImpl implements PropertyService {
         if (!travelNestUserDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
 
         Car car = carRepository.findById(carId)
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.car")));
         commentRepository.deleteAllWhereCar(car);
         carRepository.deleteAllFromUsersFavoriteCarsWhereHousingId(carId);
         rentRepository.deleteAllWhereCar(car);

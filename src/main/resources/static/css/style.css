@@ -396,7 +396,7 @@ button {
 .quote_btn a,
 .logoutForm .btn,
 .add_picture,
-.housing-details .details_button{
+.housing-details .details_button, .send_bt{
     width: max-content;
     float: left;
     font-size: 16px;
@@ -411,7 +411,8 @@ button {
 .quote_btn a:hover,
 .logoutForm .btn:hover,
 .add_picture:hover,
-.housing-details .details_button:hover{
+.housing-details .details_button:hover,
+.send_bt:hover{
     background-color: #ffffff;
     color: #252525;
     border: 1px solid black;
@@ -2391,4 +2392,8 @@ align-content: center;
 
 .ticket_count label{
     margin: 0;
+}
+
+.modal-content .modal-title{
+    text-align: center;
 }

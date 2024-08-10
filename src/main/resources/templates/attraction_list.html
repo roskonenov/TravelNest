@@ -52,7 +52,7 @@
         <div class="attraction-card"
              th:each="attraction : ${attractionList}"
              th:object="${attraction}"
-             th:data-city="*{cityName}">
+             th:data-city="*{city}">
             <div class="button-overlay">
                 <img th:src="*{pictureUrl}" alt="Attraction Image">
                 <div class="btn_main">
@@ -60,11 +60,9 @@
                 </div>
             </div>
             <div class="card-content">
-                <div class="card-title" th:text="*{title}">Attraction Title 1</div>
-                <div class="card-city" th:text="*{cityName}">City 1</div>
-                <div class="card-description" th:text="*{description}">This is a brief description of the attraction. It
-                    provides a short
-                    overview of what visitors can expect.
+                <div class="card-title" th:text="*{title}">Attraction Title</div>
+                <div class="card-city" th:text="#{|city.filter.*{city}|}">City</div>
+                <div class="card-description" th:text="*{description}">
                 </div>
 
             </div>

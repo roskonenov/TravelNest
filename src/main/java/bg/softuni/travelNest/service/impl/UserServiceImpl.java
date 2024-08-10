@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.RegisterDto;
 import bg.softuni.travelNest.model.entity.User;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+    private final Messages messages;
 
     @Override
     public boolean register(RegisterDto registerDto) {
@@ -46,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUser(TravelNestUserDetails travelNestUserDetails) {
         return userRepository.findByUsername(travelNestUserDetails.getUsername())
-                .orElseThrow(() -> new ObjectNotFoundException("Current user not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.user.not.found")));
     }
 
     @Override

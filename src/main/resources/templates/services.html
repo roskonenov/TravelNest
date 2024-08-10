@@ -44,8 +44,8 @@
          <div class="container-fluid">
             <div class="row">
                <div class="col-sm-12">
-                  <h1 class="services_taital">Our Services</h1>
-                  <p class="services_text_1">You just have fun, we'll take care of the rest!</p>
+                  <h1 class="services_taital" th:text="#{services.services}">Our Services</h1>
+                  <p class="services_text_1" th:text="#{services.sub.title}">You just have fun, we'll take care of the rest!</p>
                </div>
             </div>
             <div class="services_section_2">
@@ -53,36 +53,36 @@
                   <div class="col-lg-3 col-sm-6">
                      <div class="box_main">
                         <div class="service_img"><img src="/images/icon-1.png"></div>
-                        <h4 class="development_text">Housing rental</h4>
-                        <p class="services_text">Find a place to stay.
+                        <h4 class="development_text" th:text="#{services.housing}">Housing rental</h4>
+                        <p class="services_text" th:text="#{services.housing.sub.title}">Find a place to stay.
                            Take a look at the rental offers according to the place you will be traveling to.</p>
-                        <div class="readmore_bt"><a th:href="@{/housing/rental}">See offers</a></div>
+                        <div class="readmore_bt"><a th:href="@{/housing/rental}" th:text="#{services.housing.see.offers}">See offers</a></div>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                      <div class="box_main">
                         <div class="service_img"><img src="/images/icon-2.png"></div>
-                        <h4 class="development_text">Rent a car</h4>
-                        <p class="services_text">Choose a suitable car for you, and we will deliver it to a place of your choice.</p>
-                        <div class="readmore_bt"><a th:href="@{/car/rental}">See cars</a></div>
+                        <h4 class="development_text" th:text="#{services.car}">Rent a car</h4>
+                        <p class="services_text" th:text="#{services.car.sub.title}">Choose a suitable car for you, and we will deliver it to a place of your choice.</p>
+                        <div class="readmore_bt"><a th:href="@{/car/rental}" th:text="#{services.car.see.offers}">See cars</a></div>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                      <div class="box_main">
                         <div class="service_img"><img src="/images/icon-3.png"></div>
-                        <h4 class="development_text">Explore</h4>
-                        <p class="services_text">Explore local attractions, museums, art galleries and more.
+                        <h4 class="development_text" th:text="#{services.attraction}">Explore</h4>
+                        <p class="services_text" th:text="#{services.attraction.sub.title}">Explore local attractions, museums, art galleries and more.
                            We will provide you with a ticket if needed.</p>
-                        <div class="readmore_bt"><a th:href="@{/attraction/list}">See suggestions</a></div>
+                        <div class="readmore_bt"><a th:href="@{/attraction/list}" th:text="#{services.attraction.see.offers}">See suggestions</a></div>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                      <div class="box_main">
                         <div class="service_img"><img src="/images/icon-4.png"></div>
-                        <h4 class="development_text">Have fun</h4>
-                        <p class="services_text">If you want to visit a cinema, theater, concert or other local event,
+                        <h4 class="development_text" th:text="#{services.event}">Have fun</h4>
+                        <p class="services_text" th:text="#{services.event.sub.title}">If you want to visit a cinema, theater, concert or other local event,
                            take a look at our suggestions.</p>
-                        <div class="readmore_bt"><a th:href="@{/event/list}">See events</a></div>
+                        <div class="readmore_bt"><a th:href="@{/event/list}" th:text="#{services.event.see.offers}">See events</a></div>
                      </div>
                   </div>
                </div>

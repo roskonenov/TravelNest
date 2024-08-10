@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.RentDTO;
 import bg.softuni.travelNest.model.entity.Car;
@@ -31,19 +32,20 @@ public class RentServiceImpl implements RentService {
     private final RentRepository rentRepository;
     private final HousingRepository housingRepository;
     private final CarRepository carRepository;
+    private final Messages messages;
 
     @Override
     public List<HousingRentPeriod> getHousingRentPeriods(UUID housingId) {
         return housingRepository.findById(housingId)
                 .map(Housing::getRentPeriods)
-                .orElseThrow(() -> new ObjectNotFoundException("We couldn't find this property"));
+                .orElse(new ArrayList<>());
     }
 
     @Override
     public List<CarRentPeriod> getCarRentPeriods(UUID propertyId) {
         return carRepository.findById(propertyId)
                 .map(Car::getRentPeriods)
-                .orElseThrow(() -> new ObjectNotFoundException("We couldn't find this property"));
+                .orElse(new ArrayList<>());
     }
 
     @Override
@@ -57,12 +59,12 @@ public class RentServiceImpl implements RentService {
                     .stream().noneMatch(period ->
                             (startDate.isBefore(period.getEndDate()) && endDate.isAfter(period.getStartDate())));
         }
-        throw new ObjectNotFoundException("Something went wrong!");
+        throw new ObjectNotFoundException(messages.get("message.error.wrong"));
     }
 
     @Override
     public String rent(RentDTO rentDTO, String propertyType) {
-        AtomicReference<String> message = new AtomicReference<>("Failed to rent the property!");
+        AtomicReference<String> message = new AtomicReference<>(messages.get("message.error.failed"));
 
         if ("housing".equals(propertyType)) {
              housingRepository.findById(rentDTO.getId())
@@ -70,7 +72,7 @@ public class RentServiceImpl implements RentService {
                         if (isAvailable(propertyType, rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
                             message.set(applyRent(rentDTO, housing, propertyType));
                         } else {
-                            message.set("The housing is not available during the selected period!");
+                            message.set(messages.get("message.housing.not.available"));
                         }
                     });
         }else if ("car".equals(propertyType)){
@@ -79,7 +81,7 @@ public class RentServiceImpl implements RentService {
                         if (isAvailable(propertyType, rentDTO.getId(), rentDTO.getStartDate(), rentDTO.getEndDate())) {
                             message.set(applyRent(rentDTO, car, propertyType));
                         } else {
-                            message.set("The car is not available during the selected period!");
+                            message.set(messages.get("message.car.not.available"));
                         }
                     });
         }
@@ -96,7 +98,7 @@ public class RentServiceImpl implements RentService {
                     rentDTO.getEndDate(),
                     (Housing) object));
 
-            return "The housing was rented successfully!";
+            return messages.get("message.housing.rented");
         } else {
             rentRepository.saveAndFlush(new CarRentPeriod(
                     rentDTO.getRenter().getId(),
@@ -104,7 +106,7 @@ public class RentServiceImpl implements RentService {
                     rentDTO.getEndDate(),
                     (Car) object));
 
-            return "The car was rented successfully!";
+            return messages.get("message.car.rented");
         }
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Error Page</title>
+    <title>Message Confirm</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -36,9 +36,9 @@
 <body>
 <div class="error-container">
     <div class="row">
-        <img src="https://cdn.pixabay.com/photo/2024/04/26/13/53/dinosaur-8721921_1280.png" alt="Friendly Dinosaur"
+        <img src="https://cdn.pixabay.com/photo/2012/04/01/12/58/e-mail-23349_1280.png" alt="Message"
              class="dinosaur">
-        <div class="error-message" th:text="${message}">Error message</div>
+        <div class="error-message" th:text="#{message.confirm}">Message confirm</div>
     </div>
     <a th:href="@{/}" class="home-link" th:text="#{message.confirm.go.home}">Go to Home Page</a>
 </div>

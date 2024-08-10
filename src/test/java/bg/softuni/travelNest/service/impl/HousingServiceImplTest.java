@@ -1,5 +1,6 @@
 package bg.softuni.travelNest.service.impl;
 
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.exception.ObjectNotFoundException;
 import bg.softuni.travelNest.model.dto.AddCommentDTO;
 import bg.softuni.travelNest.model.dto.CarDetailsDTO;
@@ -89,6 +90,9 @@ class HousingServiceImplTest {
     @Mock
     private RoleRepository roleRepository;
 
+    @Mock
+    private Messages messages;
+
     @Captor
     private ArgumentCaptor<Housing> housingArgumentCaptor;
 
@@ -110,7 +114,8 @@ class HousingServiceImplTest {
                 userService,
                 mockCityRepository,
                 mockCommentRepository,
-                mockRentRepository
+                mockRentRepository,
+                messages
         );
 
         testUserDetails = new TravelNestUserDetails(USER_ID, USERNAME, PASSWORD, AUTHORITIES, EMAIL);
@@ -164,6 +169,11 @@ class HousingServiceImplTest {
     void findAllAdds_Return_ListOf_PropertyDTO() {
         when(mockHousingRepository.findAll())
                 .thenReturn(List.of(housing, housing, housing));
+        when(messages.get("housing.fields." + HOUSING_TYPE))
+                .thenReturn(HOUSING_TYPE.toLowerCase());
+
+        when(messages.get("housing.fields.many.rooms"))
+                .thenReturn("rooms");
 
         List<PropertyDTO> allAdds = toTest.findAllAdds();
 
@@ -276,6 +286,11 @@ class HousingServiceImplTest {
     void findUserFavorites() {
         when(mockHousingRepository.findAllByUserFavorites(HOUSING_ID))
                 .thenReturn(Optional.of(List.of(housing, housing, housing)));
+        when(messages.get("housing.fields." + HOUSING_TYPE))
+                .thenReturn(HOUSING_TYPE.toLowerCase());
+
+        when(messages.get("housing.fields.many.rooms"))
+                .thenReturn("rooms");
 
         List<PropertyDTO> userFavorites = toTest.findUserFavorites(HOUSING_ID);
         assertEquals(3, userFavorites.size());

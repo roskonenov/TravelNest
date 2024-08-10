@@ -46,7 +46,7 @@
 <!-- header section end -->
 <div class="housing-details container"
      th:object="${propertyDetails}">
-    <h2>Property Details</h2>
+    <h2 th:text="#{property.details.title}">Property Details</h2>
     <div th:if="${message}">
         <p th:text="${message}" style="color: orange; font-size: 15px"></p>
     </div>
@@ -56,31 +56,36 @@
                  class="housing-details main_image">
         </div>
         <div class="housing-details details_section">
-            <p><strong>City: </strong> <span th:text="*{city}"></span></p>
-            <p><strong>Address: </strong> <span th:text="*{address}"></span></p>
+            <p><strong th:text="#{attraction.details.city}">City: </strong> <span
+                    th:text="#{|city.filter.*{city}|}"></span></p>
+            <p><strong th:text="#{attraction.details.address}">Address: </strong> <span th:text="*{address}"></span></p>
             <th:block th:if="${entityType == 'housing'}">
                 <div th:replace="~{fragments/housing_details_fields::housing_details_fields}"></div>
             </th:block>
             <th:block th:if="${entityType == 'car'}">
                 <div th:replace="~{fragments/car_details_fields::car_details_fields}"></div>
             </th:block>
-            <p><strong>Price: </strong> <span th:text="*{price}"></span>/day</p>
+            <p>
+                <strong th:text="#{attraction.details.price}">Price: </strong>
+                <span th:text="*{price}"></span>
+                <span th:text="#{property.details.day}">/day</span>
+                </p>
         </div>
     </div>
     <div class="row">
-        <button class="details_button" id="rentButton">Rent</button>
+        <button class="details_button" id="rentButton" th:text="#{property.details.rent}">Rent</button>
         <div id="rentModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Select Dates</h2>
+                <h2 class="modal-title" th:text="#{property.details.select.dates}">Select Dates</h2>
                 <form th:action="@{/{entityType}/rent/{uuid} (uuid= ${uuid}, entityType= ${entityType})}"
                       th:method="post">
-                    <h1>Unavailable Rent Periods</h1>
+                    <h1 th:text="#{property.details.unavailable.period}">Unavailable Rent Periods</h1>
                     <table class="rented_periods">
                         <thead>
                         <tr>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                            <th th:text="#{property.details.start.date}">Start Date</th>
+                            <th th:text="#{property.details.end.date}">End Date</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,19 +95,23 @@
                         </tr>
                         </tbody>
                     </table>
-                    <label for="startDate" id="startDateLabel">Start Date:</label>
-                    <input type="text" id="startDate" name="startDate" required value="-Choose date-">
+                    <label for="startDate" id="startDateLabel" th:text="#{property.details.start.date.label}">Start
+                        Date:</label>
+                    <input type="text" id="startDate" name="startDate" required
+                           th:value="#{property.details.choose.date}">
                     <br>
-                    <label for="endDate" id="endDateLabel">End Date: </label>
-                    <input type="text" id="endDate" name="endDate" required value="-Choose date-">
+                    <label for="endDate" id="endDateLabel" th:text="#{property.details.end.date.label}">End
+                        Date: </label>
+                    <input type="text" id="endDate" name="endDate" required th:value="#{property.details.choose.date}">
                     <br><br>
-                    <button type="submit" id="submitRentForm" disabled>Submit</button>
+                    <button type="submit" id="submitRentForm" disabled th:text="#{property.details.submit}">Submit
+                    </button>
                 </form>
             </div>
         </div>
         <form th:method="post"
               th:action="@{/{entityType}/add-to-favorites/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
-            <button class="details_button">Add to favorites
+            <button class="details_button" th:text="#{property.details.add.favorites}">Add to favorites
             </button>
             <th:block class="favorite-icon" th:if="${isFavorite}">
                 <i id="favorite" class="favorite mdi mdi-star" style="font-size: 52px; color: #fda417;"></i>
@@ -110,19 +119,22 @@
         </form>
         <form th:method="delete"
               th:action="@{/{entityType}/details/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
-            <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
+            <button class="details_button" sec:authorize="hasRole('ADMIN')" th:text="#{property.details.delete.add}">
+                Delete add
             </button>
         </form>
     </div>
     <article class="comment-section">
-        <h2>Comments</h2>
+        <h2 th:text="#{property.details.comments}">Comments</h2>
 
         <!-- Existing Comments -->
         <div class="comment_box container" id="comments">
             <div class="housing-details comment"
                  th:each="comment : *{comments}">
                 <div class="author" th:text="${comment.getUser().getUsername()}">Author Name</div>
-                <div class="comment_text" th:text="${comment.getText()}">Comment text goes here...</div>
+                <div class="comment_text" th:text="${comment.getText()}"
+                     th:placeholder="#{property.details.comments.placeholder}">Comment text goes here...
+                </div>
             </div>
         </div>
 
@@ -131,14 +143,14 @@
               th:action="@{/{entityType}/details/{uuid} (uuid=${uuid}, entityType= ${entityType})}"
               th:method="post"
               th:object="${commentData}">
-            <h3 class="table-title title">Add a Comment</h3>
+            <h3 class="table-title title" th:text="#{property.details.add.comment}">Add a Comment</h3>
             <th:block th:errors="*{text}" class="invalid-feedback danger">Error
                 message!
             </th:block>
             <div>
                 <textarea th:field="*{text}"
                           th:errorclass="is-invalid" id="comment" name="comment" rows="4" required></textarea>
-                <button type="submit">Submit</button>
+                <button type="submit" th:text="#{property.details.add.submit}">Submit</button>
             </div>
         </form>
     </article>

@@ -35,7 +35,7 @@ public class AddRentalCarDTO {
     private String model;
 
     @NotNull(message = "{property.engine.not.empty}")
-    private Engine engine;
+    private String engine;
 
     @NotNull(message = "{property.doors.not.empty}")
     @Positive(message = "{property.doors.positive}")

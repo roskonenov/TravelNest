@@ -60,7 +60,7 @@ public class HousingServiceImpl implements PropertyService {
         return housingRepository.findById(id)
                 .map(housingRental -> {
                     HousingDetailsDTO map = modelMapper.map(housingRental, HousingDetailsDTO.class);
-                    map.setCity(housingRental.getCity().getName());
+                    map.setCity(housingRental.getCity().getName().replaceAll("\\s+", "."));
                     map.setComments(commentRepository.findByType(COMMENT_TYPE)
                             .stream()
                             .map(comment -> (HousingComment) comment)
@@ -69,7 +69,7 @@ public class HousingServiceImpl implements PropertyService {
                             .toList());
                     return map;
                 })
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.housing")));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class HousingServiceImpl implements PropertyService {
     public void addComment(AddCommentDTO addCommentDTO, UUID housingId, User user) {
 
         Housing housing = housingRepository.findById(housingId)
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.housing")));
 
         commentRepository.saveAndFlush(new HousingComment(addCommentDTO.getText(), housing, user));
     }
@@ -97,7 +97,7 @@ public class HousingServiceImpl implements PropertyService {
     @Transactional
     public void addToFavorites(User user, UUID housingId) {
         user.getFavoriteHousings().add(housingRepository.findById(housingId)
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found")));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.housing"))));
     }
 
     @Override
@@ -106,7 +106,7 @@ public class HousingServiceImpl implements PropertyService {
         if (!travelNestUserDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) return;
 
         Housing housing = housingRepository.findById(housingId)
-                .orElseThrow(() -> new ObjectNotFoundException("Rental property not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.housing")));
         commentRepository.deleteAllWhereHousing(housing);
         housingRepository.deleteAllFromUsersFavoriteHousingsWhereHousingId(housingId);
         rentRepository.deleteAllWhereHousing(housing);

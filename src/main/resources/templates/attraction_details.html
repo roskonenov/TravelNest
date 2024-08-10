@@ -46,7 +46,7 @@
 <!-- header section end -->
 <div class="housing-details container"
      th:object="${attractionDetails}">
-    <h2 th:text="*{title}">Property Details</h2>
+    <h2 th:text="*{title}">Title</h2>
     <span th:if="*{isPaid() == true}">
     <div th:if="${message}">
         <p th:text="${message}" style="color: orange; font-size: 15px"></p>
@@ -58,10 +58,19 @@
                  class="housing-details main_image">
         </div>
         <div class="housing-details details_section">
-            <p><strong>City: </strong> <span th:text="*{cityName}"></span></p>
-            <p><strong>Address: </strong> <span th:text="*{address}"></span></p>
-            <p th:if="${attractionDetails.isPaid() == true}"><strong>Price: </strong> <span th:text="*{price}"></span> lv.</p>
-            <p><span th:text="*{description}"></span></p>
+            <p><strong th:text="#{attraction.details.city}">City: </strong>
+                <span th:text="#{|city.filter.*{city}|}"></span>
+            </p>
+            <p><strong th:text="#{attraction.details.address}">Address: </strong>
+                <span th:text="*{address}"></span>
+            </p>
+            <p th:if="${attractionDetails.isPaid() == true}">
+                <strong th:text="#{attraction.details.price}">Price: </strong>
+                <span th:text="*{price}"></span>
+                <strong th:text="#{attraction.details.bgn}"> lv.</strong>
+
+            </p>
+            <p><span th:text="*{description}">Description: </span></p>
             <th:block th:if="${entityType == 'event'}">
                 <div th:replace="~{fragments/event_details_fields::event_details_fields}"></div>
             </th:block>
@@ -72,10 +81,11 @@
               th:action="@{/{entityType}/details/{uuid} (uuid = ${uuid}, entityType = ${entityType})}"
               th:object="${tickets}"
               th:if="${attractionDetails.isPaid() == true}">
-            <button class="details_button" id="buyButton">Buy ticket</button>
+            <button class="details_button" id="buyButton"
+                    th:text="#{attraction.details.buy.ticket}">Buy ticket</button>
 
             <div class="add_property_field ticket_count form-group">
-                <label th:for="count">Count of tickets</label>
+                <label th:for="count" th:text="#{attraction.details.count.tickets}">Count of tickets</label>
                 <input th:field="*{count}"
                        th:errorclass="is-invalid"
                        type="number" class="add_property_box form-control" id="count" name="count" required>
@@ -85,7 +95,7 @@
         </form>
         <form th:method="delete"
               th:action="@{/{entityType}/details/{uuid} (uuid= ${uuid}, entityType = ${entityType})}">
-            <button class="details_button" sec:authorize="hasRole('ADMIN')">Delete add
+            <button class="details_button" sec:authorize="hasRole('ADMIN')" th:text="#{attraction.details.delete.add}">Delete add
             </button>
         </form>
     </div>

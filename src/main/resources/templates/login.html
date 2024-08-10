@@ -51,7 +51,7 @@
                     <!-- form card login -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="mb-0">Login</h3>
+                            <h3 class="mb-0" th:text="#{login.login}">Login</h3>
                         </div>
                         <div class="card-body">
                             <form id="formLogin"
@@ -60,42 +60,42 @@
 								  class="formLogin">
 								<div class="error"
 										  th:if="${showError}"
-								th:text="'Username or password incorrect!'"
+								th:text="#{login.error}"
 									 style="color: red; font-size: 15px">
 								</div>
                                 <div class="form-group">
-                                    <input th:for="username" class="form-control" id="username" name="username" placeholder="Username" type="text" required="">
+                                    <input th:for="username" class="form-control" id="username" name="username" th:placeholder="#{login.username}" type="text" required="">
 									<i class="mdi mdi-account"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input th:for="password" type="password" class="form-control"  placeholder="Password" id="password" name="password" required="">
+                                    <input th:for="password" type="password" class="form-control"  th:placeholder="#{login.password}" id="password" name="password" required="">
 									<i class="mdi mdi-onepassword"></i>
                                 </div>
 								<div class="row mb-3">
 									<div class="col-md-6">
 										<div class="checkbox checkbox-primary">
 											<input name="rememberMe" id="checkbox1" class="styled" type="checkbox">
-											<label for="checkbox1">
+											<label for="checkbox1" th:text="#{login.remember.me}">
 												Remember me
 											</label>
 										</div>
 									</div>
 									<div class="col-md-6 text-right">
-										<a href="#">forgot password?</a>
+										<a href="#" th:text="#{login.forgot.password}">forgot password?</a>
 									</div>
 								</div>
 								<div class="row mb-3">
-									<div class="col-lg-12 text-center"><button type="submit" class="btn btn-success btn-wd" id="btnLogin">Login</button></div>
+									<div class="col-lg-12 text-center"><button type="submit" class="btn btn-success btn-wd" id="btnLogin" th:text="#{login.login}">Login</button></div>
 								</div>
                             </form>
 							<div class="naw-text mb-3">
-								<h5>New to TravelNest?</h5>
+								<h5 th:text="#{login.new.member}">New to TravelNest?</h5>
 							</div>
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="create-box text-block text-center my-0">
-										<span class="text-small font-weight-semibold">Not a member ?</span>
-										<a th:href="@{/users/register}" class="text-black text-small">Create new account</a>
+										<span class="text-small font-weight-semibold" th:text="#{login.not.member}">Not a member ?</span>
+										<a th:href="@{/users/register}" class="text-black text-small" th:text="#{login.create.account}">Create new account</a>
 									</div>
 								</div>
 							</div>

@@ -29,7 +29,7 @@
                     th:field="*{engine}"
                     th:each="engine : ${engines}"
                     th:value="${engine}"
-                    th:text="${engine}">City
+                    th:text="#{|car.engine.${engine}|}">City
             </option>
         </select>
         <small th:errors="*{engine}" class="invalid-feedback danger">Invalid Engine Type!</small>

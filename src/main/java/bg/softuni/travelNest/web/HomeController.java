@@ -22,11 +22,6 @@ public class HomeController {
 
     private final Messages messages;
 
-    @GetMapping("/services")
-    public String getServices(){
-        return "services";
-    }
-
     @GetMapping("/")
     public String showHome(@AuthenticationPrincipal UserDetails userDetails, Model model){
         if (userDetails instanceof TravelNestUserDetails travelNestUserDetails) {
@@ -37,13 +32,13 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/contact")
-    public String contact(){
-        return "contact";
-    }
-
     @GetMapping("/about")
     public String showAbout(){
         return "about";
+    }
+
+    @GetMapping("/services")
+    public String getServices(){
+        return "services";
     }
 }

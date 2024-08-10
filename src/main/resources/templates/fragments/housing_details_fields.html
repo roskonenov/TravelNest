@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:fragment="housing_details_fields">
-    <p><strong th:text="#{housing.details.fields.type}">Type: </strong> <span th:text="*{type}"></span></p>
+    <p><strong th:text="#{housing.details.fields.type}">Type: </strong> <span th:text="#{|housing.fields.*{type}|}"></span></p>
     <p><strong th:text="#{housing.details.fields.floor}">Floor: </strong> <span th:text="*{floor}"></span></p>
     <p><strong th:text="#{housing.details.fields.rooms}">Rooms: </strong> <span th:text="*{rooms}"></span></p>
 </div>

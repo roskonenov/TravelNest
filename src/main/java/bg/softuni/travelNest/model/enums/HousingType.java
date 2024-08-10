@@ -10,6 +10,5 @@ public enum HousingType {
         return Arrays.toString(Arrays.stream(name().split("_"))
                         .map(word -> word.charAt(0) + word.substring(1).toLowerCase()).toArray())
                 .replaceAll("[\\[\\],]", "");
-
     }
 }
