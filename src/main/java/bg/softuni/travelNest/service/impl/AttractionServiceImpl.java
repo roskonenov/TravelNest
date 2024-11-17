@@ -86,7 +86,7 @@ public class AttractionServiceImpl implements AttractionService {
 
     @Override
     public UUID add(AddAttractionDTO addAttractionDTO, String attractionType) throws IOException {
-        ;
+
         return Objects.requireNonNull(restClient.post()
                         .uri("/{attraction-type}/add", attractionType)
                         .accept(MediaType.APPLICATION_JSON)

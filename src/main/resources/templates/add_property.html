@@ -45,8 +45,8 @@
 </div>
 <!-- header section end -->
 <div class="add_property_background container mt-5">
-    <h1 th:unless="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4">Add Rental Property</h1>
-    <h1 th:if="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4">Add Attraction</h1>
+    <h1 th:unless="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4" th:text="#{add.property.rental}">Add Rental Property</h1>
+    <h1 th:if="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4" th:text="#{add.property.attraction}">Add Attraction</h1>
     <div class="row">
         <form th:method="post"
               th:action="@{${action}}"
