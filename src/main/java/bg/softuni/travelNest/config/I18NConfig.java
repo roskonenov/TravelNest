@@ -18,7 +18,7 @@ public class I18NConfig {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
         source.setBasename("classpath:i18n/messages");
         source.setDefaultEncoding("UTF-8");
-        source.setDefaultLocale(Locale.of("bg_BG"));
+        source.setDefaultLocale(new Locale("bg_BG"));
         return source;
     }
 
