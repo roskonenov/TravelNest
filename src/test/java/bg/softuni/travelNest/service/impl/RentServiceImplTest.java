@@ -145,13 +145,13 @@ class RentServiceImplTest {
         rentPeriods = toTest.getHousingRentPeriods(PROPERTY_ID);
 
         assertFalse(rentPeriods.isEmpty());
-        assertInstanceOf(HousingRentPeriod.class, rentPeriods.getFirst());
-        assertEquals(START_DATE, rentPeriods.getFirst().getStartDate());
+        assertInstanceOf(HousingRentPeriod.class, rentPeriods.get(0));
+        assertEquals(START_DATE, rentPeriods.get(0).getStartDate());
         assertEquals(START_DATE.plusDays(5), rentPeriods.get(1).getStartDate());
-        assertEquals(START_DATE.plusDays(10), rentPeriods.getLast().getStartDate());
-        assertEquals(END_DATE, rentPeriods.getFirst().getEndDate());
+        assertEquals(START_DATE.plusDays(10), rentPeriods.get(2).getStartDate());
+        assertEquals(END_DATE, rentPeriods.get(0).getEndDate());
         assertEquals(END_DATE.plusDays(5), rentPeriods.get(1).getEndDate());
-        assertEquals(END_DATE.plusDays(10), rentPeriods.getLast().getEndDate());
+        assertEquals(END_DATE.plusDays(10), rentPeriods.get(2).getEndDate());
     }
 
     @Test
@@ -168,13 +168,13 @@ class RentServiceImplTest {
         rentPeriods = toTest.getCarRentPeriods(PROPERTY_ID);
 
         assertFalse(rentPeriods.isEmpty());
-        assertInstanceOf(CarRentPeriod.class, rentPeriods.getFirst());
-        assertEquals(START_DATE, rentPeriods.getFirst().getStartDate());
+        assertInstanceOf(CarRentPeriod.class, rentPeriods.get(0));
+        assertEquals(START_DATE, rentPeriods.get(0).getStartDate());
         assertEquals(START_DATE.plusDays(5), rentPeriods.get(1).getStartDate());
-        assertEquals(START_DATE.plusDays(10), rentPeriods.getLast().getStartDate());
-        assertEquals(END_DATE, rentPeriods.getFirst().getEndDate());
+        assertEquals(START_DATE.plusDays(10), rentPeriods.get(2).getStartDate());
+        assertEquals(END_DATE, rentPeriods.get(0).getEndDate());
         assertEquals(END_DATE.plusDays(5), rentPeriods.get(1).getEndDate());
-        assertEquals(END_DATE.plusDays(10), rentPeriods.getLast().getEndDate());
+        assertEquals(END_DATE.plusDays(10), rentPeriods.get(2).getEndDate());
     }
 
     @Test

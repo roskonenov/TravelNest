@@ -117,8 +117,8 @@ class UserControllerIT {
         assertEquals("Size", Objects.requireNonNull(bindingResult.getFieldError("username")).getCode());
         assertEquals("Email", Objects.requireNonNull(bindingResult.getFieldError("email")).getCode());
         assertEquals("Password", Objects.requireNonNull(bindingResult.getFieldError("password")).getCode());
-        assertEquals("EqualPasswords", confirmPasswordCodes.getFirst());
-        assertEquals("Password", confirmPasswordCodes.getLast());
+        assertEquals("EqualPasswords", confirmPasswordCodes.get(0));
+        assertEquals("Password", confirmPasswordCodes.get(1));
         assertEquals("AssertTrue", Objects.requireNonNull(bindingResult.getFieldError("agree")).getCode());
     }
 

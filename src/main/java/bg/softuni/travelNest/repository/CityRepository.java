@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface CityRepository extends JpaRepository<CityEntity, UUID> {
 
     CityEntity findByName(String city);
+
+    CityEntity findByNameIgnoreCase(String city);
 }

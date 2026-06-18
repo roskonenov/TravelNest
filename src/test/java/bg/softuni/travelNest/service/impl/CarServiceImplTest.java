@@ -292,10 +292,10 @@ class CarServiceImplTest {
 
         List<PropertyDTO> userFavorites = toTest.findUserFavorites(CAR_ID);
         assertEquals(3, userFavorites.size());
-        assertEquals(CAR_ID, userFavorites.getFirst().getId());
+        assertEquals(CAR_ID, userFavorites.get(0).getId());
         assertEquals(MAKE + " " + MODEL, userFavorites.get(1).getTitle());
         assertEquals(CITY, userFavorites.get(2).getCity());
-        assertEquals(PICTURE_URL, userFavorites.getLast().getPictureUrl());
+        assertEquals(PICTURE_URL, userFavorites.get(2).getPictureUrl());
         assertEquals(ADDRESS, userFavorites.get(1).getAddress());
     }
 

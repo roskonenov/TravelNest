@@ -34,7 +34,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CarServiceImpl implements PropertyService {
 
-    private static final String COMMENT_TYPE = "CAR";
+    private static final String COMMENT_TYPE = "car";
 
     private final PictureService pictureService;
     private final UserService userService;

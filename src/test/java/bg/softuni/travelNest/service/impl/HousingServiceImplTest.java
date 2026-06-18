@@ -291,11 +291,11 @@ class HousingServiceImplTest {
 
         List<PropertyDTO> userFavorites = toTest.findUserFavorites(HOUSING_ID);
         assertEquals(3, userFavorites.size());
-        assertEquals(HOUSING_ID, userFavorites.getFirst().getId());
+        assertEquals(HOUSING_ID, userFavorites.get(0).getId());
         assertEquals(HOUSING_TYPE.toLowerCase() + " " +
                 ROOMS + " rooms", userFavorites.get(1).getTitle());
         assertEquals(CITY, userFavorites.get(2).getCity());
-        assertEquals(PICTURE_URL, userFavorites.getLast().getPictureUrl());
+        assertEquals(PICTURE_URL, userFavorites.get(2).getPictureUrl());
         assertEquals(ADDRESS, userFavorites.get(1).getAddress());
     }
 

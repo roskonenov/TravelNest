@@ -121,7 +121,7 @@ public class DatabaseInit implements CommandLineRunner {
     private Housing createHousingEntity(String[] fields) {
         return new Housing(
                 HousingType.valueOf(fields[0]),
-                cityRepository.findByName(getPropperString(fields[1])),
+                cityRepository.findByNameIgnoreCase(getPropperString(fields[1])),
                 getPropperString(fields[2]),
                 BigDecimal.valueOf(Integer.parseInt(fields[3])),
                 Integer.parseInt(fields[4]),
@@ -132,7 +132,7 @@ public class DatabaseInit implements CommandLineRunner {
 
     private Car createCarEntity(String[] fields) {
         return new Car(
-                cityRepository.findByName(getPropperString(fields[0])),
+                cityRepository.findByNameIgnoreCase(getPropperString(fields[0])),
                 getPropperString(fields[1]),
                 BigDecimal.valueOf(Integer.parseInt(fields[2])),
                 fields[3],

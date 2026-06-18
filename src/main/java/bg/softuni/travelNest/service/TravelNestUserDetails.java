@@ -1,7 +1,6 @@
 package bg.softuni.travelNest.service;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 

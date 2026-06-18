@@ -29,7 +29,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class HousingServiceImpl implements PropertyService {
 
-    private static final String COMMENT_TYPE = "HOUSING";
+    private static final String COMMENT_TYPE = "housing";
 
     private final HousingRepository housingRepository;
     private final ModelMapper modelMapper;
@@ -67,6 +67,7 @@ public class HousingServiceImpl implements PropertyService {
                             .filter(comment -> comment.getHousing().getId().equals(id))
                             .sorted(Comparator.comparingLong(Comment::getId))
                             .toList());
+                    System.out.println(map.getComments().toString());
                     return map;
                 })
                 .orElseThrow(() -> new ObjectNotFoundException(messages.get("message.error.housing")));
