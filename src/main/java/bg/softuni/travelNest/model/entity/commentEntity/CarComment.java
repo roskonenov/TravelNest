@@ -16,7 +16,7 @@ import lombok.Setter;
 @DiscriminatorValue("car")
 public class CarComment extends Comment {
 
-    private static final String type = "CAR";
+    private static final String type = "car";
 
     @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")

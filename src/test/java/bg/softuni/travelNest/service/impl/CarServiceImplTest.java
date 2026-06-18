@@ -13,6 +13,7 @@ import bg.softuni.travelNest.model.entity.commentEntity.CarComment;
 import bg.softuni.travelNest.model.enums.City;
 import bg.softuni.travelNest.model.enums.Engine;
 import bg.softuni.travelNest.repository.*;
+import bg.softuni.travelNest.service.PictureService;
 import bg.softuni.travelNest.service.TravelNestUserDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -34,6 +35,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,7 +56,7 @@ class CarServiceImplTest {
     private static final String MODEL = "testModel";
     private static final Engine ENGINE = Engine.PETROL;
     private static final Integer DOORS = 4;
-    private static final String COMMENT_TYPE = "CAR";
+    private static final String COMMENT_TYPE = "car";
     private static final String COMMENT_TEXT = "testText";
 
     private CarServiceImpl toTest;
@@ -62,9 +64,6 @@ class CarServiceImplTest {
     private TravelNestUserDetails testUserDetails;
 
     private User testUser;
-
-    @InjectMocks
-    private PictureServiceImpl pictureService;
 
     @InjectMocks
     private UserServiceImpl userService;
@@ -78,6 +77,9 @@ class CarServiceImplTest {
 
     @Captor
     private ArgumentCaptor<CarComment> commentArgumentCaptor;
+
+    @Mock
+    private PictureService mockPictureService;
 
     @Mock
     private CityRepository mockCityRepository;
@@ -108,7 +110,7 @@ class CarServiceImplTest {
         );
 
         toTest = new CarServiceImpl(
-                pictureService,
+                mockPictureService,
                 userService,
                 mockCityRepository,
                 mockCarRepository,
@@ -138,7 +140,6 @@ class CarServiceImplTest {
     }
 
     @Test
-    @Disabled
     void add() throws IOException {
         AddRentalCarDTO addRentalCarDTO = new AddRentalCarDTO();
         addRentalCarDTO.setAddress(ADDRESS);
@@ -149,8 +150,11 @@ class CarServiceImplTest {
         addRentalCarDTO.setModel(MODEL);
         addRentalCarDTO.setPrice(PRICE);
         addRentalCarDTO.setImage(new MockMultipartFile(
-                "test.xlsx",
-                new FileInputStream("F:\\Росен курсове\\Project\\TravelNest\\src\\main\\resources\\static\\images\\about-img.png")));
+                "image",
+                "test-image.png",
+                "image/png",
+                "fake image content".getBytes()
+        ));
 
         when(mockUserRepository.findByUsername(USERNAME))
                 .thenReturn(Optional.of(testUser));
@@ -158,9 +162,19 @@ class CarServiceImplTest {
         when(mockCityRepository.findByName(CITY))
                 .thenReturn(new CityEntity(CITY));
 
+        when(mockPictureService.uploadImage(addRentalCarDTO.getImage()))
+                .thenReturn("/test-image-url");
+
+        when(mockCarRepository.saveAndFlush(any(Car.class)))
+                .thenAnswer(invocation -> {
+                    Car savedCar = invocation.getArgument(0);
+                    savedCar.setId(CAR_ID);
+                    return savedCar;
+                });
+
         toTest.add(addRentalCarDTO, testUserDetails);
 
-        verify(mockCarRepository).save(carArgumentCaptor.capture());
+        verify(mockCarRepository).saveAndFlush(carArgumentCaptor.capture());
         Car actualCar = carArgumentCaptor.getValue();
         assertEquals(addRentalCarDTO.getAddress(), actualCar.getAddress());
         assertEquals(addRentalCarDTO.getCity(), actualCar.getCity().getName());

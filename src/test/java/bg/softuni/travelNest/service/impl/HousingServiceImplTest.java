@@ -49,7 +49,7 @@ class HousingServiceImplTest {
     private static final String PICTURE_URL = "testPictureIrl";
     private static final Integer FLOOR = 2;
     private static final Integer ROOMS = 3;
-    private static final String COMMENT_TYPE = "HOUSING";
+    private static final String COMMENT_TYPE = "housing";
     private static final String COMMENT_TEXT = "testText";
 
     private HousingServiceImpl toTest;
