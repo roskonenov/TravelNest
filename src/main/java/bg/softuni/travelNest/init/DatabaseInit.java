@@ -12,10 +12,14 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,10 +30,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DatabaseInit implements CommandLineRunner {
 
-    private static final String HOUSING_INPUT_FILE_PATH = "src/main/resources/static/housing.txt";
-    
-    private static final String CAR_INPUT_FILE_PATH = "src/main/resources/static/car.txt";
-    
+    private static final String HOUSING_INPUT_FILE_PATH = "static/housing.txt";
+
+    private static final String CAR_INPUT_FILE_PATH = "static/car.txt";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseInit.class);
 
     private final CityRepository cityRepository;
@@ -101,7 +105,7 @@ public class DatabaseInit implements CommandLineRunner {
     void housingInit() throws IOException {
         if (housingRepository.count() != 0) return;
 
-        Files.readAllLines(Path.of(HOUSING_INPUT_FILE_PATH))
+        readFileFromResources(HOUSING_INPUT_FILE_PATH)
                 .forEach(line -> {
                     String[] fields = line.split("\\s+");
                     housingRepository.saveAndFlush(createHousingEntity(fields));
@@ -111,7 +115,7 @@ public class DatabaseInit implements CommandLineRunner {
     void carInit() throws IOException {
         if (carRepository.count() != 0) return;
 
-        Files.readAllLines(Path.of(CAR_INPUT_FILE_PATH))
+        readFileFromResources(CAR_INPUT_FILE_PATH)
                 .forEach(line -> {
                     String[] fields = line.split("\\s+");
                     carRepository.saveAndFlush(createCarEntity(fields));
@@ -145,5 +149,16 @@ public class DatabaseInit implements CommandLineRunner {
 
     private static String getPropperString(String text) {
         return text.replaceAll("_", " ");
+    }
+
+    private List<String> readFileFromResources(String fileName) throws IOException {
+        try (InputStream inputStream =
+                     new ClassPathResource(fileName).getInputStream()) {
+
+            return new BufferedReader(
+                    new InputStreamReader(inputStream))
+                    .lines()
+                    .toList();
+        }
     }
 }
