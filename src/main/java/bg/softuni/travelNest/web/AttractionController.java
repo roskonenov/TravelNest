@@ -1,9 +1,11 @@
 package bg.softuni.travelNest.web;
 
+import bg.softuni.travelNest.config.Messages;
 import bg.softuni.travelNest.model.dto.AddAttractionDTO;
 import bg.softuni.travelNest.model.dto.AttractionDetailsDTO;
 import bg.softuni.travelNest.model.dto.TicketDTO;
 import bg.softuni.travelNest.service.AttractionService;
+import bg.softuni.travelNest.service.TravelNestUserDetails;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +25,7 @@ import java.util.UUID;
 public class AttractionController {
 
     private final AttractionService attractionService;
+    private final Messages messages;
 
     @ModelAttribute("cities")
     public List<String> showCities() {
@@ -59,13 +62,18 @@ public class AttractionController {
     @GetMapping("/{attraction-type}/details/{uuid}")
     public String showAttractionDetails(Model model,
                                         @PathVariable UUID uuid,
-                                        @PathVariable("attraction-type") String attractionType) {
+                                        @PathVariable("attraction-type") String attractionType,
+                                        @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails) {
 
-        TicketDTO tickets = attractionService.getTickets(uuid);
-        String message = String.format("You have %d bought tickets", tickets.getCount());
+        String message = messages.get("message.buy.tickets");
+
+        if (travelNestUserDetails != null) {
+            TicketDTO tickets = attractionService.getTickets(uuid);
+            message = String.format(messages.get("message.tickets.count"), tickets.getCount());
+            model.addAttribute("tickets", tickets);
+        }
 
         model.addAttribute("attractionDetails", attractionService.getAttractionById(uuid));
-        model.addAttribute("tickets", tickets);
         model.addAttribute("message", message);
         model.addAttribute("entityType", attractionType);
 

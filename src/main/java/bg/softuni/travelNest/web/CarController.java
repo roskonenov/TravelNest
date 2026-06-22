@@ -95,7 +95,7 @@ public class CarController {
                                  @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                                  Model model) {
 
-        if (carService.isFavorite(travelNestUserDetails, propertyId)) {
+        if (travelNestUserDetails != null && carService.isFavorite(travelNestUserDetails, propertyId)) {
             model.addAttribute("isFavorite", true);
         }
         model.addAttribute("rentPeriods", rentService.getCarRentPeriods(propertyId));

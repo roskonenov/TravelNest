@@ -69,7 +69,7 @@ public class HousingController {
                                      @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                                      Model model) {
 
-        if (housingService.isFavorite(travelNestUserDetails, propertyId)) {
+        if (travelNestUserDetails != null && housingService.isFavorite(travelNestUserDetails, propertyId)) {
             model.addAttribute("isFavorite", true);
         }
         model.addAttribute("rentPeriods", rentService.getHousingRentPeriods(propertyId));

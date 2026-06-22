@@ -28,7 +28,7 @@ public class RentController {
 
     @PostMapping("/{entityType}/rent/{uuid}")
     public String rentHousing(@PathVariable("uuid") UUID propertyId,
-                              @PathVariable("entityType") String entityType,
+                              @PathVariable String entityType,
                               @AuthenticationPrincipal TravelNestUserDetails travelNestUserDetails,
                               @RequestParam("startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
                               @RequestParam("endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate,

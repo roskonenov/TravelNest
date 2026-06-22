@@ -117,6 +117,8 @@ public class CarServiceImpl implements PropertyService {
 
     @Override
     public boolean isFavorite(TravelNestUserDetails travelNestUserDetails, UUID propertyId) {
+        if (travelNestUserDetails == null) return false;
+
         return userService.findUser(travelNestUserDetails)
                 .getFavoriteCars()
                 .contains(carRepository.findById(propertyId).orElse(new Car()));

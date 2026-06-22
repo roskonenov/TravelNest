@@ -116,6 +116,8 @@ public class HousingServiceImpl implements PropertyService {
 
     @Override
     public boolean isFavorite(TravelNestUserDetails travelNestUserDetails, UUID housingId) {
+        if (travelNestUserDetails == null) return false;
+
         return userService.findUser(travelNestUserDetails)
                 .getFavoriteHousings()
                 .contains(housingRepository.findById(housingId).orElse(new Housing()));
