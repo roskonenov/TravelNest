@@ -27,7 +27,7 @@ public class SecurityConfig {
     };
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity, CustomAuthSuccessHandler customAuthSuccessHandler) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
@@ -38,7 +38,7 @@ public class SecurityConfig {
                         .loginPage("/users/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/", true)
+                        .successHandler(customAuthSuccessHandler)
                         .failureUrl("/users/login-error"))
                 .rememberMe(rememberMe -> rememberMe
                         .rememberMeParameter("rememberMe")
