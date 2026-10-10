@@ -1,9 +1,27 @@
 $(function () {
+    // Guard against missing plugins
+    if (!$.fn.datepicker || !$.fn.timepicker) {
+        return;
+    }
+
     // Initialize datepickers
     $("#startDate, #endDate").datepicker({
         dateFormat: "dd-mm-yy",
         minDate: 0, // Disable past dates
-        onSelect: function () {
+        firstDay: 1, // Start week on Monday
+        showAnim: "fadeIn",
+        onSelect: function (dateText, inst) {
+            let id = $(this).attr("id");
+            if (id === "startDate") {
+                let start = $("#startDate").datepicker("getDate");
+                if (start) {
+                    $("#endDate").datepicker("option", "minDate", start);
+                    let currentEnd = $("#endDate").datepicker("getDate");
+                    if (currentEnd && currentEnd < start) {
+                        $("#endDate").datepicker("setDate", null);
+                    }
+                }
+            }
             validateDates();
         }
     });
@@ -24,12 +42,11 @@ $(function () {
 
         if (startDate && endDate) {
             if (endDate < startDate) {
-                alert("End date cannot be before start date.");
                 $("#endDate").datepicker("setDate", null);
             }
         }
     }
 
-    $("#startDate").change(validateDates);
-    $("#endDate").change(validateDates);
+    $("#startDate").on("change", validateDates);
+    $("#endDate").on("change", validateDates);
 });

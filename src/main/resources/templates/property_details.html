@@ -5,11 +5,7 @@
 <head>
     <!-- basic -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- site metas -->
     <title>Housing details</title>
     <meta name="keywords" content="">
@@ -50,12 +46,17 @@
     <div th:if="${message}">
         <p th:text="${message}" style="color: orange; font-size: 15px"></p>
     </div>
-    <div class="row">
-        <div class="main_image_container">
-            <img th:src="@{*{pictureUrl}}" alt="Main Property Image" id="mainImage"
-                 class="housing-details main_image">
+    <div class="row align-items-center">
+        <div class="col-lg-6 col-md-12 main_image_container mb-4">
+            <div class="property_image_wrapper">
+                <img th:src="@{*{pictureUrl}}" alt="Main Property Image" id="mainImage"
+                     class="housing-details main_image img-fluid">
+                <div class="favorite_badge" th:if="${isFavorite}" title="Favorite">
+                    <i class="mdi mdi-star"></i>
+                </div>
+            </div>
         </div>
-        <div class="housing-details details_section">
+        <div class="col-lg-6 col-md-12 housing-details details_section mb-4">
             <p><strong th:text="#{attraction.details.city}">City: </strong> <span
                     th:text="#{|city.filter.*{city}|}"></span></p>
             <p><strong th:text="#{attraction.details.address}">Address: </strong> <span th:text="*{address}"></span></p>
@@ -72,57 +73,74 @@
                 </p>
         </div>
     </div>
-    <div class="row">
+    <div class="row details_action_row">
         <button class="details_button" id="rentButton" th:text="#{property.details.rent}">Rent</button>
-        <div id="rentModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2 class="modal-title" th:text="#{property.details.select.dates}">Select Dates</h2>
-                <form th:action="@{/{entityType}/rent/{uuid} (uuid= ${uuid}, entityType= ${entityType})}"
-                      th:method="post">
-                    <h1 th:text="#{property.details.unavailable.period}">Unavailable Rent Periods</h1>
-                    <table class="rented_periods">
-                        <thead>
-                        <tr>
-                            <th th:text="#{property.details.start.date}">Start Date</th>
-                            <th th:text="#{property.details.end.date}">End Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="period : ${rentPeriods}">
-                            <td th:text="${period.startDate}"></td>
-                            <td th:text="${period.endDate}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <label for="startDate" id="startDateLabel" th:text="#{property.details.start.date.label}">Start
-                        Date:</label>
-                    <input type="text" id="startDate" name="startDate" required
-                           th:value="#{property.details.choose.date}">
-                    <br>
-                    <label for="endDate" id="endDateLabel" th:text="#{property.details.end.date.label}">End
-                        Date: </label>
-                    <input type="text" id="endDate" name="endDate" required th:value="#{property.details.choose.date}">
-                    <br><br>
-                    <button type="submit" id="submitRentForm" disabled th:text="#{property.details.submit}">Submit
-                    </button>
-                </form>
-            </div>
-        </div>
-        <form th:method="post"
+        <form class="favorite_form" th:method="post"
               th:action="@{/{entityType}/add-to-favorites/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
-            <button class="details_button" th:text="#{property.details.add.favorites}">Add to favorites
+            <button class="details_button favorite_button" th:classappend="${isFavorite} ? 'is_favorite' : ''" type="submit">
+                <i id="favorite" class="favorite mdi mdi-star" th:if="${isFavorite}"></i>
+                <span th:text="#{property.details.add.favorites}">Add to favorites</span>
             </button>
-            <th:block class="favorite-icon" th:if="${isFavorite}">
-                <i id="favorite" class="favorite mdi mdi-star" style="font-size: 52px; color: #fda417;"></i>
-            </th:block>
         </form>
-        <form th:method="delete"
+        <form class="delete_form" th:method="delete"
               th:action="@{/{entityType}/details/{uuid} (uuid= ${uuid}, entityType= ${entityType})}">
             <button class="details_button" sec:authorize="hasRole('ADMIN')" th:text="#{property.details.delete.add}">
                 Delete add
             </button>
         </form>
+    </div>
+
+    <!-- Rent Modal -->
+    <div id="rentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header-custom">
+                <h3 class="modal-title" th:text="#{property.details.select.dates}">Select Dates</h3>
+                <button type="button" class="close close-modal-btn" aria-label="Close">&times;</button>
+            </div>
+            <form id="rentForm"
+                  th:action="@{/{entityType}/rent/{uuid} (uuid= ${uuid}, entityType= ${entityType})}"
+                  th:method="post">
+                <div class="unavailable-periods-section" th:if="${rentPeriods != null and not #lists.isEmpty(rentPeriods)}">
+                    <h4 class="unavailable-periods-heading" th:text="#{property.details.unavailable.period}">Unavailable Rent Periods</h4>
+                    <div class="unavailable-table-responsive">
+                        <table class="rented_periods">
+                            <thead>
+                            <tr>
+                                <th th:text="#{property.details.start.date}">Start Date</th>
+                                <th th:text="#{property.details.end.date}">End Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="period : ${rentPeriods}">
+                                <td th:text="${period.startDate}"></td>
+                                <td th:text="${period.endDate}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="rent-form-group">
+                    <label for="startDate" id="startDateLabel" th:text="#{property.details.start.date.label}">Start Date:</label>
+                    <div class="rent-input-wrapper">
+                        <i class="mdi mdi-calendar rent-input-icon"></i>
+                        <input type="text" id="startDate" name="startDate" required readonly
+                               th:placeholder="#{property.details.choose.date}">
+                    </div>
+                </div>
+                <div class="rent-form-group">
+                    <label for="endDate" id="endDateLabel" th:text="#{property.details.end.date.label}">End Date:</label>
+                    <div class="rent-input-wrapper">
+                        <i class="mdi mdi-calendar rent-input-icon"></i>
+                        <input type="text" id="endDate" name="endDate" required readonly
+                               th:placeholder="#{property.details.choose.date}">
+                    </div>
+                </div>
+                <div id="dateErrorMessage" class="date-error-message" style="display: none;"></div>
+                <div class="rent-modal-actions">
+                    <button type="submit" id="submitRentForm" disabled th:text="#{property.details.submit}">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
     <article class="comment-section">
         <h2 th:text="#{property.details.comments}">Comments</h2>
@@ -138,8 +156,9 @@
             </div>
         </div>
 
-        <!-- Add New Comment -->
+        <!-- Add New Comment (Only for logged-in users) -->
         <form class="add-comment"
+              sec:authorize="isAuthenticated()"
               th:action="@{/{entityType}/details/{uuid} (uuid=${uuid}, entityType= ${entityType})}"
               th:method="post"
               th:object="${commentData}">
@@ -153,6 +172,23 @@
                 <button type="submit" th:text="#{property.details.add.submit}">Submit</button>
             </div>
         </form>
+
+        <!-- Message for non-logged in users -->
+        <div class="comment-login-prompt" sec:authorize="isAnonymous()">
+            <div class="comment-login-card">
+                <div class="comment-login-icon-box">
+                    <i class="fa fa-comments" aria-hidden="true"></i>
+                </div>
+                <div class="comment-login-info">
+                    <h4 class="comment-login-title" th:text="#{property.details.add.comment}">Add a Comment</h4>
+                    <p class="comment-login-text" th:text="#{property.details.login.to.comment}">Please log in to your account if you wish to leave a comment.</p>
+                </div>
+                <a class="comment-login-btn" th:href="@{/users/login}">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    <span th:text="#{header.section.login}">Login</span>
+                </a>
+            </div>
+        </div>
     </article>
 </div>
 <!-- footer section start -->
@@ -167,7 +203,7 @@
 <!-- popper.min.js -->
 <script src="/js/popper.min.js"></script>
 <!-- bootstrap js -->
-<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 <!-- script js -->
 <script src="/js/script.js"></script>
 

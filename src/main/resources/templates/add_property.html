@@ -4,11 +4,7 @@
 <head>
     <!-- basic -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- site metas -->
     <title>Add Rental Property</title>
     <meta name="keywords" content="">
@@ -48,7 +44,8 @@
     <h1 th:unless="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4" th:text="#{add.property.rental}">Add Rental Property</h1>
     <h1 th:if="${entityType == 'attraction' or entityType == 'event'}" class="add_property mb-4" th:text="#{add.property.attraction}">Add Attraction</h1>
     <div class="row">
-        <form th:method="post"
+        <form class="col-lg-6 col-md-12 add-property-form"
+              th:method="post"
               th:action="@{${action}}"
               th:object="${addData}"
               enctype="multipart/form-data">
@@ -111,20 +108,20 @@
             </div>
             <button type="submit" class="add_picture btn btn-primary" th:text="#{add.property.submit}">Submit</button>
         </form>
-        <div class="col-md-6 padding_left_15">
-            <div class="add_rent_property">
+        <div class="col-lg-6 col-md-12 padding_left_15">
+            <div class="add_rent_property text-center">
                 <img th:if="${entityType == 'housing'}"
-                     th:src="'https://cdn.pixabay.com/photo/2024/02/29/10/47/house-8603946_1280.png'" width="500"
-                     height="500" alt="add_rent_property image">
+                     th:src="'https://cdn.pixabay.com/photo/2024/02/29/10/47/house-8603946_1280.png'"
+                     class="img-fluid add-preview-img" alt="add_rent_property image">
                 <img th:if="${entityType == 'car'}"
-                     th:src="'https://cdn.pixabay.com/photo/2018/02/02/17/28/car-keys-3125905_1280.jpg'" width="500"
-                     height="500" alt="add_rent_property image">
+                     th:src="'https://cdn.pixabay.com/photo/2018/02/02/17/28/car-keys-3125905_1280.jpg'"
+                     class="img-fluid add-preview-img" alt="add_rent_property image">
                 <img th:if="${entityType == 'attraction'}"
-                     th:src="'https://cdn.pixabay.com/photo/2015/11/06/11/35/alexander-1026303_1280.jpg'" width="500"
-                     height="500" alt="add_rent_property image">
+                     th:src="'https://cdn.pixabay.com/photo/2015/11/06/11/35/alexander-1026303_1280.jpg'"
+                     class="img-fluid add-preview-img" alt="add_rent_property image">
                 <img th:if="${entityType == 'event'}"
-                     th:src="'https://cdn.pixabay.com/photo/2020/04/03/13/13/cinema-4998849_1280.png'" width="500"
-                     height="500" alt="add_rent_property image">
+                     th:src="'https://cdn.pixabay.com/photo/2020/04/03/13/13/cinema-4998849_1280.png'"
+                     class="img-fluid add-preview-img" alt="add_rent_property image">
             </div>
         </div>
     </div>
@@ -141,16 +138,13 @@
 <!-- popper.min.js -->
 <script src="/js/popper.min.js"></script>
 <!-- bootstrap js -->
-<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 <!-- script js -->
 <script src="/js/script.js"></script>
 
-<script src="/js/datepicker.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<!-- jquery ui & timepicker plugins -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="/js/datepicker.js"></script>
 </body>
 </html>

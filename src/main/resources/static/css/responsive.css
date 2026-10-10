@@ -1,472 +1,1247 @@
-/*--------------------------------------------------------------------- File Name: responsive.css ---------------------------------------------------------------------*/
+/*---------------------------------------------------------------------
+  File Name: responsive.css
+  Responsive stylesheet for TravelNest across Tablet and Mobile devices
+---------------------------------------------------------------------*/
 
-
-/*------------------------------------------------------------------- 991px x 768px ---------------------------------------------------------------------*/
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .header-search {
-        padding: 15px 0px;
-    }
-}
-
-
-/*------------------------------------------------------------------- 767px x 599px ---------------------------------------------------------------------*/
-
-@media only screen and (min-width: 599px) and (max-width: 767px) {
-    .logo {
-        text-align: center;
-    }
-    .cart-content-right {
-        padding-bottom: 5px;
-    }
-    .mg {
-        margin: 0px 0px;
-    }
-    .menu-area-main {
-        height: 256px;
-        overflow-y: auto;
-    }
-    .megamenu>.row [class*="col-"] {
-        padding: 0px;
-    }
-    .menu-area-main .megamenu .men-cat {
-        padding: 0px 15px;
-    }
-    .menu-area-main .megamenu .women-cat {
-        padding: 0px 15px;
-    }
-    .menu-area-main .megamenu .el-cat {
-        padding: 0px 15px;
-    }
-    .mean-container .mean-nav ul li a.mean-expand {
-        height: 19px;
-    }
-    .category-box.women-box {
-        display: none;
-    }
-    .cart-box {
-        display: inline-block;
-        margin: 0px 30px;
-    }
-    .wish-box {
-        float: none;
-        margin: 0px 30px;
-        display: inline-block;
-    }
-    .menu-add {
-        display: none;
-    }
-    .category-box {
-        display: none;
-    }
-    .mean-container .mean-nav ul li ol {
-        padding: 0px;
-    }
-    .mean-container .mean-nav ul li a {
-        padding: 10px 20px;
-        width: 94.8%;
-    }
-    .mean-container .mean-nav ul li li a {
-        width: 92%;
-        padding: 1em 4%;
-    }
-    .mean-container .mean-nav ul li li li a {
-        width: 100%;
-    }
-    .header-search {
-        padding: 15px 0px;
-    }
-    #collapseFilter.d-md-block {
-        padding: 30px 0px;
-    }
-}
-
-
-/*------------------------------------------------------------------- 599px x 280px ---------------------------------------------------------------------*/
-
-@media only screen and (min-width: 280px) and (max-width: 599px) {
-    .cart-content-right {
-        padding-bottom: 5px;
-    }
-    .megamenu>.row [class*="col-"] {
-        padding: 0px;
-    }
-    .menu-area-main .megamenu .men-cat {
-        padding: 0px 15px;
-    }
-    .menu-area-main .megamenu .women-cat {
-        padding: 0px 15px;
-    }
-    .menu-area-main .megamenu .el-cat {
-        padding: 0px 15px;
-    }
-    .mean-container .mean-nav ul li a {
-        padding: 1em 4%;
-        width: 92%;
-    }
-    .mean-container .mean-nav ul li li a {
-        width: 90%;
-        padding: 1em 5%;
-    }
-    .mean-container .sub-full.megamenu-categories ol li a {
-        padding: 5px 0px;
-        text-transform: capitalize;
-        width: 100%;
-    }
-    .megamenu .sub-full.megamenu-categories .women-box .banner-up-text a {
-        width: auto;
-        border: none;
-        float: none;
-    }
-    .menu-area-main {
-        height: 45px;
-        overflow-y: auto;
-    }
-    .mean-container .mean-nav ul li a.mean-expand {
-        top: 0;
-    }
-}
-
+/* =====================================================================
+   1. Breakpoint: Screens 992px to 1199px (Small Laptops / Landscape Tablets)
+   ===================================================================== */
 @media (min-width: 992px) and (max-width: 1199px) {
-    .ml-auto,
-    .mx-auto {
-        margin: 0 auto;
-    }
     .navbar-expand-lg .navbar-nav .nav-link {
-        padding-right: 5px;
-        padding-left: 5px;
-        font-size: 14px;
+        padding-right: 8px;
+        padding-left: 8px;
+        font-size: 15px;
     }
-    .login_text li {
-        font-size: 14px;
-        padding: 0px 10px;
+    .login_text li,
+    .language {
+        font-size: 15px;
+        padding: 0 15px;
     }
     .quote_btn {
-        width: 140px;
+        width: 110px;
     }
     .quote_btn a {
         font-size: 14px;
+        padding: 7px 12px;
     }
-    #my_slider a.carousel-control-prev {
-        left: inherit;
-        top: 180px;
-        right: 30px;
+    .banner_taital_main {
+        width: 60%;
     }
-    #my_slider a.carousel-control-next {
-        right: 30px;
-        top: 120px;
-        left: initial;
+    .banner_taital {
+        font-size: 42px;
+        line-height: 48px;
     }
     .services_section_2 {
-        width: 98%;
+        width: 96%;
     }
     .development_text {
-        font-size: 20px;
-    }
-    .service_img img {
-        min-height: 30px;
-    }
-    .about_taital {
-        padding-top: 40px;
-    }
-    #costum_slider a.carousel-control-next {
-        right: -60px;
-        left: 0px;
-        top: 550px;
-    }
-    #costum_slider a.carousel-control-prev {
-        left: -60px;
-        right: 0px;
-        top: 550px;
-    }
-    .mail_section_1 {
-        padding-left: 15px;
-        padding-top: 0px;
+        font-size: 18px;
     }
     .location_text li {
-        padding: 0px 90px 30px 90px;
-    }
-    .useful_text {
-        font-size: 20px;
+        padding: 0 40px 20px 40px;
     }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-    #my_slider a.carousel-control-prev {
-        left: 30px;
-        top: 180px;
-        right: 0px;
-        display: none;
-    }
-    #my_slider a.carousel-control-next {
-        right: 0px;
-        top: 120px;
-        left: 30px;
-        display: none;
-    }
+/* =====================================================================
+   2. Breakpoint: max-width 991.98px (Tablets & Mobile - Collapse Navbar)
+   ===================================================================== */
+@media (max-width: 991.98px) {
+    /* Hide top header bar on mobile/tablet so app header is sleek */
     .header_top_section {
         display: none;
     }
-    .navbar-expand-lg .navbar-nav .nav-link {
-        text-align: center;
-        margin-top: 0px;
-    }
-    .navbar-toggler {
-        background-color: #fff;
-    }
+
+    /* Main navbar container */
     .header_section {
         background-size: cover;
+        position: relative;
+        width: 100%;
+        float: none;
     }
-    .logo {
+
+    .header_section .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .header_section .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+
+    /* Mobile Brand / Logo in Navbar */
+    .mobile-brand {
+        display: inline-block;
+        padding: 0;
+        margin-right: auto;
+    }
+
+    .mobile-brand img {
+        max-height: 46px;
         width: auto;
+        object-fit: contain;
     }
+
+    /* Navbar toggler burger button */
+    .navbar-toggler {
+        display: block;
+        border: 2px solid #fda417;
+        background-color: #fda417;
+        padding: 7px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .navbar-toggler:hover,
+    .navbar-toggler:focus {
+        background-color: #fd7e14;
+        border-color: #fd7e14;
+    }
+
+    .navbar-toggler .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* Collapsed menu drawer */
+    .navbar-collapse {
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-top: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border: 1px solid #e9ecef;
+    }
+
+    .navbar-expand-lg .navbar-nav {
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 5px;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-item {
+        width: 100%;
+        margin: 2px 0;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link {
+        text-align: left;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 14px;
+        border-radius: 6px;
+        color: #212529;
+        display: block;
+        border-bottom: 1px solid #f1f3f5;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link.active,
+    .navbar-expand-lg .navbar-nav .nav-link:hover {
+        color: #fda417;
+        background-color: rgba(253, 164, 23, 0.08);
+    }
+
+    /* Form-inline inside mobile menu (auth & language evenly stacked) */
+    .header_section .form-inline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 2px solid #f1f3f5;
+        gap: 10px;
+    }
+
+    .header_section .user-info-box,
+    .header_section .auth-link-box,
+    .header_section .logoutForm,
+    .header_section .language {
+        width: 100%;
+        max-width: 240px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        float: none;
+        padding: 0;
+    }
+
+    .header_section .user-greeting-pill {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #f8f9fa;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 30px;
+        box-sizing: border-box;
+    }
+
+    .header_section .nav-auth-btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 9px 16px;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 30px;
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header_section .logoutForm .btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 9px 16px;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 30px;
+        box-sizing: border-box;
+        margin: 0;
+        float: none;
+    }
+
+    .header_section .language-form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .header_section .language-select-wrapper {
+        width: 100%;
+        justify-content: center;
+        padding: 4px 14px;
+        border-radius: 30px;
+        box-sizing: border-box;
+    }
+
+    .header_section .custom-lang-select {
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        padding: 6px 20px 6px 8px;
+    }
+
+    /* Banner / Hero Section */
+    .banner_section {
+        padding: 50px 0 40px 0;
+    }
+
     .banner_taital_main {
-        width: 80%;
+        width: 85%;
+        margin: 0 auto;
+        float: none;
     }
+
     .banner_taital {
-        font-size: 50px;
-        line-height: 55px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        float: none;
+        font-size: 36px;
+        line-height: 1.25;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
     }
-    .about_text {
-        font-size: 14px;
-        margin: 0px;
+
+    .banner_text {
+        font-size: 16px;
+        line-height: 24px;
+        margin: 15px 0 25px 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
+
+    #my_slider a.carousel-control-prev,
+    #my_slider a.carousel-control-next {
+        display: none;
+    }
+
+    /* Services */
+    .services_section {
+        padding: 40px 0 20px 0;
+    }
+
+    .services_section_2 {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .services_taital {
+        font-size: 32px;
+    }
+
+    .services_text_1 {
+        font-size: 16px;
+        margin: 10px auto 20px auto;
+    }
+
+    .box_main {
+        height: auto;
+        min-height: 340px;
+        padding: 28px 18px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* About Section */
+    .about_section {
+        padding: 40px 0 20px 0;
+    }
+
     .about_taital {
-        padding-top: 0px;
+        font-size: 32px;
+        padding-top: 0;
+        margin-bottom: 15px;
     }
-    .video_bt {
+
+    .about_text {
+        font-size: 15px;
+        line-height: 24px;
+        margin: 0 0 25px 0;
+    }
+
+    .about_video_container,
+    .about_video {
         width: 100%;
-        padding: 120px 0px;
+        max-width: 100%;
+        border-radius: 12px;
+        margin-bottom: 25px;
     }
-    .projects_section ul .nav-link {
-        padding: 12px 9px;
-        margin: 0px 5px;
-        width: auto;
+
+    /* Contact Section */
+    .contact_section {
+        padding: 30px 0;
     }
-    .image {
-        min-height: auto;
-        margin-top: 30px;
-    }
-    .testimonial_section_2 {
-        width: 100%;
-        padding-top: 30px;
-    }
-    #costum_slider a.carousel-control-next {
-        top: 560px;
-    }
-    #costum_slider a.carousel-control-prev {
-        top: 560px;
-    }
-    .textimonial_text {
-        padding: 40px 20px;
-    }
-    .testimonial_section {
-        padding: 90px 0px 150px 0px;
-    }
+
     .contact_taital {
-        padding-left: 0px;
+        font-size: 32px;
+        padding-left: 0;
+        text-align: center;
     }
+
+    .contact_section_2 {
+        padding: 15px 0 30px 0;
+    }
+
     .mail_section_1 {
-        padding-left: 0px;
-        padding-top: 0px;
+        padding: 0 10px;
+        width: 100%;
     }
+
     .contact_img {
-        margin-top: 30px;
+        margin-top: 25px;
+        text-align: center;
     }
+
+    .contact-support-img {
+        max-width: 280px;
+        max-height: 300px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .send_bt {
+        width: auto;
+        min-width: 130px;
+        max-width: 180px;
+        margin: 15px auto 0 auto;
+        display: inline-flex;
+        float: none;
+        text-align: center;
+    }
+
+    /* City Filter */
+    .filter_section {
+        margin: 25px 0 15px 0;
+        gap: 12px;
+    }
+
+    .filter_section label {
+        font-size: 16px;
+    }
+
+    .filter_section .nice-select,
+    .filter_section select {
+        font-size: 15px;
+        height: 40px;
+    }
+
+    /* Property details & Attraction details */
+    .housing-details {
+        padding: 20px 15px;
+    }
+
+    .housing-details h2 {
+        font-size: 32px;
+    }
+
+    .housing-details .details_section {
+        padding-left: 0;
+    }
+
+    .housing-details .details_section p,
+    .add-comment h3 {
+        font-size: 17px;
+    }
+
+    .details_action_row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .housing-details .details_button {
+        margin: 6px;
+        float: none;
+        display: inline-block;
+        width: auto;
+        min-width: 130px;
+        padding: 9px 18px;
+    }
+
+    .comment_box {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .housing-details .comment {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
+    }
+
+    .add-comment {
+        width: 100%;
+    }
+
+    .add-comment textarea {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Add Property */
+    .add_property_background {
+        margin-top: 25px;
+        padding: 0 15px;
+    }
+
+    .add_property {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .add-preview-img {
+        max-width: 100%;
+        height: auto;
+        max-height: 350px;
+        border-radius: 12px;
+        object-fit: cover;
+        margin: 20px auto;
+        display: block;
+    }
+
+    /* Login & Register */
+    .login-form .card,
+    .register-form .card {
+        margin-top: 35px;
+        margin-bottom: 50px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+    }
+
+    /* Footer Section */
+    .footer_section {
+        padding: 35px 0 20px 0;
+    }
+
+    .location_text ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
     .location_text li {
-        padding: 0px 50px 30px 50px;
+        float: none;
+        padding: 10px 25px 20px 25px;
+        font-size: 15px;
+        text-align: center;
     }
-    .useful_text {
-        font-size: 14px;
-    }
-    .lorem_text {
-        font-size: 14px;
-    }
+
     .footer_menu {
         width: 100%;
     }
-}
 
-@media (min-width: 576px) and (max-width: 767px) {
-    #my_slider a.carousel-control-prev {
-        left: 30px;
-        top: 180px;
-        right: 0px;
-        display: none;
-    }
-    #my_slider a.carousel-control-next {
-        right: 0px;
-        top: 120px;
-        left: 30px;
-        display: none;
-    }
-    .header_top_section {
-        display: none;
-    }
-    .navbar-expand-lg .navbar-nav .nav-link {
-        text-align: center;
-        margin-top: 0px;
-    }
-    .navbar-toggler {
-        background-color: #fff;
-    }
-    .header_section {
-        background-size: cover;
-    }
-    .logo {
-        width: auto;
-    }
-    .banner_taital_main {
-        width: 100%;
-    }
-    .banner_taital {
-        font-size: 50px;
-        line-height: 55px;
-    }
-    .about_text {
-        font-size: 14px;
-    }
-    .about_taital {
-        padding-top: 0px;
-    }
-    .video_bt {
-        width: 100%;
-        padding: 60px 0px;
-    }
-    .about_img {
-        margin-top: 30px;
-    }
-    .projects_section ul .nav-link {
-        padding: 12px 5px;
-    }
-    .image {
-        min-height: auto;
-        margin-top: 30px;
-    }
-    .testimonial_section_2 {
-        width: 100%;
-        padding-top: 30px;
-    }
-    #costum_slider a.carousel-control-next {
-        display: none;
-    }
-    #costum_slider a.carousel-control-prev {
-        display: none;
-    }
-    .textimonial_text {
-        padding: 40px 20px;
-    }
-    .testimonial_section {
-        padding: 90px 0px 90px 0px;
-    }
-    .contact_taital {
-        padding-left: 0px;
-    }
-    .mail_section_1 {
-        padding-left: 0px;
-        padding-top: 0px;
-    }
-    .contact_img {
-        margin-top: 30px;
-    }
-    .location_text li {
-        float: none;
-        padding: 0px 20px 30px 20px;
-    }
     .useful_text {
-        padding-top: 20px;
-        font-size: 20px;
+        font-size: 18px;
+        margin-top: 15px;
     }
 }
 
-@media (max-width: 575px) {
-    #my_slider a.carousel-control-prev {
-        left: 30px;
-        top: 180px;
-        right: 0px;
-        display: none;
+/* =====================================================================
+   3. Breakpoint: max-width 767.98px (Small Tablets & Large Phones)
+   ===================================================================== */
+@media (max-width: 767.98px) {
+    /* Banner / Hero */
+    .banner_taital_main {
+        width: 95%;
+        margin: 0 auto;
     }
-    #my_slider a.carousel-control-next {
-        right: 0px;
-        top: 120px;
-        left: 30px;
-        display: none;
+
+    div.opacity {
+        padding: 22px 18px;
+        border-radius: 14px;
     }
-    .header_top_section {
-        display: none;
+
+    .banner_taital {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        float: none;
+        font-size: 28px;
+        line-height: 1.25;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        margin-bottom: 10px;
     }
-    .navbar-expand-lg .navbar-nav .nav-link {
+
+    .banner_text {
+        font-size: 15px;
+        line-height: 22px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* Property List: Compact card orientation */
+    .property_item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        padding: 12px 14px;
+        border-radius: 16px;
+        margin: 10px 0;
         text-align: center;
-        margin-top: 0px;
+        align-items: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     }
-    .navbar-toggler {
-        background-color: #fff;
+
+    .property_item img {
+        width: 100%;
+        max-width: 240px;
+        height: 120px;
+        margin: 0 auto 8px auto;
+        object-fit: cover;
+        border-radius: 10px;
     }
-    .header_section {
-        background-size: cover;
+
+    .property_item ul {
+        width: 100%;
+        padding: 0;
+        margin: 0 0 6px 0;
+        text-align: center;
     }
-    .logo {
+
+    .property_item h1 {
+        font-size: 16px;
+        margin: 2px 0 3px 0;
+        text-align: center;
+    }
+
+    .property_item h2 {
+        font-size: 13px;
+        margin: 2px 0;
+        text-align: center;
+    }
+
+    .property_item p {
+        width: 100%;
+        max-width: 100%;
+        margin: 2px auto 4px auto;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    .property_item .btn_main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 6px;
+    }
+
+    .property_item .details_button {
+        width: 100%;
+        max-width: 180px;
+        margin: 2px auto;
+        background: transparent;
+        border: none;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .property_item .details_button a {
+        width: 100%;
+        text-align: center;
+        padding: 8px 16px;
+        font-size: 13px;
+        color: #ffffff;
+        background-color: #0b0b0b;
+        border: 1.5px solid #0b0b0b;
+        border-radius: 40px;
+    }
+
+    .property_item .details_button a:hover {
+        background-color: #ffffff;
+        color: #0b0b0b;
+        border: 1.5px solid #000000;
+    }
+
+    /* Attraction Cards */
+    .card-container {
+        margin-top: 20px;
+        padding: 0 5px;
+    }
+
+    .attraction-card {
+        width: 100%;
+        max-width: 360px;
+        margin: 12px auto;
+        height: auto;
+        min-height: 440px;
+        overflow: hidden;
+    }
+
+    .attraction-card img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .button-overlay .btn_main {
+        position: absolute;
+        bottom: 12px;
+        right: 18px;
+        left: auto;
+        width: auto;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .button-overlay .details_button {
+        margin: 0;
         width: auto;
     }
+
+    .button-overlay .details_button a {
+        padding: 7px 16px;
+        font-size: 13px;
+        border-radius: 30px;
+        color: #ffffff;
+        background-color: #0b0b0b;
+        border: 1.5px solid #0b0b0b;
+    }
+
+    .button-overlay .details_button a:hover {
+        background-color: #ffffff;
+        color: #0b0b0b;
+        border: 1.5px solid #000000;
+    }
+
+    /* Housing details image & actions */
+    .main_image_container img,
+    .housing-details .main_image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .details_action_row {
+        justify-content: center;
+    }
+
+    /* Error & Not Found */
+    .error-container {
+        margin: 40px auto;
+        width: 92%;
+        max-width: 480px;
+        height: auto;
+        min-height: 240px;
+        padding: 25px 15px;
+    }
+
+    .error-container .row {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dinosaur {
+        max-width: 130px;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .error-message {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    /* Footer location */
+    .location_text li {
+        padding: 10px 15px 15px 15px;
+    }
+}
+
+/* =====================================================================
+   4. Breakpoint: max-width 575.98px (Smartphones / Mobile Devices)
+   ===================================================================== */
+@media (max-width: 575.98px) {
+    /* Navbar brand scaling */
+    .mobile-brand img {
+        max-height: 38px;
+    }
+
+    .navbar-toggler {
+        padding: 5px 10px;
+    }
+
+    /* Banner / Hero */
+    .banner_section {
+        padding: 30px 0 25px 0;
+    }
+
     .banner_taital_main {
         width: 100%;
+        max-width: 100%;
     }
+
+    div.opacity {
+        padding: 18px 14px;
+        border-radius: 12px;
+    }
+
     .banner_taital {
-        font-size: 30px;
-        line-height: 35px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        float: none;
+        font-size: 22px;
+        line-height: 1.25;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        margin-bottom: 8px;
+        -webkit-text-stroke: 0.8px #988c74;
     }
-    .about_text {
+
+    .banner_text {
+        font-size: 14px;
+        line-height: 1.35;
+        margin: 8px auto 16px auto;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .started_text a {
+        padding: 9px 22px;
         font-size: 14px;
     }
+
+    .readmore_bt {
+        width: 100%;
+        max-width: 190px;
+        margin: 12px auto 0 auto;
+    }
+
+    .readmore_bt a {
+        padding: 9px 18px;
+        font-size: 14px;
+    }
+
+    /* Services */
+    .services_section {
+        padding: 30px 0 15px 0;
+    }
+
+    .services_taital {
+        font-size: 26px;
+    }
+
+    .services_text_1 {
+        font-size: 14px;
+    }
+
+    .box_main {
+        padding: 25px 18px;
+        min-height: 390px;
+        height: auto;
+    }
+
+    .development_text {
+        font-size: 18px;
+    }
+
+    /* About Section */
+    .about_section {
+        padding: 30px 0 15px 0;
+    }
+
     .about_taital {
-        padding-top: 0px;
+        font-size: 26px;
+        text-align: center;
     }
-    .video_bt {
-        width: 100%;
-        padding: 60px 0px;
+
+    .about_text {
+        font-size: 14px;
+        text-align: center;
+        margin: 10px 0 20px 0;
     }
-    .about_img {
-        margin-top: 30px;
+
+    /* Contact Section */
+    .contact_section {
+        padding: 25px 0;
     }
-    .projects_section ul .nav-link {
-        padding: 12px 5px;
-    }
-    .image {
-        min-height: auto;
-        margin-top: 30px;
-    }
-    .testimonial_section_2 {
-        width: 100%;
-        padding-top: 30px;
-    }
-    #costum_slider a.carousel-control-next {
-        display: none;
-    }
-    #costum_slider a.carousel-control-prev {
-        display: none;
-    }
-    .textimonial_text {
-        padding: 40px 20px;
-    }
-    .testimonial_section {
-        padding: 90px 0px 90px 0px;
-    }
+
     .contact_taital {
-        padding-left: 0px;
+        font-size: 26px;
     }
-    .mail_section_1 {
-        padding-left: 0px;
-        padding-top: 0px;
+
+    .contact-support-img {
+        max-width: 220px;
+        max-height: 240px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
     }
-    .contact_img {
-        margin-top: 30px;
+
+    .send_bt {
+        width: auto;
+        min-width: 130px;
+        max-width: 170px;
+        display: inline-flex;
     }
-    .location_text li {
-        float: none;
-        padding: 0px 20px 30px 20px;
+
+    /* Filter Section: Stack vertically on phone */
+    .filter_section {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        margin: 20px 0 15px 0;
     }
-    .useful_text {
-        padding-top: 20px;
+
+    .filter_section label {
+        text-align: center;
+        width: 100%;
+    }
+
+    .filter_section .nice-select,
+    .filter_section select {
+        width: 100%;
+        min-width: 100%;
+        margin: 5px 0;
+    }
+
+    .filter_section .create-box {
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .create-box .place {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .create-box .create {
+        width: 100%;
+        max-width: 220px;
+        text-align: center;
+    }
+
+    /* Housing & Attraction Details */
+    .housing-details h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .housing-details .details_section p,
+    .add-comment h3 {
+        font-size: 15px;
+        padding: 8px 12px;
+    }
+
+    .housing-details .details_button {
+        width: 100%;
+        max-width: 220px;
+        margin: 6px auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .details_action_row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .details_action_row form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .details_action_row .favorite_button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .details_action_row .favorite_button .favorite {
+        font-size: 18px;
+        line-height: 1;
+        margin: 0;
+    }
+
+    .ticket_count {
+        margin: 10px 0;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Add Property */
+    .add_property {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .add_property_field {
+        font-size: 15px;
+    }
+
+    .add_picture {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    /* Login & Register */
+    .login-form .card,
+    .register-form .card {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .login-form .card .card-header h3,
+    .register-form .card .card-header h3 {
+        font-size: 22px;
+    }
+
+    .formLogin .form-group .form-control,
+    .formRegister .form-group .form-control {
+        min-height: 46px;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .formLogin .form-group i,
+    .formRegister .form-group i {
+        font-size: 28px;
+    }
+
+    .formLogin .btn-wd,
+    .formRegister .btn-wd {
+        width: 100%;
+        max-width: 200px;
+        font-size: 15px;
+    }
+
+    /* Popup Terms of Service Modal */
+    .popup-window {
+        width: 94%;
+        padding: 16px 12px;
+        height: 82vh;
+    }
+
+    .popup-window h1 {
         font-size: 20px;
+    }
+
+    .popup-window .content ol {
+        padding-left: 20px;
+        font-size: 13px;
+    }
+
+    /* Rent Modal Mobile Optimizations - Strictly stacked vertically */
+    #rentModal.modal {
+        padding: 10px 8px;
+    }
+
+    #rentModal .modal-content {
+        width: 100%;
+        max-width: 100%;
+        margin: 15px auto;
+        padding: 20px 16px;
+        border-radius: 14px;
+        max-height: calc(100vh - 30px);
+        overflow-y: auto;
+    }
+
+    #rentModal form,
+    #rentModal #rentForm {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+
+    #rentModal .modal-header-custom {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+        width: 100%;
+    }
+
+    #rentModal .modal-header-custom .modal-title {
+        font-size: 19px;
+    }
+
+    #rentModal .unavailable-periods-section {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 14px;
+        box-sizing: border-box;
+    }
+
+    #rentModal .unavailable-periods-heading {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    #rentModal .rented_periods th,
+    #rentModal .rented_periods td {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    #rentModal .rent-form-group {
+        display: block;
+        width: 100%;
+        margin-bottom: 14px;
+        box-sizing: border-box;
+    }
+
+    #rentModal #startDateLabel,
+    #rentModal #endDateLabel {
+        display: block;
+        width: 100%;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    #rentModal .rent-input-wrapper {
+        display: flex;
+        width: 100%;
+        position: relative;
+    }
+
+    #rentModal #startDate,
+    #rentModal #endDate {
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        height: 44px;
+        padding-left: 40px;
+        box-sizing: border-box;
+    }
+
+    #rentModal .rent-input-icon {
+        font-size: 18px;
+        left: 12px;
+    }
+
+    #rentModal .rent-modal-actions {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    #rentModal #submitRentForm {
+        width: 100%;
+        max-width: 100%;
+        height: 46px;
+        font-size: 15px;
+    }
+
+    /* Flatpickr Mobile Adaptations */
+    .flatpickr-calendar {
+        max-width: calc(100vw - 20px);
+        width: calc(100vw - 20px);
+        left: 10px;
+        right: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .flatpickr-calendar .dayContainer {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .flatpickr-calendar .flatpickr-days {
+        width: 100%;
+    }
+
+    .flatpickr-calendar .flatpickr-day {
+        max-width: calc((100vw - 40px) / 7);
+        height: 38px;
+        line-height: 38px;
+    }
+
+    /* Footer on Mobile */
+    .footer_section {
+        padding: 30px 0 15px 0;
+    }
+
+    .location_text li {
+        width: 100%;
+        padding: 10px 5px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .useful_text {
+        font-size: 17px;
+        margin-top: 20px;
+    }
+
+    .copyright_text {
+        font-size: 12px;
+        line-height: 18px;
+        padding: 8px 5px;
+    }
+}
+
+/* =====================================================================
+   5. Breakpoint: max-width 360px (Extra Small Mobile Devices)
+   ===================================================================== */
+@media (max-width: 360px) {
+    .banner_taital {
+        font-size: 19px;
+        line-height: 1.25;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+
+    .services_taital,
+    .about_taital,
+    .contact_taital,
+    .add_property {
+        font-size: 22px;
+    }
+
+    .property_item {
+        padding: 10px 10px;
+        margin: 8px 0;
+    }
+
+    .property_item h1 {
+        font-size: 15px;
+    }
+
+    .property_item img {
+        height: 105px;
+        max-width: 210px;
+    }
+
+    /* Rent Modal on extra small screens */
+    #rentModal .modal-content {
+        padding: 16px 12px;
+    }
+
+    #rentModal .modal-header-custom .modal-title {
+        font-size: 17px;
+    }
+
+    #rentModal #startDate,
+    #rentModal #endDate {
+        font-size: 13px;
+        height: 42px;
+    }
+
+    .flatpickr-calendar .flatpickr-day {
+        height: 34px;
+        line-height: 34px;
+        font-size: 12px;
+    }
+
+    /* Comment Login Prompt on small screens */
+    .comment-login-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
+        padding: 16px 14px;
+    }
+
+    .comment-login-icon-box {
+        margin: 0 auto;
+    }
+
+    .comment-login-btn {
+        width: 100%;
+        max-width: 200px;
+        justify-content: center;
+    }
+
+    /* jQuery UI Datepicker & Timepicker on small screens */
+    #ui-datepicker-div,
+    .ui-datepicker {
+        width: 290px;
+        padding: 10px;
+    }
+
+    .ui-datepicker table.ui-datepicker-calendar td a,
+    .ui-datepicker table.ui-datepicker-calendar td span {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
     }
 }

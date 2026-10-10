@@ -32,9 +32,13 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     color: #666666;
     font-size: 14px;
     line-height: 1.80857;
@@ -177,9 +181,13 @@ img {
     padding: 0;
 }
 
-.form-control:focus {
-    border-color: #ffffff !important;
-    box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25);
+.form-control:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #fd7e14;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.25);
 }
 
 .navbar-form input {
@@ -208,8 +216,8 @@ button {
 }
 
 .layout_padding {
-    padding-top: 30px;
-    padding-bottom: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .padding_0 {
@@ -293,10 +301,11 @@ button {
 
 .header_section {
     width: 100%;
-    float: left;
+    float: none;
     background: white none;
     height: auto;
     background-size: 100% 100%;
+    clear: both;
 }
 
 .header_section_home {
@@ -373,61 +382,184 @@ button {
     padding: 0;
 }
 
-.login_text li,
-.language {
-    float: left;
-    font-size: 18px;
-    color: #000000;
-    padding: 0 30px;
+.header-auth-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.login_text li a {
-    color: #000000;
+.user-greeting-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ffffff;
+    border: 1.5px solid #cbd5e0;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a365d;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.login_text li a:hover {
-    color: #fd7e14;
+.user-greeting-pill .user-icon {
+    font-size: 17px;
+    color: #fda417;
 }
 
+.nav-auth-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 1.4;
+    border: none;
+}
+
+.nav-auth-btn.login-btn {
+    color: #1a202c;
+    background-color: #ffffff;
+    border: 1.5px solid #cbd5e0;
+}
+
+.nav-auth-btn.login-btn:hover {
+    color: #fda417;
+    border-color: #fda417;
+    background-color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-auth-btn.register-btn {
+    color: #ffffff;
+    background-color: #0b0b0b;
+    border: 1.5px solid #0b0b0b;
+}
+
+.nav-auth-btn.register-btn:hover {
+    color: #fda417;
+    background-color: #ffffff;
+    border-color: #fd7e14;
+    text-decoration: none;
+}
+
+.nav-auth-btn.logout-btn {
+    color: #ffffff;
+    background-color: #e53e3e;
+    border: 1.5px solid #e53e3e;
+}
+
+
+.nav-auth-btn.logout-btn:hover {
+    color: #e53e3e;
+    background-color: #ffffff;
+    border-color: #e53e3e;
+}
+
+/* Global Action and Details Buttons across the website */
 .quote_btn {
-    width: 120px;
+    width: auto;
     float: left;
 }
 
 .quote_btn a,
 .logoutForm .btn,
 .add_picture,
-.housing-details .details_button, .send_bt {
-    width: max-content;
-    float: left;
+button.add_picture,
+button.details_button,
+a.details_button,
+.housing-details button.details_button,
+.attraction-details button.details_button,
+.send_bt,
+button.send_bt {
+    width: auto;
+    min-width: 130px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
+    font-weight: 600;
     text-align: center;
     color: #ffffff;
     background-color: #fda417;
-    border: 1px solid #fda417;
+    border: 1.5px solid #fda417;
     border-radius: 40px;
-    padding: 8px;
+    padding: 8px 20px;
+    margin: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(253, 164, 23, 0.2);
 }
 
 .quote_btn a:hover,
 .logoutForm .btn:hover,
 .add_picture:hover,
-.housing-details .details_button:hover,
-.send_bt:hover {
+button.add_picture:hover,
+button.details_button:hover,
+a.details_button:hover,
+.housing-details button.details_button:hover,
+.attraction-details button.details_button:hover,
+.send_bt:hover,
+button.send_bt:hover {
     background-color: #ffffff;
     color: #252525;
-    border: 1px solid black;
+    border: 1.5px solid #000000;
+    text-decoration: none;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.logoutForm .btn {
-    width: 100%;
-    float: left;
-    font-size: 16px;
-    text-align: center;
-    color: #ffffff;
-    background-color: #fda417;
-    border-radius: 40px;
-    padding: 8px;
+/* Custom Language Selector */
+.language-select-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e0;
+    border-radius: 30px;
+    padding: 2px 8px 2px 12px;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.language-select-wrapper:hover,
+.language-select-wrapper:focus-within {
+    border-color: #fda417;
+    box-shadow: 0 0 0 3px rgba(253, 164, 23, 0.18);
+}
+
+.language-globe-icon {
+    font-size: 15px;
+    color: #fd7e14;
+    margin-right: 4px;
+    pointer-events: none;
+}
+
+.custom-lang-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d3748;
+    padding: 6px 20px 6px 4px;
+    cursor: pointer;
+    outline: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23718096'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    background-size: 16px;
 }
 
 /* header section end */
@@ -449,38 +581,50 @@ button {
 }
 
 div.opacity {
-    background-color: rgb(90, 89, 89, 0.8);
-    padding: 30px;
-    border: solid rgb(49, 51, 53, 0.8);
+    background-color: rgba(40, 44, 52, 0.85);
+    padding: 28px 24px;
+    border: 2px solid rgba(253, 164, 23, 0.4);
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 }
 
 .banner_taital {
-    -webkit-text-stroke: 2px #988c74;
-    align-content: center;
-    width: 400px;
-    height: 250px;
-    float: left;
-    font-size: 60px;
+    -webkit-text-stroke: 1.5px #988c74;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    float: none;
+    font-size: 50px;
+    line-height: 1.25;
     color: white;
     text-transform: uppercase;
-    font-weight: bolder;
+    font-weight: 800;
     padding-bottom: 0;
-    line-height: 70px;
+    margin-bottom: 15px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
     font-family: 'Poppins', sans-serif;
 }
 
 .banner_text {
-    -webkit-text-stroke: 1px #988c74;
-    align-content: center;
+    -webkit-text-stroke: 0.5px #988c74;
     width: 100%;
-    float: left;
-    font-size: 25px;
-    font-weight: bold;
+    max-width: 100%;
+    height: auto;
+    float: none;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 600;
     color: white;
     margin-left: 0;
-    margin-top: 30px;
+    margin-top: 15px;
+    margin-bottom: 20px;
     font-family: 'Poppins', sans-serif;
-    letter-spacing: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .btn_main {
@@ -500,14 +644,21 @@ div.opacity {
     padding: 10px 10px;
     color: #ffffff;
     background-color: #0b0b0b;
+    border: 1.5px solid #0b0b0b;
     text-align: center;
     font-size: 16px;
     border-radius: 40px;
+    transition: all 0.25s ease;
+    text-decoration: none;
 }
 
 .started_text a:hover {
     color: #ffffff;
     background-color: #fda417;
+    border-color: #fda417;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(253, 164, 23, 0.3);
 }
 
 .started_text.active a {
@@ -555,7 +706,8 @@ div.opacity {
 .about_section {
     width: 100%;
     float: left;
-    padding: 90px 0 0 0;
+    padding: 60px 0 60px 0;
+    margin-bottom: 95px;
 }
 
 .about_taital {
@@ -573,15 +725,23 @@ div.opacity {
     font-size: 16px;
     color: #375082;
     margin-left: 0;
+    line-height: 1.7;
+}
+
+.about_video_container {
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+    border: 2px solid #fd7e14;
+    background-color: #000000;
 }
 
 .about_video {
-    float: left;
-    border-radius: 5%;
-    padding: 0 0 0 0;
-    margin-bottom: 30px;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
     border: none;
-    box-shadow: 0 0 30px 0;
 }
 
 
@@ -690,64 +850,119 @@ div.opacity {
 .services_section_2 {
     width: 90%;
     margin: 10px auto;
-    padding-top: 30px;
+    padding-top: 20px;
+}
+
+.services_section_2 .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.services_section_2 .row > [class*="col-"] {
+    display: flex;
+    margin-bottom: 30px;
 }
 
 .box_main {
     width: 100%;
     background-color: #ffffff;
-    height: 370px;
-    padding: 40px 20px 40px 20px;
+    height: auto;
+    min-height: 440px;
+    padding: 35px 22px 30px 22px;
     border-radius: 20px;
-    margin-top: 30px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
 }
 
 .box_main:hover {
     background-color: #ffffff;
-    box-shadow: 0 0 20px 0;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
 }
 
 .box_main.active {
     background-color: #ffffff;
-    box-shadow: 0 0 20px 0;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
 }
 
 .service_img {
-    width: 30%;
-    min-height: 71px;
+    width: 100%;
+    min-height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.service_img img {
+    max-height: 75px;
+    width: auto;
+    object-fit: contain;
 }
 
 .development_text {
     width: 100%;
-    font-size: 24px;
+    font-size: 20px;
     color: #1b1b1b;
     font-weight: bold;
-    padding: 20px 0 0 0;
+    padding: 10px 0 0 0;
     text-transform: uppercase;
-    min-height: 80px;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
-.service_img img {
-    min-height: 80px;
+.services_text {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555555;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .readmore_bt {
-    width: 170px;
-    padding-top: 5px;
+    width: 100%;
+    max-width: 190px;
+    margin-top: auto;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .readmore_bt a {
+    display: inline-block;
     width: 100%;
     text-align: center;
-    font-size: 16px;
-    color: #fda51a;
-    padding: 15px 20px;
-    margin-top: 10px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #fda417;
+    border: 1.5px solid #fda417;
+    padding: 10px 22px;
+    border-radius: 40px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(253, 164, 23, 0.25);
+    text-decoration: none;
 }
 
 .readmore_bt a:hover {
     color: #252525;
+    background-color: #ffffff;
+    border-color: #000000;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -788,60 +1003,99 @@ div.opacity {
     width: 100%;
     float: left;
     font-size: 16px;
-    color: #c5c8c7;
-    border: 0;
-    background-color: transparent;
-    padding: 8px 15px;
-    margin-bottom: 40px;
-    box-shadow: 0 0 10px 0 #cfcfcf;
+    color: #2d3748;
+    background-color: #ffffff;
+    border: 2px solid #fd7e14;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: border-color 0.25s, box-shadow 0.25s;
 }
 
 input.mail_text::placeholder {
-    color: #c5c8c7;
+    color: #8c8c8c;
 }
 
 .massage-bt {
-    color: #c5c8c7;
     width: 100%;
-    height: 110px;
-    font-size: 18px;
-    background-color: transparent;
-    padding: 40px 15px 0 15px;
-    border: 0;
-    box-shadow: 0 0 10px 0 #cfcfcf;
+    font-size: 16px;
+    color: #2d3748;
+    background-color: #ffffff;
+    border: 2px solid #fd7e14;
+    border-radius: 10px;
+    padding: 14px 16px;
+    height: 130px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: border-color 0.25s, box-shadow 0.25s;
+    resize: vertical;
 }
 
 textarea#comment.massage-bt::placeholder {
-    color: #c5c8c7;
+    color: #8c8c8c;
 }
 
-.send_bt {
-    width: 170px;
-    float: left;
+.mail_text:focus,
+.massage-bt:focus {
+    border-color: #fd7e14;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.25);
 }
 
+.send_bt,
+button.send_bt,
 .send_bt a {
-    width: 100%;
+    width: auto;
+    min-width: 140px;
+    max-width: 180px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    font-size: 18px;
+    font-size: 15px;
+    font-weight: 700;
     color: #ffffff;
     background-color: #fda417;
-    padding: 12px;
-    text-transform: uppercase;
-    margin-top: 30px;
-    display: block;
-    font-weight: bold;
+    border: 1.5px solid #fda417;
     border-radius: 40px;
+    padding: 8px 26px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(253, 164, 23, 0.25);
+    float: none;
 }
 
+.send_bt:hover,
+button.send_bt:hover,
 .send_bt a:hover {
-    color: #ffffff;
-    background-color: #252525;
+    color: #252525;
+    background-color: #ffffff;
+    border: 1.5px solid #000000;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .contact_img {
     width: 100%;
-    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-support-img {
+    max-width: 320px;
+    max-height: 340px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: 10px auto;
+    display: block;
 }
 
 .padding_left_15 {
@@ -856,10 +1110,27 @@ textarea#comment.massage-bt::placeholder {
 
 .footer_section {
     width: 100%;
-    float: left;
     background-color: #1f1f1f;
     height: auto;
+    margin-top: auto;
+    padding-top: 55px;
     padding-bottom: 50px;
+    clear: both;
+}
+
+/* Page Spacing: Generous bottom margin so elements never stick to footer */
+.services_section,
+.housing-details.container,
+.attraction-details.container,
+.card-container,
+.contact_section,
+.about_section,
+.login-form,
+.register-form,
+.add_property_background,
+.error-container,
+.container > .property_list:last-child {
+    margin-bottom: 60px;
 }
 
 .footer_section_2 {
@@ -1179,7 +1450,7 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .formLogin .form-group .form-control:focus {
-    border: 1px solid #fda417 !important;
+    border: 1px solid #fda417;
     box-shadow: none;
 }
 
@@ -1209,21 +1480,24 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .formLogin .btn-wd {
-
     color: #ffffff;
     background-color: #fda417;
     display: inline-block;
-    border-radius: 40px !important;
+    border-radius: 40px;
     padding: 8px 16px;
     min-width: 180px;
     font-weight: bold;
-    border: none !important;
+    border: 1.5px solid #fda417;
+    transition: all 0.25s ease;
+    cursor: pointer;
 }
 
 .btn-wd:hover {
-    color: #ffffff;
-    background-color: #252525;
-    border: none !important;
+    color: #252525;
+    background-color: #ffffff;
+    border: 1.5px solid #000000;
+    transform: translateY(-1px);
+    cursor: pointer;
 }
 
 .copy-text {
@@ -1384,7 +1658,7 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .formRegister .form-group .form-control:focus {
-    border: 1px solid #fda417 !important;
+    border: 1px solid #fda417;
     box-shadow: none;
 }
 
@@ -1414,21 +1688,24 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .formRegister .btn-wd {
-
     color: #ffffff;
     background-color: #fda417;
     display: inline-block;
-    border-radius: 40px !important;
+    border-radius: 40px;
     padding: 8px 16px;
     min-width: 180px;
     font-weight: bold;
-    border: none !important;
+    border: 1.5px solid #fda417;
+    transition: all 0.25s ease;
+    cursor: pointer;
 }
 
 .btn-wd:hover {
-    color: #ffffff;
-    background-color: #252525;
-    border: none !important;
+    color: #252525;
+    background-color: #ffffff;
+    border: 1.5px solid #000000;
+    transform: translateY(-1px);
+    cursor: pointer;
 }
 
 .copy-text {
@@ -1492,37 +1769,44 @@ textarea#comment.massage-bt::placeholder {
 /*pop-up-window*/
 .popup-window {
     position: fixed;
-    width: 500px;
-    height: 650px;
-    overflow: scroll;
+    width: 90%;
+    max-width: 500px;
+    height: 80vh;
+    max-height: 600px;
+    overflow-y: auto;
     background: white;
     border: 2px solid #fda417;
-    padding: 30px;
+    padding: 25px;
     margin: auto;
     border-radius: 15px;
     top: 0;
-    right: 15px;
+    right: 0;
     bottom: 0;
     left: 0;
-    z-index: 9;
+    z-index: 1050;
     display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 #close-button {
     color: #ffffff;
     background-color: #fda417;
     display: inline-block;
-    border-radius: 40px !important;
+    border-radius: 40px;
     padding: 8px 16px;
     min-width: 180px;
     font-weight: bold;
-    border: none !important;
+    border: 1.5px solid #fda417;
+    transition: all 0.25s ease;
+    cursor: pointer;
 }
 
 #close-button:hover {
-    color: #ffffff;
-    background-color: #252525;
-    border: none !important;
+    color: #252525;
+    background-color: #ffffff;
+    border: 1.5px solid #000000;
+    transform: translateY(-1px);
+    cursor: pointer;
 }
 
 #popup-window h1 {
@@ -1545,71 +1829,97 @@ textarea#comment.massage-bt::placeholder {
 
 
 .filter_section {
-    margin-bottom: 100px;
-    display: contents;
+    margin: 30px 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
 }
 
 .filter_section label {
     padding-right: 10px;
-    padding-left: 10px;
+    padding-left: 5px;
     font-size: 17px;
     font-weight: bold;
     color: #171a1d;
     text-transform: uppercase;
-    float: left;
+    margin-bottom: 0;
+    float: none;
 }
 
 .filter_section label:focus {
     color: #fd7e14;
 }
 
-.filter_section .nice-select {
+.filter_section .nice-select,
+.filter_section select {
     color: #171a1d;
-    width: 35%;
-    height: 40px;
-    font-size: 18px;
-    padding: 8px 20px 8px 20px;
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    height: 42px;
+    font-size: 16px;
+    padding: 8px 20px;
     background-color: #ffffff;
-    justify-content: center;
-    align-items: center;
-    display: block;
-    margin: auto auto 0;
     border-radius: 40px;
-    float: left;
+    float: none;
+    margin: 0;
 }
 
 .property_item {
-    display: inline-flex !important;
+    display: flex;
     background-color: #fda417;
-    border-radius: 30px;
-    border: 3px solid #fd7e14;
-    width: 90%;
+    border-radius: 20px;
+    border: 2px solid #fd7e14;
+    width: 100%;
+    max-width: 1000px;
     font-size: 14px;
     color: #171a1d;
-    margin: 15px 0 15px 0;
+    margin: 12px auto;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.details_button {
-    width: 140px;
-    margin: 20px 30px;
+div.details_button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 4px;
+    box-shadow: none;
+    width: auto;
+    display: inline-block;
 }
 
 .details_button a {
-    width: 100%;
-    float: right;
-    padding: 10px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 22px;
     color: #ffffff;
-    border: solid #0b0b0b 1px;
-    background-color: #0b0b0b;
+    border: 1.5px solid #fda417;
+    background-color: #fda417;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
     border-radius: 40px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(253, 164, 23, 0.2);
 }
 
 .details_button a:hover {
-    border: solid #fd7e14 1px;
-    color: #fda417;
+    border: 1.5px solid #000000;
+    color: #252525;
     background-color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .details_button.active a {
@@ -1617,23 +1927,41 @@ textarea#comment.massage-bt::placeholder {
     background-color: #fda417;
 }
 
+.property_item .details_button a {
+    background-color: #0b0b0b;
+    border: 1.5px solid #0b0b0b;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.property_item .details_button a:hover {
+    background-color: #ffffff;
+    color: #0b0b0b;
+    border: 1.5px solid #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 .filter_section .create-box {
-    padding-right: 10px;
-    padding-left: 10px;
-    font-size: 17px;
+    padding: 0;
+    font-size: 16px;
     color: #5a5959;
-    margin-top: 100px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .create-box .create {
-    width: 17%;
-    float: right;
-    padding: 10px 10px;
+    width: auto;
+    float: none;
+    display: inline-block;
+    padding: 8px 18px;
     color: #ffffff;
     background-color: #0b0b0b;
     border: solid #0b0b0b 1px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
     border-radius: 40px;
 }
 
@@ -1644,49 +1972,55 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .create-box .place {
-    align-self: end;
-    font-size: 17px;
+    align-self: center;
+    font-size: 16px;
     font-weight: bold;
     color: #171a1d;
     text-transform: uppercase;
-    text-align: right;
-}
-
-.filter_section div {
-    text-align: right;
+    margin-bottom: 0;
 }
 
 .property_item ul {
-    width: 400px;
+    flex: 1 1 240px;
+    width: auto;
+    max-width: 100%;
+    padding: 0 10px;
+    margin: 0;
 }
 
 .property_item img {
-    height: 150px;
-    width: 200px;
-    margin: 30px 30px;
-    border-radius: 5px;
+    height: 105px;
+    width: 155px;
+    max-width: 100%;
+    object-fit: cover;
+    margin: 4px 14px 4px 0;
+    border-radius: 12px;
     border: 2px solid #fd7e14;
-    box-shadow: 0 0 15px 0 #5a5959;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
 }
 
 .property_item p {
     align-self: center;
-    width: 600px;
-    font-size: 17px;
-    margin-top: 8px;
+    width: 100%;
+    max-width: 100%;
+    font-size: 13px;
+    margin-top: 2px;
+    margin-bottom: 0;
     margin-left: 0;
+    line-height: 1.3;
+    word-break: break-word;
 }
 
 .property_item h1 {
-    align-self: center;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: #171a1d;
     display: block;
     text-align: left;
     padding-bottom: 0;
-    margin-top: 55px;
-    margin-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 3px;
 }
 
 .property_item h1:first-letter {
@@ -1694,18 +2028,19 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .property_item h2 {
-    align-self: center;
-    font-size: 17px;
-    font-weight: bold;
-    color: #171a1d;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2b2b2b;
     text-transform: capitalize;
     text-align: left;
     padding-bottom: 0;
-    margin-top: 20px;
+    margin-top: 0;
+    margin-bottom: 3px;
 }
 
 .property_item .btn_main {
-    align-items: flex-end;
+    display: flex;
+    align-items: center;
     justify-content: flex-end;
 }
 
@@ -1719,7 +2054,8 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .housing-details .main_image {
-    width: 600px;
+    max-width: 100%;
+    width: 100%;
     height: auto;
 }
 
@@ -1741,7 +2077,8 @@ textarea#comment.massage-bt::placeholder {
 
 .housing-details .details_section, .comments_section, .add_comment_section {
     margin-top: 20px;
-    width: 530px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .housing-details .comment {
@@ -1754,8 +2091,7 @@ textarea#comment.massage-bt::placeholder {
 
 .add_property {
     width: 100%;
-    float: left;
-    font-size: 55px;
+    font-size: calc(1.8rem + 1.2vw);
     color: #305281;
     font-weight: bold;
     text-align: center;
@@ -1763,11 +2099,11 @@ textarea#comment.massage-bt::placeholder {
 
 .add_property_field {
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 650;
     margin: 0 auto;
     color: #305281;
-    padding-top: 20px;
+    padding-top: 15px;
 }
 
 .add_property_box {
@@ -1779,24 +2115,39 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .add_property_box:active {
-    border-color: #5a5959 !important;
+    border-color: #5a5959;
 }
 
 .add_rent_property, #img {
-    padding-top: 120px;
+    padding-top: 20px;
 }
 
 .add_picture {
-    border-color: #fd7e14;
-    margin: 10px 0 10px 0;
+    border: 1.5px solid #fda417;
+    background-color: #fda417;
+    color: #ffffff;
+    border-radius: 40px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_picture:hover {
+    background-color: #ffffff;
+    color: #252525;
+    border: 1.5px solid #000000;
+    transform: translateY(-1px);
+    cursor: pointer;
 }
 
 .add_property_background .row {
-    display: inline-flex;
-    align-items: stretch;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-
+    align-items: center;
 }
 
 .image-upload-error, .invalid-feedback {
@@ -1808,7 +2159,8 @@ textarea#comment.massage-bt::placeholder {
 /*housing details*/
 
 .main_image_container img {
-    width: 500px;
+    max-width: 100%;
+    width: 100%;
     height: auto;
     border: 3px solid #fd7e14;
     border-radius: 15px;
@@ -1818,8 +2170,7 @@ textarea#comment.massage-bt::placeholder {
 
 .housing-details h2 {
     width: 100%;
-    float: left;
-    font-size: 55px;
+    font-size: calc(1.8rem + 1.2vw);
     color: #305281;
     font-weight: bold;
     text-align: left;
@@ -1828,31 +2179,29 @@ textarea#comment.massage-bt::placeholder {
 .housing-details .details_section p,
 .add-comment h3 {
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 650;
     color: #305281;
-    padding-top: 20px;
+    padding-top: 15px;
     text-align: left;
     background-color: white;
-    margin: 20px auto 0;
+    margin: 15px auto 0;
 }
 
 .housing-details .details_section {
-    padding-left: 20px;
+    padding-left: 0;
 }
 
 .comment_box {
-    display: inline-flex !important;
-    display-inside: ruby-base;
-    flex-wrap: nowrap;
-    align-items: baseline;
+    display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
+    max-width: 100%;
     font-size: 14px;
     font-weight: normal;
     margin: 0 auto;
     color: #5a5959;
-    padding-top: 20px;
+    padding-top: 15px;
 }
 
 .housing-details .comment {
@@ -1873,67 +2222,276 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .add-comment textarea {
-    width: 50%;
-    border: solid 3px #0056b3;
-    border-radius: 15px;
-    padding: 5px 5px;
+    width: 100%;
+    max-width: 600px;
+    border: 2px solid #fd7e14;
+    border-radius: 12px;
+    padding: 12px 16px;
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
-    text-shadow: #0d95e8;
-    font-weight: initial;
-    float: initial;
-    margin-bottom: -20px;
+    color: #2d3748;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    transition: border-color 0.25s, box-shadow 0.25s;
+    margin-bottom: 12px;
+    resize: vertical;
+}
+
+.add-comment textarea:focus {
+    border-color: #fd7e14;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.25);
+}
+
+/* Comment Login Prompt (when user is anonymous) */
+.comment-login-prompt {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0 30px 0;
+}
+
+.comment-login-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    background: #ffffff;
+    border: 2px dashed #fda417;
+    border-radius: 16px;
+    padding: 18px 24px;
+    box-shadow: 0 4px 14px rgba(253, 164, 23, 0.1);
+}
+
+.comment-login-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: rgba(253, 164, 23, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fd7e14;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.comment-login-info {
+    flex-grow: 1;
+}
+
+.comment-login-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #305281;
+    margin: 0 0 4px 0;
+}
+
+.comment-login-text {
+    font-size: 14px;
+    color: #555555;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.comment-login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fda417;
+    border: 1.5px solid #fda417;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 9px 22px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(253, 164, 23, 0.25);
+    flex-shrink: 0;
+}
+
+.comment-login-btn:hover {
+    background-color: #ffffff;
+    color: #252525;
+    border-color: #000000;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .add-comment label {
     align-self: auto;
 }
 
-.housing-details .details_button {
-    width: 150px;
-    float: left;
+.housing-details .details_button,
+.attraction-details .details_button {
+    width: auto;
+    min-width: 140px;
+    float: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
     text-align: center;
     color: #ffffff;
     background-color: #fda417;
-    border: 1px solid #fda417;
+    border: 1.5px solid #fda417;
     border-radius: 40px;
-    padding: 8px;
-    margin: 25px;
+    padding: 8px 18px;
+    margin: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
-.housing-details .details_button:hover {
+.housing-details .details_button:hover,
+.attraction-details .details_button:hover {
     background-color: #ffffff;
     color: #252525;
-    border: 1px solid black;
+    border: 1.5px solid #000000;
+    transform: translateY(-1px);
+}
+
+.details_action_row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    gap: 8px;
+}
+
+.details_action_row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    gap: 10px;
+}
+
+.details_action_row form {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+.details_action_row .details_button,
+.details_action_row button.details_button,
+.details_action_row .favorite_button {
+    width: auto;
+    min-width: 140px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    color: #ffffff;
+    background-color: #fda417;
+    border: 1.5px solid #fda417;
+    border-radius: 40px;
+    padding: 8px 22px;
+    margin: 4px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(253, 164, 23, 0.2);
+    box-sizing: border-box;
+}
+
+.details_action_row .favorite_button.is_favorite {
+    background-color: #f59e0b;
+    border-color: #f59e0b;
+    color: #ffffff;
+}
+
+.details_action_row .details_button:hover,
+.details_action_row button.details_button:hover,
+.details_action_row .favorite_button:hover,
+.details_action_row .favorite_button.is_favorite:hover,
+.housing-details .details_button:hover,
+.attraction-details .details_button:hover {
+    background-color: #ffffff;
+    color: #252525;
+    border: 1.5px solid #000000;
+    text-decoration: none;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.details_action_row .favorite_button .favorite {
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 1;
+    margin-right: 6px;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.details_action_row .favorite_button:hover .favorite,
+.details_action_row .favorite_button.is_favorite:hover .favorite {
+    color: #fda417;
+}
+
+/* Property Image Wrapper & Favorite Badge */
+.property_image_wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.favorite_badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(253, 164, 23, 0.95);
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 5;
 }
 
 .add-comment button {
-    width: 150px;
-    padding: 10px 10px;
+    width: auto;
+    min-width: 130px;
+    max-width: 160px;
+    padding: 9px 24px;
     color: #ffffff;
-    border: solid #0b0b0b 1px;
-    background-color: #0b0b0b;
+    border: 1.5px solid #fda417;
+    background-color: #fda417;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 600;
     border-radius: 40px;
     margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(253, 164, 23, 0.2);
 }
 
 .add-comment button:hover {
-    border: solid #fd7e14 1px;
-    color: #fda417;
+    border: 1.5px solid #000000;
+    color: #252525;
     background-color: #ffffff;
-}
-
-.add-comment button.active {
-    color: #ffffff;
-    background-color: #fda417;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .add-comment .invalid-feedback .dander {
-    font-size: 15px !important;
-    color: darkred !important;
+    font-size: 15px;
+    color: darkred;
 }
 
 #error {
@@ -1941,137 +2499,320 @@ textarea#comment.massage-bt::placeholder {
     color: darkred;
 }
 
-/*flatpickr*/
+/*flatpickr and rent modal*/
 
-.modal {
+#rentModal.modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1050;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    background-color: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 20px 15px;
+    box-sizing: border-box;
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%;
-    max-width: 400px;
-}
-
-.close {
-    color: #fd7e14;
-    float: right;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#startDate, #endDate {
-    text-align: center;
-    font-size: medium;
-    margin-left: 10px;
-    border: 2px solid #fd7e14;
-    border-radius: 10px;
-}
-
-#endDateLabel {
-    margin-right: 5px;
-}
-
-#startDateLabel, #endDateLabel {
+#rentModal .modal-content {
+    background-color: #ffffff;
+    margin: 40px auto;
+    padding: 28px 24px;
+    border: none;
     width: 100%;
-    font-size: 20px;
-    font-weight: 650;
-    color: #305281;
-    padding-top: 20px;
+    max-width: 480px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    box-sizing: border-box;
+}
+
+#rentModal form,
+#rentModal #rentForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#rentModal .modal-header-custom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #edf2f7;
+    margin-bottom: 18px;
+}
+
+#rentModal .modal-header-custom .modal-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a365d;
     text-align: left;
-    background-color: white;
 }
 
-.modal-content button {
-    width: 150px;
-    float: left;
-    font-size: 16px;
+#rentModal .close-modal-btn {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: #718096;
+    cursor: pointer;
+    padding: 0;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#rentModal .close-modal-btn:hover,
+#rentModal .close-modal-btn:focus {
+    color: #e53e3e;
+    background-color: #edf2f7;
+    text-decoration: none;
+    outline: none;
+}
+
+/* Unavailable Rent Periods */
+#rentModal .unavailable-periods-section {
+    background: #fffaf0;
+    border: 1px solid #feebc8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+}
+
+#rentModal .unavailable-periods-heading {
+    font-size: 13px;
+    font-weight: 700;
+    color: #c05621;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+    text-align: left;
+}
+
+#rentModal .unavailable-table-responsive {
+    max-height: 120px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    border: 1px solid #fbd38d;
+}
+
+#rentModal .rented_periods {
+    width: 100%;
+    margin: 0;
+    background: #ffffff;
+    border-collapse: collapse;
+}
+
+#rentModal .rented_periods th,
+#rentModal .rented_periods td {
+    padding: 8px 10px;
     text-align: center;
-    color: #ffffff;
-    background-color: #fda417;
-    border: 1px solid #fda417;
-    border-radius: 40px;
-    padding: 8px;
+    font-size: 13px;
 }
 
-.modal-content button:hover {
+#rentModal .rented_periods th {
+    background: #fef5ea;
+    color: #7b341e;
+    font-weight: 700;
+    border-bottom: 1px solid #fbd38d;
+    position: sticky;
+    top: 0;
+}
+
+#rentModal .rented_periods td {
+    color: #4a5568;
+    border-bottom: 1px solid #edf2f7;
+}
+
+#rentModal .rented_periods tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Rent Form Groups & Inputs */
+#rentModal .rent-form-group {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+#rentModal #startDateLabel,
+#rentModal #endDateLabel {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 6px;
+    padding-top: 0;
+    text-align: left;
+    background: transparent;
+}
+
+#rentModal .rent-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#rentModal .rent-input-icon {
+    position: absolute;
+    left: 14px;
+    font-size: 20px;
+    color: #fd7e14;
+    pointer-events: none;
+    z-index: 2;
+}
+
+#rentModal #startDate,
+#rentModal #endDate {
+    width: 100%;
+    padding: 10px 14px 10px 44px;
+    font-size: 15px;
+    color: #1a202c;
+    background-color: #f7fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    text-align: left;
+    height: 48px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+#rentModal #startDate:focus,
+#rentModal #endDate:focus {
+    background-color: #ffffff;
+    border-color: #fd7e14;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.2);
+}
+
+#rentModal .date-error-message {
+    color: #c53030;
+    background-color: #fff5f5;
+    border: 1px solid #feb2b2;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Submit Button */
+#rentModal .rent-modal-actions {
+    margin-top: 22px;
+}
+
+#rentModal #submitRentForm {
+    width: 100%;
+    max-width: 100%;
+    height: 48px;
+    background-color: #fda417;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    border: 1.5px solid #fda417;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(253, 164, 23, 0.35);
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+#rentModal #submitRentForm:hover:not(:disabled) {
     background-color: #ffffff;
     color: #252525;
-    border: 1px solid black;
+    border: 1.5px solid #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
-.modal-content .rented_periods {
-    align-content: center;
+#rentModal #submitRentForm:disabled {
+    background-color: #e2e8f0;
+    color: #a0aec0;
+    border: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
 }
 
-.modal-content .rented_periods td, th {
-    padding: 0 20px;
-    display: inline-flex;
-    color: #305281;
+/* Flatpickr Theme Customizations */
+.flatpickr-calendar {
+    z-index: 1060;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.modal-content .rented_periods th {
-    margin-right: 10px;
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.selected:focus,
+.flatpickr-day.selected:hover {
+    background: #fda417;
+    border-color: #fda417;
+    color: #fff;
 }
 
-.modal-content h1 {
-    padding-left: 30px;
-}
-
-.rented_periods {
-    margin-left: 50px;
+.flatpickr-day:hover {
+    background: #fff3e0;
 }
 
 /*object_not_found*/
 
 .error-container {
     display: block;
-    flex-wrap: nowrap;
-    flex-direction: column-reverse;
-    margin: 100px auto;
+    margin: 60px auto;
     max-width: 600px;
     background: #fda417;
-    padding: 20px;
-    width: 100%;
-    height: 275px;
+    padding: 25px 20px;
+    width: 92%;
+    height: auto;
+    min-height: 250px;
     border: 2px solid #fd7e14;
-    border-radius: 10px;
+    border-radius: 12px;
     color: #5a5959;
     box-shadow: 0 0 15px 0 #5a5959;
+    text-align: center;
 }
 
 .error-container .row {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .dinosaur {
-    max-width: 50%;
-    height: 200px;
+    max-width: 140px;
+    height: auto;
     align-self: center;
+    margin-bottom: 15px;
 }
 
 .error-message {
     width: 100%;
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 650;
     color: #305281;
     text-align: center;
@@ -2080,15 +2821,18 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .home-link {
-    width: 150px;
-    float: right;
+    width: auto;
+    min-width: 150px;
+    float: none;
+    display: inline-block;
+    margin: 15px auto 0 auto;
     font-size: 16px;
     text-align: center;
     color: #ffffff;
     background-color: black;
     border: 1px solid black;
     border-radius: 40px;
-    padding: 8px;
+    padding: 8px 24px;
 }
 
 .home-link:hover {
@@ -2099,12 +2843,13 @@ textarea#comment.massage-bt::placeholder {
 
 /*attraction-list*/
 
-.card-container {;
-    margin-top: 200px;
+.card-container {
+    margin-top: 30px;
     display: flex;
     align-items: center;
-    flex-wrap: nowrap;
-    justify-content: space-evenly
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
 }
 
 .card-container .row {
@@ -2112,6 +2857,8 @@ textarea#comment.massage-bt::placeholder {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
 }
 
 .attraction-card {
@@ -2119,29 +2866,66 @@ textarea#comment.massage-bt::placeholder {
     border: 2px solid #fd7e14;
     border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    margin: 20px 30px;
+    margin: 15px 12px;
     overflow: hidden;
-    width: 400px;
-    height: 500px;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    min-height: 480px;
     display: flex;
     flex-direction: column;
 }
 
 .button-overlay {
     position: relative;
-    display: inline-block;
+    display: block;
+    width: 100%;
 }
 
 .button-overlay .btn_main {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(5%, 75%);
+    bottom: 15px;
+    right: 20px;
+    top: auto;
+    left: auto;
+    width: auto;
+    transform: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-overlay .details_button {
+    margin: 0;
+    width: auto;
+    min-width: 120px;
+}
+
+.button-overlay .details_button a,
+.attraction-card .details_button a {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 30px;
+    white-space: nowrap;
+    background-color: #0b0b0b;
+    border: 1.5px solid #0b0b0b;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.25s ease;
+}
+
+.button-overlay .details_button a:hover,
+.attraction-card .details_button a:hover {
+    background-color: #ffffff;
+    color: #0b0b0b;
+    border: 1.5px solid #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .attraction-card img {
-    width: 400px;
-    height: 300px;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
 }
 
 .card-content {
@@ -2150,7 +2934,7 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .card-title {
-    font-size: 1.5em;
+    font-size: 1.4em;
     margin: 0;
     color: #305281;
 }
@@ -2162,9 +2946,33 @@ textarea#comment.massage-bt::placeholder {
 }
 
 .card-description {
-    height: 150px;
+    height: auto;
+    min-height: 80px;
+    max-height: 120px;
+    overflow-y: auto;
     font-size: 0.9em;
-    color: #777777;
+    color: #444444;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: #fd7e14 rgba(0, 0, 0, 0.08);
+}
+
+.card-description::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card-description::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+}
+
+.card-description::-webkit-scrollbar-thumb {
+    background: #fd7e14;
+    border-radius: 8px;
+}
+
+.card-description::-webkit-scrollbar-thumb:hover {
+    background: #e06805;
 }
 
 .ticket_count {
@@ -2192,4 +3000,240 @@ textarea#comment.massage-bt::placeholder {
 .email-field {
     font-size: 15px;
     color: red;
+}
+
+/* ========================================================
+   Event Dropdowns (jQuery UI Datepicker & Timepicker)
+   ======================================================== */
+
+/* --- jQuery UI Datepicker Dropdown Customization --- */
+#ui-datepicker-div,
+.ui-datepicker {
+    width: 310px;
+    padding: 14px;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+    border: 2px solid #fd7e14;
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', 'Raleway', sans-serif;
+    z-index: 9999 !important;
+    display: none;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    position: relative;
+    padding: 10px 0;
+    background: linear-gradient(135deg, #305281 0%, #1e3a63 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    margin: 0 2.3em;
+    line-height: 24px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    position: absolute;
+    top: 9px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+    left: 10px;
+}
+
+.ui-datepicker .ui-datepicker-next {
+    right: 10px;
+}
+
+.ui-datepicker .ui-datepicker-prev:hover,
+.ui-datepicker .ui-datepicker-next:hover {
+    background: #fda417;
+}
+
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    text-indent: -9999px;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    margin: 0;
+    padding: 0;
+    position: static;
+}
+
+.ui-datepicker .ui-datepicker-prev span {
+    transform: rotate(-45deg);
+    margin-left: 3px;
+}
+
+.ui-datepicker .ui-datepicker-next span {
+    transform: rotate(135deg);
+    margin-right: 3px;
+}
+
+.ui-datepicker table.ui-datepicker-calendar {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.ui-datepicker table.ui-datepicker-calendar th {
+    padding: 6px 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #718096;
+    border: none;
+    text-transform: uppercase;
+    background-color: #ffffff;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td {
+    padding: 1px;
+    text-align: center;
+    border: none;
+    background-color: #ffffff;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td a,
+.ui-datepicker table.ui-datepicker-calendar td span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin: 0 auto;
+    font-size: 13px;
+    font-weight: 500;
+    color: #2d3748;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td a:hover {
+    background-color: #fff3e0;
+    color: #fd7e14;
+    font-weight: 700;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td.ui-datepicker-current-day a,
+.ui-datepicker table.ui-datepicker-calendar td a.ui-state-active {
+    background-color: #fd7e14;
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(253, 126, 20, 0.4);
+}
+
+.ui-datepicker table.ui-datepicker-calendar td.ui-datepicker-today a,
+.ui-datepicker table.ui-datepicker-calendar td a.ui-state-highlight {
+    border: 1.5px solid #fd7e14;
+    color: #fd7e14;
+    font-weight: 700;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td.ui-state-disabled span {
+    color: #cbd5e0;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* --- jQuery Timepicker Dropdown Customization --- */
+.ui-timepicker-container.ui-timepicker-standard {
+    z-index: 9999 !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+    border: 2px solid #fd7e14;
+    border-radius: 14px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+    width: 170px;
+    padding: 4px;
+    font-family: 'Poppins', 'Raleway', sans-serif;
+    overflow: hidden;
+}
+
+.ui-timepicker-container .ui-timepicker-viewport {
+    max-height: 220px;
+    padding: 4px 2px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    scrollbar-width: thin;
+    scrollbar-color: #fd7e14 rgba(0, 0, 0, 0.06);
+}
+
+.ui-timepicker-container .ui-timepicker-viewport::-webkit-scrollbar {
+    width: 5px;
+}
+
+.ui-timepicker-container .ui-timepicker-viewport::-webkit-scrollbar-thumb {
+    background: #fd7e14;
+    border-radius: 6px;
+}
+
+.ui-timepicker-container .ui-timepicker-viewport::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.ui-timepicker-container .ui-timepicker-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ui-timepicker-container .ui-timepicker-list li.ui-timepicker-item {
+    margin: 2px 4px;
+}
+
+.ui-timepicker-container .ui-timepicker-list li.ui-timepicker-item a {
+    display: block;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d3748;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    border: none;
+    transition: all 0.15s ease;
+}
+
+.ui-timepicker-container .ui-timepicker-list li.ui-timepicker-item a:hover,
+.ui-timepicker-container .ui-timepicker-list li.ui-timepicker-selected a:hover {
+    background-color: #fff3e0;
+    color: #fd7e14;
+    font-weight: 700;
+}
+
+.ui-timepicker-container .ui-timepicker-list li.ui-timepicker-selected a {
+    background-color: #fd7e14;
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(253, 126, 20, 0.35);
 }

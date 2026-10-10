@@ -13,6 +13,13 @@
         th:attrappend="class=${activeLink == 'index'? '_home': ''}">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand d-lg-none mobile-brand" th:href="@{/}">
+                <img src="/images/TravelNestLogo.png" alt="Travel Nest">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
@@ -33,42 +40,34 @@
                            th:classappend="${activeLink == 'contact'}? 'active'" th:text="#{header.section.contacts}">Contact Us</a>
                     </li>
                 </ul>
-                <section class="form-inline my-2 my-lg-0">
-                    <div class="login_text">
-                        <ul>
-                            <li sec:authorize="isAnonymous()">
-                                <a th:href="@{/users/login}" th:text="#{header.section.login}">Login</a>
-                            </li>
-                            <li sec:authorize="isAuthenticated()">
-                                <a th:href="@{/}">
-                                    <i class="fa fa-user" aria-hidden="true">
-                                    </i>
-                                </a>
-                            </li>
-                            <li th:if="${activeLink == 'index'}">
-                                <a th:href="@{/}" class="text-center"
-                                   th:text="#{header.section.user} + ' ' + ${username} + '!'">User:
-                                </a>
-                            </li>
-                        </ul>
+                <section class="form-inline my-2 my-lg-0 header-auth-section">
+                    <div class="login_text user-info-box" sec:authorize="isAuthenticated()">
+                        <div class="user-greeting-pill">
+                            <i class="fa fa-user-circle user-icon" aria-hidden="true"></i>
+                            <span class="user-name-text"><span th:text="#{header.section.user}">User:</span> <span sec:authentication="name">Username</span></span>
+                        </div>
+                    </div>
+                    <div class="login_text auth-link-box" sec:authorize="isAnonymous()">
+                        <a class="nav-auth-btn login-btn" th:href="@{/users/login}" th:text="#{header.section.login}">Login</a>
+                    </div>
+                    <div class="quote_btn auth-link-box" sec:authorize="isAnonymous()">
+                        <a class="nav-auth-btn register-btn" th:href="@{/users/register}" th:text="#{header.section.register}">Register</a>
                     </div>
                     <form class="logoutForm" name="logoutForm"
                           th:method="post"
                           th:action="@{/users/logout}"
                           sec:authorize="isAuthenticated()">
-                            <input class="btn" type="submit" th:value="#{header.section.logout}"/>
+                        <input class="nav-auth-btn logout-btn btn" type="submit" th:value="#{header.section.logout}"/>
                     </form>
-                    <div class="quote_btn"
-                         sec:authorize="isAnonymous()">
-                        <a th:href="@{/users/register}" th:text="#{header.section.register}">Register</a>
-                    </div>
-                    <div class="nav-item language" >
-                        <form th:method="get">
-                            <label class="text-black" for="lang" th:text="#{header.section.language}">Language</label>
-                            <select id="lang" name="lang" onchange="this.form.submit()">
-                                <option value="bg_BG" th:selected="${#locale.toString() == 'bg_BG'}">Български</option>
-                                <option value="en_US" th:selected="${#locale.toString() == 'en_US'}">English</option>
-                            </select>
+                    <div class="nav-item language">
+                        <form th:method="get" class="language-form">
+                            <div class="language-select-wrapper">
+                                <i class="fa fa-globe language-globe-icon" aria-hidden="true"></i>
+                                <select id="lang" name="lang" class="custom-lang-select" onchange="this.form.submit()" aria-label="Select language">
+                                    <option value="en_US" th:selected="${#locale.language == 'en'}">EN | English</option>
+                                    <option value="bg_BG" th:selected="${#locale.language == 'bg'}">BG | Български</option>
+                                </select>
+                            </div>
                         </form>
                     </div>
                 </section>

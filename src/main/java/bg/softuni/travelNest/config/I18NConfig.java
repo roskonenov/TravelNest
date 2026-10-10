@@ -18,13 +18,15 @@ public class I18NConfig {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
         source.setBasename("classpath:i18n/messages");
         source.setDefaultEncoding("UTF-8");
-        source.setDefaultLocale(new Locale("en_EN"));
+        source.setDefaultLocale(Locale.ENGLISH);
         return source;
     }
 
     @Bean
     public LocaleResolver localeResolver(){
-        return new CookieLocaleResolver("lang");
+        CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver("lang");
+        cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
+        return cookieLocaleResolver;
     }
 
     @Bean

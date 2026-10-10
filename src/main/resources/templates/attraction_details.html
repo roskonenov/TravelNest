@@ -5,11 +5,7 @@
 <head>
     <!-- basic -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- site metas -->
     <title>Housing details</title>
     <meta name="keywords" content="">
@@ -52,12 +48,12 @@
         <p th:text="${message}" style="color: orange; font-size: 15px"></p>
     </div>
     </span>
-    <div class="row">
-        <div class="main_image_container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 col-md-12 main_image_container mb-4">
             <img th:src="@{*{pictureUrl}}" alt="Main Property Image" id="mainImage"
-                 class="housing-details main_image">
+                 class="housing-details main_image img-fluid">
         </div>
-        <div class="housing-details details_section">
+        <div class="col-lg-6 col-md-12 housing-details details_section mb-4">
             <p><strong th:text="#{attraction.details.city}">City: </strong>
                 <span th:text="#{|city.filter.*{city}|}"></span>
             </p>
@@ -76,7 +72,7 @@
             </th:block>
         </div>
     </div>
-    <div class="row">
+    <div class="row details_action_row">
         <form th:method="post"
               th:action="@{/{entityType}/details/{uuid} (uuid = ${uuid}, entityType = ${entityType})}"
               th:object="${tickets}"
@@ -112,7 +108,7 @@
 <!-- popper.min.js -->
 <script src="/js/popper.min.js"></script>
 <!-- bootstrap js -->
-<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 <!-- script js -->
 <script src="/js/script.js"></script>
 

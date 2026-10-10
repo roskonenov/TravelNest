@@ -4,78 +4,124 @@ document.addEventListener("DOMContentLoaded", function() {
     const btn = document.getElementById("rentButton");
     const span = document.getElementsByClassName("close")[0];
     const submitBtn = document.getElementById("submitRentForm");
+    const rentForm = document.getElementById("rentForm");
+    const errorMsg = document.getElementById("dateErrorMessage");
 
-    // Show modal when the button is clicked
-    btn.onclick = function() {
-        modal.style.display = "block";
+    if (!modal || !btn) {
+        return;
     }
 
-    // Hide modal when the close button is clicked
-    span.onclick = function() {
+    function closeModal() {
         modal.style.display = "none";
+        document.body.style.overflow = "";
+    }
+
+    function openModal() {
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+
+    // Show modal when the button is clicked
+    btn.onclick = openModal;
+
+    // Hide modal when the close button is clicked
+    if (span) {
+        span.onclick = closeModal;
     }
 
     // Hide modal when clicking outside of it
-    window.onclick = function(event) {
+    window.addEventListener("click", function(event) {
         if (event.target === modal) {
-            modal.style.display = "none";
+            closeModal();
         }
-    }
-
-    // Initialize flatpickr with validation function
-    flatpickr("#startDate", {
-        dateFormat: "Y-m-d",
-        minDate: "today",
-        onChange: validateDates
     });
 
-    flatpickr("#endDate", {
+    // Close on Escape key
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape" && modal.style.display === "block") {
+            closeModal();
+        }
+    });
+
+    let endDatePicker = null;
+
+    // Initialize flatpickr with mobile support and date chaining
+    const startDatePicker = flatpickr("#startDate", {
         dateFormat: "Y-m-d",
         minDate: "today",
-        onChange: validateDates
+        disableMobile: true,
+        onChange: function(selectedDates) {
+            if (endDatePicker && selectedDates.length > 0) {
+                const nextDay = new Date(selectedDates[0]);
+                nextDay.setDate(nextDay.getDate() + 1);
+                endDatePicker.set("minDate", nextDay);
+                if (endDatePicker.selectedDates.length > 0 && endDatePicker.selectedDates[0] <= selectedDates[0]) {
+                    endDatePicker.clear();
+                }
+            }
+            validateDates();
+        }
+    });
+
+    endDatePicker = flatpickr("#endDate", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        disableMobile: true,
+        onChange: function() {
+            validateDates();
+        }
     });
 
     // Add input event listeners for validation
-    document.getElementById("startDate").addEventListener("input", validateDates);
-    document.getElementById("endDate").addEventListener("input", validateDates);
+    const startInput = document.getElementById("startDate");
+    const endInput = document.getElementById("endDate");
+    if (startInput) startInput.addEventListener("input", validateDates);
+    if (endInput) endInput.addEventListener("input", validateDates);
 
     // Form validation
-    document.getElementById("rentForm").addEventListener("submit", function(event) {
-        const startDate = document.getElementById("startDate").value;
-        const endDate = document.getElementById("endDate").value;
-
-        if (!validateDates([startDate], [endDate])) {
-            event.preventDefault();
-            alert("Please ensure that the dates are valid and the end date is after the start date.");
-        }
-    });
+    if (rentForm) {
+        rentForm.addEventListener("submit", function(event) {
+            if (!validateDates()) {
+                event.preventDefault();
+            }
+        });
+    }
 
     function validateDates() {
-        const startDate = document.getElementById("startDate").value;
-        const endDate = document.getElementById("endDate").value;
-        const currentDate = new Date();
+        const startDate = startInput ? startInput.value.trim() : "";
+        const endDate = endInput ? endInput.value.trim() : "";
 
         if (!startDate || !endDate) {
-            submitBtn.disabled = true;
+            if (submitBtn) submitBtn.disabled = true;
+            if (errorMsg) errorMsg.style.display = "none";
             return false;
         }
 
-        let start = new Date(startDate);
-        let end = new Date(endDate);
+        const start = new Date(startDate);
+        const end = new Date(endDate);
 
-        // if (start < currentDate) {
-        //     alert("Start date cannot be before the current date.");
-        //     submitBtn.disabled = true;
-        //     return false;
-        // }
+        if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+            if (submitBtn) submitBtn.disabled = true;
+            return false;
+        }
 
         if (end <= start) {
-            alert("End date must be after the start date.");
-            submitBtn.disabled = true;
+            const isBg = document.documentElement.lang === "bg" || 
+                (document.getElementById("startDateLabel") && /[\u0400-\u04FF]/.test(document.getElementById("startDateLabel").textContent));
+            if (errorMsg) {
+                errorMsg.textContent = isBg ? "Крайната дата трябва да е след началната дата." : "End date must be after start date.";
+                errorMsg.style.display = "block";
+            }
+            if (submitBtn) submitBtn.disabled = true;
             return false;
         }
 
-        submitBtn.disabled = false;
+        if (errorMsg) {
+            errorMsg.style.display = "none";
+        }
+        if (submitBtn) {
+            submitBtn.disabled = false;
+        }
         return true;
     }
 });
