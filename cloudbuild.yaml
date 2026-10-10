@@ -1,0 +1,39 @@
+steps:
+  # 1. Build the Docker container image
+  - id: 'Build'
+    name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--no-cache'
+      - '-t'
+      - 'europe-west4-docker.pkg.dev/travel-nest-project/cloud-run-source-deploy/travelnest/travelnest:$COMMIT_SHA'
+      - '.'
+      - '-f'
+      - 'Dockerfile'
+
+  # 2. Push the container image to Artifact Registry
+  - id: 'Push'
+    name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-west4-docker.pkg.dev/travel-nest-project/cloud-run-source-deploy/travelnest/travelnest:$COMMIT_SHA'
+
+  # 3. Deploy to Cloud Run service
+  - id: 'Deploy'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'services'
+      - 'update'
+      - 'travelnest'
+      - '--platform=managed'
+      - '--image=europe-west4-docker.pkg.dev/travel-nest-project/cloud-run-source-deploy/travelnest/travelnest:$COMMIT_SHA'
+      - '--region=europe-west4'
+      - '--quiet'
+
+images:
+  - 'europe-west4-docker.pkg.dev/travel-nest-project/cloud-run-source-deploy/travelnest/travelnest:$COMMIT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
